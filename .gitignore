@@ -1,0 +1,13 @@
+personal/
+node_modules/
+source/bower_components/
+
+craft/storage/
+public/uploads/
+
+*.log
+.DS_Store
+Thumbs.db
+*~
+*.swp
+*.sass-cache

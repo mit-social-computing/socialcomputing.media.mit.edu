@@ -1,0 +1,20 @@
+{
+  "name": "lab-site",
+  "version": "1.0.0",
+  "authors": [
+    "Brian Whitton <me@brianwhitton.com>"
+  ],
+  "description": "Website for the Social Computing group at the MIT Media Lab. Uses Craft as a CMS.",
+  "main": "public/index.php",
+  "license": "MIT",
+  "homepage": "http://socialcomputing.media.mit.edu",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "source/bower_components",
+    "test",
+    "tests"
+  ]
+}
