@@ -1,0 +1,51 @@
+@font-face {
+    font-family: handwriting;
+    src: url("/assets/css/fonts/yah.ttf") format(truetype);
+    font-weight: normal;
+}
+
+*,
+*:after,
+*:before {
+    @include box-sizing(border-box);
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    min-height: 100%;
+    color: $gray;
+    @include fontsize($font-medium);
+}
+
+a {
+    color: $pink;
+    @include transition(color 250ms ease);
+
+    &:hover {
+        color: $gray;
+    }
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    @include handwriting;
+    @include fontsize($font-medium-header);
+    @include vertical-rhythm($font-medium-header);
+}
+
+p {
+    @include vertical-rhythm($font-medium);
+}
+
+button {
+    @include appearance(none);
+    background-color: transparent;
+    border: none;
+}

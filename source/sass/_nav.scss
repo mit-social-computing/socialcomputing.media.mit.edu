@@ -1,0 +1,14 @@
+.nav-logo {
+    margin: 0;
+    text-transform: lowercase;
+
+    > a {
+        font-family: "handwriting";
+        text-decoration: none;
+        color: $lightergray;
+
+        &:hover {
+            color: $pink;
+        }
+    }
+}

@@ -1,0 +1,34 @@
+.l-highlight {
+    background-color: $darkgray;
+}
+
+.l-max {
+    width: 100%;
+    max-width: #{$max-width}px;
+    margin: 0 auto;
+}
+
+.l-vpadding {
+    padding: #{$base}px 0;
+}
+
+.l-contain {
+    @extend .clearfix;
+    padding: 0 rems($base/2);
+
+    @include mq($screen-min) {
+        padding: 0 rems($base);
+    }
+
+    @include mq($screen-max) {
+        padding: 0;
+    }
+}
+
+.l-left {
+    float: left;
+}
+
+.l-right {
+    float: right;
+}

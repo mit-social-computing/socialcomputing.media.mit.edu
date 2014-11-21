@@ -1,0 +1,5 @@
+{
+    buttons : [ 'bold', 'italic', 'link'],
+    formatting : false,
+    toolbarFixedBox : true
+}

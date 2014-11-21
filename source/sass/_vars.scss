@@ -1,0 +1,67 @@
+// FUNCTIONS
+@function rems($value) {
+    @return #{$value/16}rem;
+}
+
+@mixin mq($mq) {
+    @media only screen and ($mq) {
+        @content;
+    }
+}
+
+// MIXINS
+@mixin fontsize($size-map) {
+    $small-size: map-get($size-map, small);
+    $medium-size: map-get($size-map, medium);
+
+    font-size: #{$small-size}px; 
+    font-size: rems($small-size);
+
+    @include mq($screen-min) {
+        font-size: #{$medium-size}px;
+        font-size: rems($medium-size);
+    }
+}
+
+@mixin vertical-rhythm($size-map) {
+    $small-size: map-get($size-map, small);
+    $medium-size: map-get($size-map, medium);
+
+    line-height: $small-size/$base;
+    margin-top: #{$small-size/$base}rem;
+    margin-bottom: #{$small-size/$base}rem;
+
+    @include mq($screen-min) {
+        line-height: $medium-size/$base;
+        margin-top: #{$medium-size/$base}rem;
+        margin-bottom: #{$medium-size/$base}rem;
+    }
+}
+
+@mixin handwriting {
+    font-family: "handwriting";
+    letter-spacing: 0.05em;
+    font-weight: normal;
+}
+
+// FONTS
+$base: 19;
+$font-medium: (small: 17.5, medium: 16);
+$font-medium-header: (small : 20, medium : 23);
+
+// SCREENS
+$max-width: 1200;
+$min-width: 321;
+
+$screen-min: "min-width:" rems($min-width);
+$screen-max: "min-width:" rems($max-width);
+
+// COLORS
+
+$lightestrgray: #e0e0e0; // light gray bg
+$lightergray: #d2d1d1; // carousel dots
+$lightgray: #999; // nav default state
+$gray: #666; // body font
+$darkgray: #333; // dark gray bg
+$pink: #d175a1;
+

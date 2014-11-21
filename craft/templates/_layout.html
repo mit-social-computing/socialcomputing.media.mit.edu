@@ -51,9 +51,22 @@
 		<header id="header">
 			<h1><a href="{{ siteUrl }}">{{ siteName }}</a></h1>
 
+            {% set sections = craft.sections.getAllSections() %}
 			<nav>
 				<ul>
-					<li><a href="{{ url('news') }}" {% if craft.request.firstSegment == 'news' %}class="active"{% endif %}>News</a></li>
+                    {% for section in sections %}
+                    <li><a href="{{ url(section|lower) }}" {% if craft.request.firstSegment == section %}class="active"{% endif %}>{{ section }}</a>
+                        {% if section.maxLevels > 1 %}
+                        {% set children = craft.entries.section(section).level(1) %}
+                        <ul>
+                            {% for child in children %}
+                            <li><a href="{{ url(child.url) }}">{{ child }}</a></li>
+                            {% endfor %}
+                        </ul>
+                        {% endif %}
+                    </li>
+                    {% endfor %}
+                    
 				</ul>
 			</nav>
 		</header>

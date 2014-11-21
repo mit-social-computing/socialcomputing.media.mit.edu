@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>{% if title is defined %}{{ title }} - {% endif %}{{ siteName }}</title>
+
+        <link href="/assets/css/styles.css" rel="stylesheet">
+    </head>
+    <body>
+        <header class="l-highlight l-fixed-top">
+            <div class="l-max">
+                <div class="l-vpadding">
+                    <div class="l-contain">
+                        <div class="l-left">
+                            <h1 class="nav-logo"><a href="{{ siteUrl }}">Social Computing</a></h1>
+                        </div>
+                        <!-- .l-left -->
+                        <div class="l-right">
+                            <button id="menu" class="btn btn-menu" type="button" role="button" aria-label="Toggle Navigation"><span></span></button>
+                            {% set sections = craft.sections.getAllSections() %}
+                            <nav id="mobileNav" class="nav nav--narrow">
+                                <h2 class="visuallyhidden">Mobile Nav</h2>
+                                <ul class="nav-stacked">
+                                    {% for section in sections %}
+                                    <li class="nav-item">
+                                        <a href="{{ url(section|lower) }}"{%if craft.request.firstSegment == section %} class="active"{% endif %}>{{ section }}</a>
+                                        {% if section.maxLevels > 1 %}
+                                        {% set children = craft.entries.section(section).level(1) %}
+
+                                        <div class="nav-dropdown">
+                                            <ul class="nav-stacked">
+                                            {% for child in children %}
+                                            <li class="nav-item">
+                                                <a href="{{ url(child.url) }}"{% if craft.request.getSegment(2) == child %} class="active"{% endif %}>{{ child }}</a>
+                                            </li>
+                                            {% endfor %}
+                                            </ul>
+                                            <!-- .nav-stacked -->
+                                        </div>
+                                        <!-- .nav-dropdown -->
+                                        {% endif %}
+
+                                    </li>
+                                    {% endfor %}
+                                </ul>
+                                <!-- .stacked-nav -->
+                                <div class="box box--gray">
+                                    <h3 class="subtitle">recent</h3>
+                                    <ul class="centered-list">
+                                        <li><a href=""></a></li>
+                                    </ul>
+                                </div>
+                            </nav>
+                            <!-- .nav-narrow -->
+
+                            <nav id="mainNav" class="nav nav--wide">
+                                <h2 class="visuallyhidden">Main Nav</h2>
+                                <ul class="nav-stacked nav--main">
+                                    {% for section in sections %}
+                                    <li class="nav-item">
+                                        <a href="{{ url(section|lower) }}"{%if craft.request.firstSegment == section %} class="active"{% endif %}>{{ section }}</a>
+                                        {% if section.maxLevels > 1 %}
+                                        {% set children = craft.entries.section(section).level(1) %}
+
+                                        <div class="nav-dropdown">
+                                            <ul class="nav-stacked">
+                                            {% for child in children %}
+                                            <li class="nav-item">
+                                                <a href="{{ url(child.url) }}"{% if craft.request.getSegment(2) == child %} class="active"{% endif %}>{{ child }}</a>
+                                            </li>
+                                            {% endfor %}
+                                            </ul>
+                                            <!-- .nav-stacked -->
+                                        </div>
+                                        <!-- .nav-dropdown -->
+                                        {% endif %}
+
+                                    </li>
+                                    {% endfor %}
+                                </ul>
+                                <!-- .nav-inline -->
+                            </nav>
+                            <!-- .nav-wide -->
+                        </div>
+                        <!-- .l-right -->
+                    </div>
+                    <!-- .l-contain -->
+                </div>
+                <!-- .l-vpadding -->
+            </div>
+            <!-- .l-max -->
+        </header>
+        <!-- .l-highlight -->
+    

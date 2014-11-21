@@ -1,0 +1,65 @@
+$button-size: rems(38);
+$transition: .3s all linear;
+
+@mixin line {
+    display: inline-block;
+    width: $button-size;
+    height: 3px;
+    background: white;
+    transition: $transition;
+}
+
+.btn-menu {
+    display: inline-block;
+    padding: 7px 10px;
+    transition: $transition;
+    @include handwriting;
+    //margin-right: -10px;
+
+    @include mq($screen-min) {
+        display: none;
+    }
+
+    > span {
+        position: relative;
+        vertical-align: middle;
+        @include line;
+
+        &:before,
+        &:after {
+            content: '';
+            position: absolute;
+            left: 0;
+            @include line;
+        }
+
+        &:before {
+            @include translateY( ($button-size/5) );
+        }
+
+        &:after {
+            @include translateY( -$button-size/5 );
+        }
+    }
+
+    &.close {
+        > span {
+            background: transparent;
+
+            &:before,
+            &:after {
+                transform-origin: 50% 50%;
+                @include translateY(0);
+                width: $button-size;
+            }
+
+            &:before {
+                @include rotate3d(0,0,1,45deg);
+            }
+
+            &:after {
+                @include rotate3d(0,0,1,-45deg);
+            }
+        }
+    }
+}
