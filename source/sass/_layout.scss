@@ -1,5 +1,7 @@
 .l-highlight {
     background-color: $darkgray;
+
+    @include transition(background-color 250ms ease-in);
 }
 
 .l-max {

@@ -19,69 +19,68 @@
                         <div class="l-right">
                             <button id="menu" class="btn btn-menu" type="button" role="button" aria-label="Toggle Navigation"><span></span></button>
                             {% set sections = craft.sections.getAllSections() %}
-                            <nav id="mobileNav" class="nav nav--narrow">
-                                <h2 class="visuallyhidden">Mobile Nav</h2>
-                                <ul class="nav-stacked">
-                                    {% for section in sections %}
-                                    <li class="nav-item">
-                                        <a href="{{ url(section|lower) }}"{%if craft.request.firstSegment == section %} class="active"{% endif %}>{{ section }}</a>
-                                        {% if section.maxLevels > 1 %}
-                                        {% set children = craft.entries.section(section).level(1) %}
+                            {% set s1 = craft.request.firstSegment %}
 
+                            <nav id="mainNav" class="nav">
+                                <h2 class="visuallyhidden">Navigation Bar</h2>
+                                <ul class="nav-list">
+                                {% for s in sections %}
+                                    {# structures with nested children #}
+                                    {% if s.maxLevels > 1 %}
+
+                                        {% if s1 == s|lower or ( s.isHomepage() and s1 is empty ) %}
+
+                                        <li class="nav-item" data-dropdown="is-open">
+                                            <a href="#" class="active">{{ s }}</a>
+
+                                        {% else %}
+
+                                        <li class="nav-item" data-dropdown="is-closed">
+                                            <a href="#">{{ s }}</a>
+
+                                        {% endif %}
+
+                                        
+                                        {% set children = craft.entries.section(s).level(1) %}
                                         <div class="nav-dropdown">
-                                            <ul class="nav-stacked">
+                                            <ul class="nav-list">
                                             {% for child in children %}
+                                            {% set s2 = craft.request.getSegment(2) %}
                                             <li class="nav-item">
-                                                <a href="{{ url(child.url) }}"{% if craft.request.getSegment(2) == child %} class="active"{% endif %}>{{ child }}</a>
+                                                <a href="{{ url(child.url) }}"{% if s2 == child|lower %} class="active"{% endif %}>{{ child }}</a>
                                             </li>
                                             {% endfor %}
                                             </ul>
                                             <!-- .nav-stacked -->
                                         </div>
                                         <!-- .nav-dropdown -->
+                                    </li>
+                                    {# one level structures, singles, and channels #}
+                                    {% else %}
+                                        <li class="nav-item">
+
+                                        {% if s1 == s|lower or ( s.isHomepage() and s1 is empty ) %}
+                                        <a href="{{ url(s|lower) }}" class="active">{{ s }}</a>
+                                        {% else %}
+                                        <a href="{{ url(s|lower) }}">{{ s }}</a>
                                         {% endif %}
 
-                                    </li>
-                                    {% endfor %}
+                                        </li>
+                                    {% endif %}
+                                {% endfor %}
                                 </ul>
                                 <!-- .stacked-nav -->
-                                <div class="box box--gray">
-                                    <h3 class="subtitle">recent</h3>
-                                    <ul class="centered-list">
-                                        <li><a href=""></a></li>
+                                <div class="box box--gray centered only-small">
+                                    <h3 class="box-title">recent</h3>
+                                    <ul class="box-list">
+                                    {% for slide in recentNews.recent %}
+                                        <li>{{ slide.caption }}</li>
+                                    {% endfor %}
                                     </ul>
                                 </div>
                             </nav>
                             <!-- .nav-narrow -->
 
-                            <nav id="mainNav" class="nav nav--wide">
-                                <h2 class="visuallyhidden">Main Nav</h2>
-                                <ul class="nav-stacked nav--main">
-                                    {% for section in sections %}
-                                    <li class="nav-item">
-                                        <a href="{{ url(section|lower) }}"{%if craft.request.firstSegment == section %} class="active"{% endif %}>{{ section }}</a>
-                                        {% if section.maxLevels > 1 %}
-                                        {% set children = craft.entries.section(section).level(1) %}
-
-                                        <div class="nav-dropdown">
-                                            <ul class="nav-stacked">
-                                            {% for child in children %}
-                                            <li class="nav-item">
-                                                <a href="{{ url(child.url) }}"{% if craft.request.getSegment(2) == child %} class="active"{% endif %}>{{ child }}</a>
-                                            </li>
-                                            {% endfor %}
-                                            </ul>
-                                            <!-- .nav-stacked -->
-                                        </div>
-                                        <!-- .nav-dropdown -->
-                                        {% endif %}
-
-                                    </li>
-                                    {% endfor %}
-                                </ul>
-                                <!-- .nav-inline -->
-                            </nav>
-                            <!-- .nav-wide -->
                         </div>
                         <!-- .l-right -->
                     </div>
@@ -92,4 +91,3 @@
             <!-- .l-max -->
         </header>
         <!-- .l-highlight -->
-    

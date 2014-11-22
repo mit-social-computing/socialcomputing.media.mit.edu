@@ -18,6 +18,8 @@ body {
     min-height: 100%;
     color: $gray;
     @include fontsize($font-medium);
+    font-family: "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+    font-weight: 100;
 }
 
 a {
@@ -48,4 +50,11 @@ button {
     @include appearance(none);
     background-color: transparent;
     border: none;
+}
+
+ul,
+ol {
+    margin: 0;
+    padding: 0;
+    list-style: none;
 }

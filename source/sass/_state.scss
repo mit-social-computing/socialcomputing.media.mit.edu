@@ -1,0 +1,14 @@
+.is-menu-open {
+    header.l-highlight {
+        background-color: $pink;
+    }
+
+    .nav {
+        @include translateX(0);
+    }
+
+    .nav-logo > a {
+        color: $darkgray;
+    }
+}
+

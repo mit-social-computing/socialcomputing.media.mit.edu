@@ -1,0 +1,18 @@
+.box {
+    padding: rems($base);
+    @extend .clearfix;
+}
+
+.box-title {
+    margin: 0;
+}
+
+.box-list {
+    > li > p {
+        margin: 0;
+    }
+}
+
+.box--gray {
+    background-color: $lightestgray;
+}

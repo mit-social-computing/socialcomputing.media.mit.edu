@@ -1,20 +1,17 @@
-$button-size: rems(38);
-$transition: .3s all linear;
-
-@mixin line {
-    display: inline-block;
-    width: $button-size;
-    height: 3px;
-    background: white;
-    transition: $transition;
+.btn {
+    &:focus {
+        outline: 1px dotted rgba(black, 0.25);
+    }
 }
 
 .btn-menu {
     display: inline-block;
-    padding: 7px 10px;
+
+    padding: 7px;
+    margin-right: -7px;
+
     transition: $transition;
     @include handwriting;
-    //margin-right: -10px;
 
     @include mq($screen-min) {
         display: none;
@@ -34,11 +31,11 @@ $transition: .3s all linear;
         }
 
         &:before {
-            @include translateY( ($button-size/5) );
+            @include translateY( rems($button-size/5) );
         }
 
         &:after {
-            @include translateY( -$button-size/5 );
+            @include translateY( -(rems($button-size/5)) );
         }
     }
 

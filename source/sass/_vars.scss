@@ -10,6 +10,17 @@
 }
 
 // MIXINS
+$button-size: 38;
+$transition: .3s all linear;
+
+@mixin line {
+    display: inline-block;
+    width: rems($button-size);
+    height: 3px;
+    background: white;
+    transition: $transition;
+}
+
 @mixin fontsize($size-map) {
     $small-size: map-get($size-map, small);
     $medium-size: map-get($size-map, medium);
@@ -49,19 +60,32 @@ $base: 19;
 $font-medium: (small: 17.5, medium: 16);
 $font-medium-header: (small : 20, medium : 23);
 
+$font-navmed: (small: 27.5, medium: 22); // mobile dropdown links
+$font-navlg: (small: 45, medium: 35); // probably only used on mobile menu
+
 // SCREENS
 $max-width: 1200;
-$min-width: 321;
+$min-width: 507;
 
 $screen-min: "min-width:" rems($min-width);
 $screen-max: "min-width:" rems($max-width);
 
 // COLORS
 
-$lightestrgray: #e0e0e0; // light gray bg
+$lightestgray: #e0e0e0; // light gray bg
 $lightergray: #d2d1d1; // carousel dots
 $lightgray: #999; // nav default state
 $gray: #666; // body font
 $darkgray: #333; // dark gray bg
 $pink: #d175a1;
 
+// UTILITIES
+.centered {
+    text-align: center;
+}
+
+.only-small {
+    @include mq($screen-min) {
+        display: none;
+    }
+}
