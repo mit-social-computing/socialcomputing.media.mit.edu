@@ -18,6 +18,7 @@ return array(
     '.dev'  => array(
         'devMode'           => true,
         'useCompressedJs'   => false,
+        'requireMatchingUserAgentForSession' => false,
         'environmentVariables'  => array(
             'basePath'  => '/Users/noSlouch/www/social_computing/lab-site/public/',
             'baseUrl'   => 'http://lab.dev/'
