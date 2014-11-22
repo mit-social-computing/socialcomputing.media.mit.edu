@@ -2,6 +2,7 @@
 var jsFiles = [
     'source/bower_components/modernizr/modernizr.build.js'
     , 'source/bower_components/jquery/dist/jquery.js'
+    , 'source/bower_components/slick-carousel/slick/slick.js'
     , 'source/js/**/*.js'
 ]
 
@@ -12,27 +13,33 @@ module.exports = function(grunt) {
                 files : [
                     'craft/templates/**/*.html'
                     , 'public/assets/js/scripts.concat.js'
-                    , 'public/assets/css/styles.css'
+                    , 'public/assets/css/styles.concat.css'
                 ],
                 options : { livereload: true }
             },
             js : {
-                files : [
-                    'source/js/**/*.js'
-                ],
+                files : jsFiles,
                 tasks : [ 'concat:js', 'uglify:dev' ]
             },
             css : {
                 files : [
-                    'public/assets/css/**/*.css'
+                    'public/assets/css/styles.css'
                 ],
-                tasks : [ 'cssmin:dev' ]
+                tasks : [ 'concat:css', 'cssmin:dev' ]
             }
         },
         concat : {
             js : {
                 files : {
                     'public/assets/js/scripts.concat.js' : jsFiles
+                }
+            },
+            css : {
+                files : {
+                    'public/assets/css/styles.concat.css' : [
+                        'public/assets/css/styles.css'
+                        , 'source/bower_components/slick-carousel/slick/slick.css'
+                    ]
                 }
             }
         },
@@ -42,11 +49,6 @@ module.exports = function(grunt) {
                 options : {
                     logConcurrentOutput : true
                 }
-            }
-        },
-        shell : {
-            watch : {
-                command : 'compass watch'
             }
         },
         uglify : {
@@ -90,7 +92,7 @@ module.exports = function(grunt) {
                 advanced : false
             },
             dev : {
-                'public/assets/css/styles.min.css' : [ 'public/assets/css/styles.css' ]
+                'public/assets/css/styles.min.css' : [ 'public/assets/css/styles.concat.css' ]
             }
         },
         modernizr : {
