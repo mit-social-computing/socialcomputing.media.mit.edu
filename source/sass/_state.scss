@@ -4,11 +4,22 @@
     }
 
     .nav {
+        @include transition(transform 250ms ease-out);
         @include translateX(0);
     }
 
     .nav-logo > a {
         color: $darkgray;
+    }
+
+    @include mq($screen-min) {
+        header.l-highlight {
+            @include transition(none);
+            background-color: $darkgray;
+        }
+        .nav-logo > a {
+            color: $lightergray;
+        }
     }
 }
 

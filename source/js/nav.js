@@ -7,8 +7,14 @@ $(function() {
     })
 
     $('[data-dropdown]').click(function(e) {
-        var open = $(this).attr('data-dropdown') === 'is-open'
-        $(this).attr('data-dropdown', open ? 'is-closed' : 'is-open')
-        return false
+        if ( !!$(e.target.parentElement).data('dropdown') ) {
+            if ( window.innerWidth < 507 ) {
+                var open = $(this).attr('data-dropdown') === 'is-open'
+                $(this).attr('data-dropdown', open ? 'is-closed' : 'is-open')
+            }
+            return false
+        } else {
+            return true
+        }
     })
 })

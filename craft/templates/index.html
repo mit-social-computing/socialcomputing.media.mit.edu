@@ -1,10 +1,20 @@
 {% extends 'layouts/_home' %}
 
-{% set s1 = craft.request.firstSegment %}
+{% set entry = craft.entries.section('home').first() %}
 
 {% block content %}
-	<h1>{{ s1 }}</h1>
 
-	{{ s1 }}
+    <div class="l-full">
+        <section class="ss" id="slideshow">
+        {% for slide in entry.slideshow %}
+            {% set i = slide.image.first() %}
+            <div>
+                <div class="ss-slide" style="background-image: url({{ i.url }});">
+                    <span class="ss-headline">{{ slide.headline }}</span>
+                </div>
+            </div>
+        {% endfor %}
+        </section>
+    </div>
 
 {% endblock %}

@@ -16,7 +16,7 @@
     @include mq($screen-min) {
         width: auto;
         position: static;
-        overflow: auto;
+        overflow: visible;
         @include translateX(0);
         @include transition(none);
     }
@@ -40,6 +40,7 @@
 }
 
 .nav-item {
+    position: relative;
 
     > a {
         position: relative;
@@ -49,6 +50,7 @@
         color: $lightergray;
         @include fontsize($font-navlg);
 
+        &:hover,
         &.active {
             color: $pink;
         }
@@ -70,13 +72,13 @@
         > a {
             display: block;
             position: static;
-            @include fontsize($font-medium);
-
-            .nav-dropdown & {
-                @include fontsize($font-medium);
-            }
         }
 
+        .nav-dropdown & {
+            display: block;
+            text-align: left;
+            margin: 0;
+        }
     }
 }
 
@@ -86,6 +88,47 @@
 
     @include mq($screen-min) {
         position: absolute;
+        left: -(rems($base));
+        overflow: auto;
+
+        background-color: $darkgray;
+        padding: rems($base/2) rems($base) rems($base);
+
+        opacity: 0;
+        pointer-events: none;
+
+        @include transition(opacity 250ms ease-in);
+    }
+}
+
+[data-dropdown] {
+    > a:after {
+        content: '';
+        height: 0;
+        width: 0;
+        position: absolute;
+        right: -21px;
+        top: 20px;
+
+        border: solid transparent;
+        border-left-color: $gray;
+        border-top-width: 10px;
+        border-bottom-width: 10px;
+        border-left-width: 11px;
+        border-right-width: 0;
+
+        @include transition(transform 250ms ease-in);
+
+        @include mq($screen-min) {
+            display: none;
+        }
+    }
+
+    @include mq($screen-min) {
+        &:hover > .nav-dropdown {
+            opacity: 1;
+            pointer-events: all;
+        }
     }
 }
 
@@ -97,22 +140,13 @@
     max-height: 200px;
 }
 
-[data-dropdown] > a:after {
-    content: '';
-    height: 0;
-    width: 0;
-    position: absolute;
-    right: -21px;
-    top: 20px;
+@include mq($screen-min) {
 
-    border: solid transparent;
-    border-left-color: $gray;
-    border-top-width: 10px;
-    border-bottom-width: 10px;
-    border-left-width: 11px;
-    border-right-width: 0;
+    [data-dropdown="is-open"] > .nav-dropdown,
+    [data-dropdown="is-closed"] > .nav-dropdown { 
+        max-height: initial;
+    }
 
-    @include transition(transform 250ms ease-in);
 }
 
 [data-dropdown="is-closed"] > a:after {
@@ -120,6 +154,7 @@
 }
 
 [data-dropdown="is-open"] > a:after {
+    cursor: default;
     @include rotate(90deg);
 }
 
@@ -136,5 +171,9 @@
         &:hover {
             color: $pink;
         }
+    }
+
+    @include mq($screen-min) {
+        margin: 0;
     }
 }

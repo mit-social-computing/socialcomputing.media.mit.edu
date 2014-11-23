@@ -18,15 +18,15 @@
                         <!-- .l-left -->
                         <div class="l-right">
                             <button id="menu" class="btn btn-menu" type="button" role="button" aria-label="Toggle Navigation"><span></span></button>
-                            {% set sections = craft.sections.getAllSections() %}
                             {% set s1 = craft.request.firstSegment %}
 
                             <nav id="mainNav" class="nav">
                                 <h2 class="visuallyhidden">Navigation Bar</h2>
                                 <ul class="nav-list">
-                                {% for s in sections %}
+                                {% for nav in navSet.navItems %}
+                                    {% set s = craft.sections.getSectionByHandle(nav.slug) %}
                                     {# structures with nested children #}
-                                    {% if s.maxLevels > 1 %}
+                                    {% if s is not empty and s.maxLevels > 1 %}
 
                                         {% if s1 == s|lower or ( s.isHomepage() and s1 is empty ) %}
 
@@ -59,10 +59,10 @@
                                     {% else %}
                                         <li class="nav-item">
 
-                                        {% if s1 == s|lower or ( s.isHomepage() and s1 is empty ) %}
-                                        <a href="{{ url(s|lower) }}" class="active">{{ s }}</a>
+                                        {% if s1 == nav|lower or ( s is not empty and s.isHomepage() and s1 is empty ) %}
+                                        <a href="{{ url(nav|lower) }}" class="active">{{ nav }}</a>
                                         {% else %}
-                                        <a href="{{ url(s|lower) }}">{{ s }}</a>
+                                        <a href="{{ url(nav|lower) }}">{{ nav }}</a>
                                         {% endif %}
 
                                         </li>
