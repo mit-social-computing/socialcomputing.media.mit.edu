@@ -1,0 +1,20 @@
+.text {
+    > h3 {
+        @include handwriting;
+        font-size: 1em;
+    }
+    
+    p {
+        font-size: inherit;
+        font-weight: inherit;
+        line-height: inherit;
+    }
+}
+
+.text-body {
+    overflow: hidden;
+
+    &.medium {
+        @include fontsize($font-medium);
+    }
+}

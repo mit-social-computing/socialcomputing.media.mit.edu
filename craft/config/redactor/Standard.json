@@ -1,5 +1,6 @@
 {
 	buttons: ['html','formatting','bold','italic','unorderedlist','orderedlist','link','image','video'],
 	plugins: ['fullscreen'],
+	formattingTags : ['p', 'h3'],
 	toolbarFixedBox: true
 }

@@ -59,6 +59,7 @@ $transition: .3s all linear;
 $base: 19;
 $font-medium: (small: 17.5, medium: 16);
 $font-medium-header: (small : 20, medium : 23);
+$font-large: (small: 24, medium: 43);
 
 $font-navmed: (small: 27.5, medium: 16); // mobile dropdown links
 $font-navlg: (small: 45, medium: 16); // probably only used on mobile menu
@@ -72,6 +73,7 @@ $screen-max: "min-width:" rems($max-width);
 
 // COLORS
 
+$offwhite: #f5f5f5;
 $lightestgray: #e0e0e0; // light gray bg
 $lightergray: #d2d1d1; // carousel dots
 $lightgray: #999; // nav default state
@@ -86,6 +88,11 @@ $pink: #d175a1;
 
 .only-small {
     @include mq($screen-min) {
+        display: none;
+    }
+}
+.only-medium {
+    @include mq("max-width:" rems($min-width)) {
         display: none;
     }
 }

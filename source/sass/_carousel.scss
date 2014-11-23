@@ -1,0 +1,64 @@
+.ss.slick-slider { // featured carousel
+    margin-bottom: 0;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+.slick-list,
+.slick-track,
+.ss-slide {
+    height: 100%;
+}
+
+#carousel .slick-slide {
+    @include flexbox;
+    @include flex-flow(column nowrap);
+
+    @include mq($screen-min) {
+        display: block;
+    }
+}
+
+.ss-slide {
+    background-position: center;
+    background-size: cover;
+    @include flexbox;
+
+    @include flex(1);
+}
+
+.ss-caption {
+    text-align: center;
+    padding: 0 15px;
+    @include flex(1);
+
+    @include mq($screen-min) {
+        display: none;
+    }
+}
+
+.ss-headline {
+    display: none;
+    text-align: center;
+    @include handwriting;
+    @include fontsize($font-large);
+
+    @include mq($screen-min) {
+        display: block;
+        margin: auto;
+        max-width: 1000px;
+        padding: 0 15px;
+    }
+
+    &.white {
+        color: white;
+    }
+
+    &.black {
+        color: $darkgray;
+    }
+}
+

@@ -5,9 +5,13 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>{% if title is defined %}{{ title }} - {% endif %}{{ siteName }}</title>
 
-        <link href="/assets/css/styles.css" rel="stylesheet">
+        <link href="/assets/css/styles.concat.css" rel="stylesheet">
     </head>
+    {% if flexpage is defined %}
+    <body class="is-flexpage">
+    {% else %}
     <body>
+    {% endif %}
         <header class="l-highlight l-fixed-top">
             <div class="l-max">
                 <div class="l-vpadding">
@@ -73,7 +77,7 @@
                                 <div class="box box--gray centered only-small">
                                     <h3 class="box-title">recent</h3>
                                     <ul class="box-list">
-                                    {% for slide in recentNews.recent %}
+                                    {% for slide in recentNewsSet.recentItems %}
                                         <li>{{ slide.caption }}</li>
                                     {% endfor %}
                                     </ul>

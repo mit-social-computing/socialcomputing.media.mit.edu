@@ -175,5 +175,6 @@
 
     @include mq($screen-min) {
         margin: 0;
+        line-height: 0.9;
     }
 }

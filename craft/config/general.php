@@ -10,7 +10,6 @@
 return array(
     '*'     => array(
         'omitScriptNameInUrls'  => true,
-        'cpTrigger'             => 'login',
         'testToEmailAddress'    => 'bwhitton@gmail.com',
         'enableCsrfProtection'  => true
     ),
