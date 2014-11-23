@@ -1,6 +1,6 @@
 {% extends 'layouts/_home' %}
 
-{% set entry = craft.entries.section('home').first() %}
+{% set entry = craft.entries.section('about').first() %}
 {% set flexpage = true %}
 
 {% block content %}
@@ -12,7 +12,7 @@
             {% set i = slide.image.first() %}
             <div>
                 <div class="ss-slide" style="background-image: url({{ i.url }});">
-                    <span class="ss-headline">{{ slide.headline }}</span>
+                    <span class="ss-headline {{ slide.color }}">{{ slide.headline }}</span>
                 </div>
                 <div class="ss-caption">{{ slide.headline }}</div>
             </div>
