@@ -477,6 +477,12 @@ img {
   max-width: 100%;
 }
 
+/* line 70, ../../../source/sass/_base.scss */
+b,
+strong {
+  font-weight: 400;
+}
+
 /* line 1, ../../../source/sass/_layout.scss */
 .l-highlight {
   background-color: #333;
@@ -573,10 +579,12 @@ img {
   /* line 84, ../../../source/sass/_layout.scss */
   .l-1of3 {
     width: 33.33333%;
+    max-width: 330px;
+    padding-right: 0.59375rem;
   }
 }
 
-/* line 93, ../../../source/sass/_layout.scss */
+/* line 94, ../../../source/sass/_layout.scss */
 .l-flexpage {
   display: -webkit-box;
   display: -webkit-flex;
@@ -591,7 +599,7 @@ img {
   flex-direction: column;
   height: 100%;
 }
-/* line 100, ../../../source/sass/_layout.scss */
+/* line 101, ../../../source/sass/_layout.scss */
 .l-flexpage > :first-child {
   -webkit-box-flex: 1;
   -webkit-flex: 1;
@@ -601,7 +609,7 @@ img {
   flex: 1;
 }
 
-/* line 106, ../../../source/sass/_layout.scss */
+/* line 107, ../../../source/sass/_layout.scss */
 .l-slideshow {
   position: relative;
 }

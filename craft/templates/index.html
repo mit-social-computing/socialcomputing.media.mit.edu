@@ -1,7 +1,9 @@
 {% extends 'layouts/_home' %}
 
-{% set entry = craft.entries.section('about').first() %}
 {% set flexpage = true %}
+{% if craft.request.firstSegment %}
+{% set entry = craft.entries.section('about').first() %}
+{% endif %}
 
 {% block content %}
 <main class="l-flexpage">
@@ -32,21 +34,23 @@
                     </div>
                 </div>
                 <div class="l-1of3">
-                    <aside class="box">
-                        <h2 class="visuallyhidden">Recent News</h2>
-                        <div class="text">
-                            <div class="text-body medium" id="newsCaption">
-                            {{ recentNewsSet.recentItems.first().caption }}
+                    <aside id="recentContainer">
+                        <h2 class="handwriting">recent</h2>
+                        <div class="box--wavy box--gray">
+                            <div class="text" id="newsCaption">
+                                <div class="text-body">{{ recentNewsSet.recentItems.first().caption }}</div>
                             </div>
-                        </div>
-                        <div id="recentNews" class="ss--small">
-                            {% for slide in recentNewsSet.recentItems %}
-                            {% set i = slide.image.first() %}
-                            <article class="ss-slide-small">
-                                <h3 class="visuallyhidden">{{ slide.caption }}</h3>
-                                <img src="{{ i.getUrl('thumbnail') }}">
-                            </article>
-                        {% endfor %}
+                            <div id="recentNews" class="ss--small">
+
+                                {% for slide in recentNewsSet.recentItems %}
+                                {% set i = slide.image.first() %}
+                                <article class="ss-slide-small">
+                                    <h3 class="visuallyhidden">{{ slide.caption }}</h3>
+                                    <img src="{{ i.getUrl('thumbnail') }}" width="{{ i.getWidth('thumbnail') }}" height="{{ i.getHeight('thumbnail') }}">
+                                </article>
+                                {% endfor %}
+
+                            </div>
                         </div>
                     </aside>
                 </div>

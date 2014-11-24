@@ -11494,7 +11494,7 @@ $(function() {
         path = location.pathname.slice(1).split('/')
 
     if ( !path[0] ) {
-        history.replaceState({},'','about')
+        //history.replaceState({},'','about')
     }
 
     $feature.slick({
