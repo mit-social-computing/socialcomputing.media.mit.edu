@@ -55,6 +55,12 @@ $transition: .3s all linear;
     font-weight: normal;
 }
 
+@mixin antialiased {
+    -webkit-font-smoothing: antialiased;
+    // font weight 200 looks fine on firefox
+    //-moz-osx-font-smoothing: grayscale;
+}
+
 // FONTS
 $base: 19;
 $font-medium: (small: 17.5, medium: 16);
@@ -68,8 +74,11 @@ $font-navlg: (small: 45, medium: 16); // probably only used on mobile menu
 $max-width: 1200;
 $min-width: 507;
 
+$content-width: 667;
+
 $screen-min: "min-width:" rems($min-width);
 $screen-max: "min-width:" rems($max-width);
+$screen-content: "min-width:" rems($content-width);
 
 // COLORS
 
@@ -96,3 +105,11 @@ $pink: #d175a1;
         display: none;
     }
 }
+
+// SLICK
+$slick-dot-color: $lightergray;
+$slick-dot-color-active: $pink;
+$slick-opacity-default: 1;
+$slick-opacity-not-active: 1;
+$slick-opacity-on-hover: 0.75;
+$slick-dot-size: 16px;

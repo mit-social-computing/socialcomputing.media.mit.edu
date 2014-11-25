@@ -7,6 +7,26 @@
     left: 0;
 }
 
+#recentContainer { // wrapper for recent news carousel
+    position: relative;
+    @include antialiased;
+
+    > .slick-dots {
+        top: 0;
+        right: 0;
+        bottom: auto;
+        width: auto;
+
+        > li {
+            margin: 0 2px;
+        }
+    }
+}
+
+.ss--small.slick-slider { // recent news carousel
+    margin-bottom: 0;
+}
+
 .slick-list,
 .slick-track,
 .ss-slide {

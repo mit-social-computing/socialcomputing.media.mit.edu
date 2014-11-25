@@ -49,6 +49,7 @@
         text-decoration: none;
         color: $lightergray;
         @include fontsize($font-navlg);
+        @include antialiased;
 
         &:hover,
         &.active {
@@ -130,32 +131,6 @@
             pointer-events: all;
         }
     }
-}
-
-[data-dropdown="is-closed"] > .nav-dropdown { 
-    max-height: 0;
-}
-
-[data-dropdown="is-open"] > .nav-dropdown {
-    max-height: 200px;
-}
-
-@include mq($screen-min) {
-
-    [data-dropdown="is-open"] > .nav-dropdown,
-    [data-dropdown="is-closed"] > .nav-dropdown { 
-        max-height: initial;
-    }
-
-}
-
-[data-dropdown="is-closed"] > a:after {
-    @include rotate(0deg);
-}
-
-[data-dropdown="is-open"] > a:after {
-    cursor: default;
-    @include rotate(90deg);
 }
 
 .nav-logo {

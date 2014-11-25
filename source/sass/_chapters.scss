@@ -1,0 +1,52 @@
+.chapter-nav {
+    height: 100%;
+    background-color: $lightestgray;
+    position: fixed;
+}
+
+.chapter-bullets {
+    a {
+        display: block;
+        text-align: center;
+        text-decoration: none;
+    }
+
+    a:before {
+        content: '•';
+        font-size: 16px;
+        font-family: "slick";
+        line-height: 1;
+        color: $lightgray;
+        opacity: 0.5;
+
+        @include transition(opacity 150ms ease, color 150ms ease);
+    }
+
+    a:hover:before {
+        color: $pink;
+        opacity: 1;
+    }
+}
+
+.chapter-content {
+    padding: 0 rems($base);
+
+    @include mq($screen-max) {
+        padding: 0;
+    }
+}
+
+[data-sidebar] {
+    &,
+    .chapter-nav {
+        @include transition(width 250ms ease-out);
+    }
+    white-space: nowrap;
+
+    > h2,
+    .chapter-bullets,
+    .chapter-list {
+        @include transition(transform 250ms ease-out, opacity 150ms ease-out);
+    }
+
+}

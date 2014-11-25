@@ -25,37 +25,54 @@
     <section class="l-highlight-offwhite">
         <h2 class="visuallyhidden">Page Content</h2>
         <div class="l-max only-medium">
-            <div class="l-twocolumn">
-                <div class="l-2of3">
-                    <div class="text">
-                        <article class="text-body medium">
-                        {{ entry.textContent }}
-                        </article>
-                    </div>
-                </div>
-                <div class="l-1of3">
-                    <aside id="recentContainer">
-                        <h2 class="handwriting">recent</h2>
-                        <div class="box--wavy box--gray">
-                            <div class="text" id="newsCaption">
-                                <div class="text-body">{{ recentNewsSet.recentItems.first().caption }}</div>
-                            </div>
-                            <div id="recentNews" class="ss--small">
-
-                                {% for slide in recentNewsSet.recentItems %}
-                                {% set i = slide.image.first() %}
-                                <article class="ss-slide-small">
-                                    <h3 class="visuallyhidden">{{ slide.caption }}</h3>
-                                    <img src="{{ i.getUrl('thumbnail') }}" width="{{ i.getWidth('thumbnail') }}" height="{{ i.getHeight('thumbnail') }}">
-                                </article>
-                                {% endfor %}
-
-                            </div>
+            <div class="l-vpadding">
+                <div class="l-twocolumn">
+                    <div class="l-2of3">
+                        <div class="text">
+                            <article class="text-scroll">
+                                <div class="text-body medium">
+                                {{ entry.textContent }}
+                                </div>
+                                <!-- .text-body -->
+                            </article>
+                            <!-- .text-scroll -->
                         </div>
-                    </aside>
+                        <!-- .text -->
+                    </div>
+                    <!-- .l-2of3 -->
+                    <div class="l-1of3">
+                        <aside id="recentContainer">
+                            <h2 class="flush">recent</h2>
+                            <div class="box--wavy box--gray">
+                                <div class="text" id="newsCaption">
+                                    <div class="text-body padded">{{ recentNewsSet.recentItems.first().desktopHeadline }}</div>
+                                </div>
+                                <!-- .text#newsCaption -->
+                                <div id="recentNews" class="ss--small">
+
+                                    {% for slide in recentNewsSet.recentItems %}
+                                    {% set i = slide.image.first() %}
+                                    <article class="ss-slide-small">
+                                        <h3 class="visuallyhidden">{{ slide.desktopHeadline }}</h3>
+                                        <img src="{{ i.getUrl('recentNews') }}" width="{{ i.getWidth('recentNews') }}" height="{{ i.getHeight('recentNews') }}">
+                                    </article>
+                                    {% endfor %}
+
+                                </div>
+                                <!-- .ss-small#recentNews -->
+                            </div>
+                            <!-- .box-wavy -->
+                        </aside>
+                        <!-- #recentContainer -->
+                    </div>
+                    <!-- .l-1of3 -->
                 </div>
+                <!-- .l-twocolumn -->
             </div>
+            <!-- .l-vpadding -->
         </div>
+        <!-- .l-max -->
     </section>
+    <!-- .l-highlight-offwhite -->
 </main>
 {% endblock %}

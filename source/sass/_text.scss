@@ -1,14 +1,5 @@
 .text {
-    > h3 {
-        @include handwriting;
-        font-size: 1em;
-    }
-    
-    p {
-        font-size: inherit;
-        font-weight: inherit;
-        line-height: inherit;
-    }
+    @include antialiased;
 }
 
 .text-body {
@@ -17,4 +8,34 @@
     &.medium {
         @include fontsize($font-medium);
     }
+
+    &.padded {
+        padding: 0 rems($base);
+    }
+
+    p {
+        font-size: inherit;
+        font-weight: inherit;
+        line-height: inherit;
+    }
+
+    > ul,
+    > ol {
+        list-style-position: inside;
+    }
+
+    ol {
+        counter-reset: counter;
+
+        li:before {
+            counter-increment: counter;
+            content: counter(counter)" ";
+            font-weight: 500;
+        }
+    }
+}
+
+.text-scroll {
+    overflow-y: scroll;
+    max-height: 258px;
 }

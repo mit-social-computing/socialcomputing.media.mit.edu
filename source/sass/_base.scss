@@ -1,7 +1,9 @@
 @font-face {
     font-family: handwriting;
-    src: url("/assets/css/fonts/yah.ttf") format(truetype);
+    src: url(/assets/css/fonts/yah.ttf) format("truetype");
     font-weight: normal;
+    font-style: normal;
+    font-size: 1rem;
 }
 
 *,
@@ -19,7 +21,7 @@ body {
     color: $gray;
     @include fontsize($font-medium);
     font-family: "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
-    font-weight: 100;
+    font-weight: 200;
 
     &.is-flexpage {
         height: 100%;
@@ -44,10 +46,19 @@ h6 {
     @include handwriting;
     @include fontsize($font-medium-header);
     @include vertical-rhythm($font-medium-header);
+
+    &:first-of-type, // evens out homepage titles
+    &.flush {
+        margin-top: 0;
+    }
 }
 
 p {
     @include vertical-rhythm($font-medium);
+
+    // &:last-child {
+    //     margin-bottom: 0;
+    // }
 }
 
 button {

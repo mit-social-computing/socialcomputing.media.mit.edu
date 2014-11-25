@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>{% if title is defined %}{{ title }} - {% endif %}{{ siteName }}</title>
 
-        <link href="/assets/css/styles.concat.css" rel="stylesheet">
+        <link href="/assets/css/styles.css" rel="stylesheet">
     </head>
     {% if flexpage is defined %}
     <body class="is-flexpage">
@@ -22,8 +22,8 @@
                         <!-- .l-left -->
                         <div class="l-right">
                             <button id="menu" class="btn btn-menu" type="button" role="button" aria-label="Toggle Navigation"><span></span></button>
-                            {% set s1 = craft.request.firstSegment %}
 
+                            {% set s1 = craft.request.firstSegment %}
                             <nav id="mainNav" class="nav">
                                 <h2 class="visuallyhidden">Navigation Bar</h2>
                                 <ul class="nav-list">
@@ -34,13 +34,13 @@
 
                                         {% if s1 == s|lower or ( s.isHomepage() and s1 is empty ) %}
 
-                                        <li class="nav-item" data-dropdown="is-open">
-                                            <a href="#" class="active">{{ s }}</a>
+                                        <li class="nav-item" data-dropdown="is-closed">
+                                            <a href="{{ url(nav|lower) }}" class="active">{{ s }}</a>
 
                                         {% else %}
 
                                         <li class="nav-item" data-dropdown="is-closed">
-                                            <a href="#">{{ s }}</a>
+                                            <a href="{{ url(nav|lower) }}">{{ s }}</a>
 
                                         {% endif %}
 
@@ -78,7 +78,11 @@
                                     <h3 class="box-title">recent</h3>
                                     <ul class="box-list">
                                     {% for slide in recentNewsSet.recentItems %}
-                                        <li>{{ slide.caption }}</li>
+                                        {% if slide.mobileHeadline %}
+                                        <li>{{ slide.mobileHeadline }}</li>
+                                        {% else %}
+                                        <li>{{ slide.desktopHeadline }}</li>
+                                        {% endif %}
                                     {% endfor %}
                                     </ul>
                                 </div>

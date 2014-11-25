@@ -11,9 +11,11 @@ $(function() {
     }
 
     $feature.slick({
+        autoplay: true,
+        pauseOnHover : false,
         arrows : false,
-        dots: true,
         fade : true,
+        draggable: false,
         responsive : [
         {
             breakpoint: 507,
@@ -23,8 +25,14 @@ $(function() {
         }
         ]
     })
+
     $recentNews.slick({
         arrows : false,
-        slide : '.ss-slide-small'
+        dots : true,
+        draggable: false,
+        slide : '.ss-slide-small',
+        onInit : function() {
+            this.$dots.prependTo('#recentContainer')
+        }
     })
 })

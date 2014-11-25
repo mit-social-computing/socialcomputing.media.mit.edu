@@ -13,7 +13,7 @@ module.exports = function(grunt) {
                 files : [
                     'craft/templates/**/*.html'
                     , 'public/assets/js/scripts.concat.js'
-                    , 'public/assets/css/styles.concat.css'
+                    , 'public/assets/css/styles.css'
                 ],
                 options : { livereload: true }
             },
@@ -25,7 +25,7 @@ module.exports = function(grunt) {
                 files : [
                     'public/assets/css/styles.css'
                 ],
-                tasks : [ 'concat:css', 'cssmin:dev' ]
+                tasks : [ 'cssmin:dev' ]
             }
         },
         concat : {
@@ -71,10 +71,13 @@ module.exports = function(grunt) {
         },
         compass : {
             options : {
-                sassDir : 'source/sass',
-                cssDir : 'public/assets/css',
+                sassPath : 'source/sass',
+                cssPath : 'public/assets/css',
+                imagesDir : 'assets/img',
+                fontsPath : 'public/assets/css/fonts',
+                fontsDir : 'assets/css/fonts',
                 require : ['compass-h5bp', 'compass-normalize'],
-                output: 'expanded',
+                output: 'expanded'
             },
             compile :  {
                 options : {
@@ -92,7 +95,7 @@ module.exports = function(grunt) {
                 advanced : false
             },
             dev : {
-                'public/assets/css/styles.min.css' : [ 'public/assets/css/styles.concat.css' ]
+                'public/assets/css/styles.min.css' : [ 'public/assets/css/styles.css' ]
             }
         },
         modernizr : {

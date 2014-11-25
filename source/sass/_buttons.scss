@@ -15,6 +15,10 @@
 
     @include mq($screen-min) {
         display: none;
+
+        &.btn--sidemenu {
+            display: block;
+        }
     }
 
     > span {
