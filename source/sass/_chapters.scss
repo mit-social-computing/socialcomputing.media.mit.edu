@@ -2,6 +2,33 @@
     height: 100%;
     background-color: $lightestgray;
     position: fixed;
+    padding: rems($base);
+
+    > h2 {
+        font-family: inherit;
+        font-weight: 100;
+        text-transform: lowercase;
+
+        font-size: 26px;
+        font-size: rems(26);
+    }
+}
+
+.chapter-list {
+    font-size: 20px;
+    font-size: rems(20);
+    @include antialiased;
+
+    a {
+        text-transform: lowercase;
+        text-decoration: none;
+        color: $gray;
+
+        &:hover,
+        &.active {
+            color: $pink;
+        }
+    }
 }
 
 .chapter-bullets {
@@ -22,14 +49,28 @@
         @include transition(opacity 150ms ease, color 150ms ease);
     }
 
+    a.active:before,
     a:hover:before {
         color: $pink;
         opacity: 1;
     }
 }
 
+.chapter {
+    &:after {
+        content: url(/assets/img/sc-logo.svg);
+        display: block;
+        margin: rems($base * 5) auto;
+        max-width: 35px;
+        opacity: 0.1;
+    }
+}
+
 .chapter-content {
     padding: 0 rems($base);
+
+    @include translate3d(0,0,0);
+    @include backface-visibility(hidden);
 
     @include mq($screen-max) {
         padding: 0;
@@ -37,16 +78,17 @@
 }
 
 [data-sidebar] {
+    white-space: nowrap;
+
     &,
     .chapter-nav {
-        @include transition(width 250ms ease-out);
+        @include transition(width 250ms linear);
     }
-    white-space: nowrap;
 
     > h2,
     .chapter-bullets,
     .chapter-list {
-        @include transition(transform 250ms ease-out, opacity 150ms ease-out);
+        @include transition(transform 250ms ease, opacity 250ms ease);
     }
 
 }

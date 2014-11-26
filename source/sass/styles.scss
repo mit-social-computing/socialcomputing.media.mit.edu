@@ -13,6 +13,7 @@
 @import "compass/css3/appearance";
 @import "compass/css3/transform";
 
+// MODULE IMPORTS
 @import "base";
 @import "layout";
 @import "state";
@@ -22,3 +23,7 @@
 @import "text";
 @import "carousel";
 @import "chapters";
+@import "scrollbars";
+@import "gallery";
+@import "lightbox";
+@import "projects";

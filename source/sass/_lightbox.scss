@@ -1,0 +1,136 @@
+body.lightbox-open {
+    overflow: hidden;
+}
+
+.lightbox-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 0;
+    z-index: 200;
+    background-color: black;
+    background-image: none;
+
+    @include transition(background-color, 150ms);
+
+    .logo {
+        opacity: 0.1;
+        width: 33px;
+    }
+
+    @include mq($screen-min) {
+        background-color: white;
+    }
+}
+
+.lightbox-bg.loading {
+    background-image: url(/assets/img/ajax-loader.gif) !important;
+    background-position: center center;
+    background-repeat: no-repeat
+}
+
+@media only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (min--moz-device-pixel-ratio: 1.5), only screen and (min-device-pixel-ratio: 1.5) {
+    .lightbox-bg.loading {
+        background-image: url(/assets/img/ajax-loader.gif) !important;
+        background-size: 64px 64px
+    }
+}
+
+.lightbox-body {
+    height: 100%;
+    padding: 25px 25px 75px;
+    opacity: 0;
+    @include transition(opacity 150ms ease-out);
+
+    // @include mq($screen-min) {
+    //     padding: 55px;
+    // }
+
+    &.is-visible {
+        opacity: 1;
+    }
+
+    .slick-slider {
+        margin: auto;
+        //height: calc(100% - 110px);
+    }
+
+    .slick-list,
+    .slick-track {
+        height: 100%
+    }
+
+    .slick-initialized .slick-slide {
+        margin: auto;
+        position: relative
+    }
+
+    .slick-prev,
+    .slick-next {
+        height: auto;
+        width: auto
+    }
+}
+
+.lb-content > img {
+    height: auto;
+    width: auto;
+    max-height: 100%;
+
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    margin: auto;
+}
+
+.lb-content {
+    height: 100%;
+    background-color: black;
+    //background-image: url("/assets/css/img/loader.gif") !important;
+    background-position: center center;
+    background-repeat: no-repeat;
+
+    @include mq($screen-min) {
+        background-color: white;
+    }
+}
+
+.lb-caption {
+    max-width: 640px;
+    width: 100%;
+
+    color: white;
+
+    > p {
+        margin-bottom: 0;
+        font-weight: 100;
+    }
+
+    @include mq($screen-min) {
+
+        > p {
+            font-weight: 300;
+            color: initial;
+        }
+    }
+}
+
+.no-flexbox .lb-content {
+    height: auto
+}
+
+#lightboxBtns .slick-dots {
+    position: static;
+    width: auto;
+    vertical-align: middle;
+
+    @include transition(opacity 150ms);
+
+    li {
+        margin: 0 2px;
+    }
+}

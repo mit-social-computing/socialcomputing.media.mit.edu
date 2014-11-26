@@ -2,7 +2,10 @@
 var jsFiles = [
     'source/bower_components/modernizr/modernizr.build.js'
     , 'source/bower_components/jquery/dist/jquery.js'
+    , 'source/bower_components/imagesloaded/imagesloaded.pkgd.js'
     , 'source/bower_components/slick-carousel/slick/slick.js'
+    , 'source/bower_components/packery/dist/packery.pkgd.js'
+    , 'source/bower_components/freewall/freewall.js'
     , 'source/js/**/*.js'
 ]
 

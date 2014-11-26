@@ -1,4 +1,85 @@
 {% include 'partials/_header' %}
 
+<div class="l-withsidebar scrollbar" id="scrollable">
+    <div class="l-sidebar" data-sidebar="is-closed" id="sidenav">
+        <nav class="chapter-nav" id="chapterNav">
+            <h2>{{ entry }}</h2>
+            <div class="l-upperright">
+                <button id="sidenavButton" class="btn btn-menu btn--sidemenu" type="button" role="button" aria-label="Toggle Navigation"><span></span></button>
+            </div>
+            <ul class="chapter-list" id="chapterList">
+                {% for chapter in chapters %}
+                {% if loop.first %}
+                <li><a href="#{{ chapter.slug }}" class="active">{{ chapter }}</a></li>
+                {% else %}
+                <li><a href="#{{ chapter.slug }}">{{ chapter }}</a></li>
+                {% endif %}
+                {% endfor %}
+            </ul>
+            <ul class="chapter-bullets">
+                {% for chapter in chapters %}
+                {% if loop.first %}
+                <li><a href="#{{ chapter.slug }}" class="active"></a></li>
+                {% else %}
+                <li><a href="#{{ chapter.slug }}"></a></li>
+                {% endif %}
+                {% endfor %}
+            </ul>
+        </nav>
+        <!-- .chapter-nav -->
+    </div>
+    <!-- .l-sidebar -->
+
+    <div class="l-content">
+        <main class="chapter-content">
+            <article class="chapter-article">
+            {% for chapter in chapters %}
+                <section class="chapter" id="{{ chapter.slug }}">
+                    <h2>{{ chapter }}</h2>
+                {% set content = chapter.multiContent %}
+                {% for block in content %}
+                    {% if block.type == 'textBlock' %}
+                    <div class="text">
+                        <div class="text-body">{{ block.text }}</div>
+                    </div>
+                    {% elseif block.type == 'galleryBlock' %}
+                    <div class="gallery" data-block="#block-{{ block.id }}">
+                    {% for asset in block.gallery %}
+
+                        {% if block.gallery|length > 1 %}
+                        {% do asset.setTransform('galleryThumb') %}
+                        {% else %}
+                        {% do asset.setTransform('bodyContent') %}
+                        {% endif %}
+
+                        <div class="gallery-item">
+                            <a href="#" class="lightbox">
+                                <img src="{{ asset.getUrl() }}" alt="{{ asset.caption }}">
+                            </a>
+                        </div>
+                    {% endfor %}
+                    </div>
+                    <!-- .gallery -->
+                    
+                    <div style="display:none;" id="block-{{ block.id }}">
+                    {% for asset in block.gallery %}
+                    <img src="{{ asset.getUrl('fullSize') }}" alt="{{ asset.caption }}">
+                    {% endfor %}
+                    </div>
+
+                    {% endif %}
+                {% endfor %}
+                </section>
+                <!-- #{{ chapter.slug }} .chapter -->
+            {% endfor %}
+            </article>
+            <!-- .chapter-article -->
+        </main>
+        <!-- .chapter-content -->
+    </div>
+    <!-- .l-content -->
+
+</div>
+
 {% include 'partials/_footer' %}
 

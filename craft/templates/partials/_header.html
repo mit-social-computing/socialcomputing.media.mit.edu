@@ -12,7 +12,7 @@
     {% else %}
     <body>
     {% endif %}
-        <header class="l-highlight l-fixed-top">
+        <header class="l-highlight l-fixed-top" id="siteHeader">
             <div class="l-max">
                 <div class="l-vpadding">
                     <div class="l-contain">
@@ -91,6 +91,11 @@
 
                         </div>
                         <!-- .l-right -->
+                        {% if navsub is defined %}
+                        <div class="l-clear only-small">
+                            <span class="nav-subtitle">{{ navsub }}</span>
+                        </div>
+                        {% endif %}
                     </div>
                     <!-- .l-contain -->
                 </div>

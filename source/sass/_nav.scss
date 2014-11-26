@@ -133,7 +133,7 @@
     }
 }
 
-.nav-logo {
+h1.nav-logo {
     margin: 8px 0 0;
     text-transform: lowercase;
 
@@ -152,4 +152,11 @@
         margin: 0;
         line-height: 0.9;
     }
+}
+
+.nav-subtitle {
+    text-transform: lowercase;
+    color: white;
+    font-weight: 200;
+    @include antialiased;
 }

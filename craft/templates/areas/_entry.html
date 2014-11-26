@@ -1,60 +1,9 @@
-{% extends 'layouts/_home' %}
+{% extends 'layouts/_offcanvas' %}
+
+{% if craft.request.isLivePreview %}
+    {% set entry = craft.entries.slug(craft.request.getSegment(2)).first() %}
+{% endif %}
+
 {% set chapters = entry.children %}
+{% set navsub = craft.request.firstSegment ~ ' > ' ~ craft.request.getSegment(2) %}
 
-{% block content %}
-
-<div class="l-withsidebar">
-    <div class="l-sidebar" data-sidebar="is-closed" id="sidenav">
-        <nav class="chapter-nav">
-            <h2>{{ entry }}</h2>
-            <div class="l-upperright">
-                <button id="sidenavButton" class="btn btn-menu btn--sidemenu" type="button" role="button" aria-label="Toggle Navigation"><span></span></button>
-            </div>
-            <ul class="chapter-list">
-                {% for chapter in chapters %}
-                <li><a href="#{{ chapter.slug }}">{{ chapter }}</a></li>
-                {% endfor %}
-            </ul>
-            <ul class="chapter-bullets">
-                {% for chapter in chapters %}
-                <li><a href="#{{ chapter.slug }}"></a></li>
-                {% endfor %}
-            </ul>
-        </nav>
-        <!-- .chapter-nav -->
-    </div>
-    <!-- .l-sidebar -->
-
-    <div class="l-content">
-        <main class="chapter-content" data-sidebar-state="is-closed" id="content">
-            <article class="chapter-article">
-            {% set transform = {
-                mode: 'crop',
-                width: 100,
-                height: 100
-            } %}
-            {% for chapter in chapters %}
-            {% set content = chapter.multiContent %}
-                {% for block in content %}
-                    {% if block.type == 'textBlock' %}
-                    <div class="text">
-                        <div class="text-body">{{ block.text }}</div>
-                    </div>
-                    {% elseif block.type == 'galleryBlock' %}
-                    <div class="gallery">
-                    {% for asset in block.gallery %}
-                        {% do asset.setTransform(transform) %}
-                        <img src="{{ asset.getUrl() }}">
-                    {% endfor %}
-                    </div>
-                    {% endif %}
-                {% endfor %}
-            {% endfor %}
-            </article>
-        </main>
-        <!-- .chapter-content -->
-    </div>
-    <!-- .l-content -->
-
-</div>
-{% endblock %}

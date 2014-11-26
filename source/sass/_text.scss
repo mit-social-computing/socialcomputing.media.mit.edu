@@ -39,3 +39,15 @@
     overflow-y: scroll;
     max-height: 258px;
 }
+
+.title {
+    margin-bottom: 0;
+    font-weight: 200;
+    @include fontsize($font-large-header);
+    -webkit-font-smoothing: initial;
+    text-transform: lowercase;
+
+    + p {
+        margin-top: 0;
+    }
+}

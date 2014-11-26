@@ -1,0 +1,27 @@
+.project {
+    margin-top: rems($base * 2);
+    margin-bottom: rems($base * 2);
+}
+
+.project-gallery {
+    .slick-slide {
+        position: relative;
+        @include transition(transform 150ms ease);
+        @include transform(scale(0.9) translateX(70%));
+        z-index: 0;
+    }
+
+    .slick-slide.slick-center {
+        @include scale(1);
+        z-index: 300;
+    }
+
+    .slick-center ~ .slick-slide {
+        @include transform(scale(0.9) translateX(-70%));
+        z-index: 0;
+    }
+
+    .slick-dots {
+        bottom: -25px;
+    }
+}

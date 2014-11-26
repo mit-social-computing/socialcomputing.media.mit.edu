@@ -1,4 +1,6 @@
 .btn {
+    display: inline-block;
+
     &:focus {
         outline: 1px dotted rgba(black, 0.25);
     }
@@ -18,6 +20,7 @@
 
         &.btn--sidemenu {
             display: block;
+            margin: 0 auto;
         }
     }
 
@@ -62,5 +65,48 @@
                 @include rotate3d(0,0,1,-45deg);
             }
         }
+    }
+}
+
+.btn--left,
+.btn--right {
+    font-size: 0;
+
+    &:after {
+        content: '';
+        display: inline-block;
+        vertical-align: middle;
+
+        height: 0;
+        width: 0;
+        border: solid transparent;
+        border-top-width: 10px;
+        border-bottom-width: 10px;
+
+        @include transition(border-color 150ms);
+    }
+}
+
+.btn--right {
+    &:hover:after {
+        border-left-color: $pink;
+    }
+
+    &:after {
+        border-left-color: $lightergray;
+        border-left-width: 11px;
+        border-right-width: 0;
+    }
+}
+
+.btn--left {
+    &:hover:after {
+        border-right-color: $pink;
+    }
+
+    &:after {
+        border-right-color: $lightergray;
+        border-right-width: 11px;
+        border-left-width: 0;
     }
 }

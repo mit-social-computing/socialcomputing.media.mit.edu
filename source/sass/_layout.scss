@@ -16,12 +16,37 @@
     z-index: 100;
 
     ~ * {
-        margin-top: 72px;
+        padding-top: 72px;
 
         @include mq($screen-min) {
-            margin-top: 58px;
+            padding-top: 58px;
         }
     }
+}
+
+.l-fixed {
+    z-index: 1;
+    position: fixed;
+}
+
+.l-fixed--upperleft {
+    top: 25px;
+    left: 25px;
+}
+
+.l-fixed--upperright {
+    top: 25px;
+    right: 25px;
+}
+
+.l-fixed--lowerleft {
+    bottom: 25px;
+    left: 25px;
+}
+
+.l-fixed--lowerright {
+    bottom: 35px;
+    right: 25px;
 }
 
 .l-max {
@@ -42,13 +67,15 @@
     max-width: #{$content-width}px;
     margin-left: auto;
     margin-right: auto;
+    padding-top: rems($base * 2);
 }
 
 .l-sidebar {
-    // position: fixed;
-    // top: 0;
-    // bottom: 0;
-    // left: 0;
+    display: none;
+
+    @include mq($screen-min) {
+        display: block;
+    }
 }
 
 .l-vpadding {
@@ -77,11 +104,27 @@
     float: right;
 }
 
+.l-clear {
+    clear: both;
+}
+
+.l-left-block {
+    float: left;
+}
+
+.l-right-block {
+    float: right;
+}
+
+.l-right-block,
+.l-left-block {
+    max-width: 674px;
+}
+
 .l-upperright {
     position: absolute;
     top: rems($base);
     right: rems($base);
-    text-align: center;
 }
 
 .l-twocolumn {

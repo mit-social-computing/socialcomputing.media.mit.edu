@@ -27,10 +27,12 @@
     margin-bottom: 0;
 }
 
-.slick-list,
-.slick-track,
-.ss-slide {
-    height: 100%;
+.ss {
+    .slick-list,
+    .slick-track,
+    .ss-slide {
+        height: 100%;
+    }
 }
 
 #carousel .slick-slide {

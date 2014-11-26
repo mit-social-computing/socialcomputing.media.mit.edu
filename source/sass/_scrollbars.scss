@@ -1,0 +1,35 @@
+.scrollbar {
+    position: static;
+
+    @include mq($screen-min) {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        overflow-y: scroll;
+        overflow-x: hidden;
+    }
+
+    &::-webkit-scrollbar {
+        width: 45px;
+
+    }
+
+    &::-webkit-scrollbar-track {
+        background-color: $lightergray;
+        border-right: 25px solid transparent;
+        background-clip: padding-box;
+        margin: rems($base * 4) 0 rems($base * 2);
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: rgba($pink, 1);
+        border-right: 25px solid transparent;
+        background-clip: padding-box;
+
+        &:hover {
+            background-color: rgba($pink, 0.75);
+        }
+    }
+}

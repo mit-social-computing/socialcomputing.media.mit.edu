@@ -51,10 +51,9 @@
 
 
 [data-sidebar="is-closed"] {
-
     &,
     > .chapter-nav {
-        width: 50px;
+        width: 56px;
     }
 
     h2,
@@ -77,12 +76,6 @@
 }
 
 [data-sidebar="is-open"] {
-
-    &,
-    > .chapter-nav {
-        width: 250px;
-    }
-
     h2,
     .chapter-list {
         pointer-events: auto;
@@ -93,6 +86,6 @@
     .chapter-bullets {
         pointer-events: none;
         opacity: 0;
-        @include translate3d(100%, 0, 0);
+        @include translate3d(0, 100%, 0);
     }
 }
