@@ -12,6 +12,8 @@
     {% else %}
     <body>
     {% endif %}
+    {% set slug = craft.request.firstSegment %}
+    {% if craft.sections.getSectionByHandle(slug).type != 'channel' %}
         <header class="l-highlight l-fixed-top" id="siteHeader">
             <div class="l-max">
                 <div class="l-vpadding">
@@ -24,7 +26,11 @@
                             <button id="menu" class="btn btn-menu" type="button" role="button" aria-label="Toggle Navigation"><span></span></button>
 
                             {% set s1 = craft.request.firstSegment %}
+                            {% if navsub is defined %}
+                            <nav id="mainNav" class="nav nav--lower">
+                            {% else %}
                             <nav id="mainNav" class="nav">
+                            {% endif %}
                                 <h2 class="visuallyhidden">Navigation Bar</h2>
                                 <ul class="nav-list">
                                 {% for nav in navSet.navItems %}
@@ -104,3 +110,4 @@
             <!-- .l-max -->
         </header>
         <!-- .l-highlight -->
+    {% endif %}

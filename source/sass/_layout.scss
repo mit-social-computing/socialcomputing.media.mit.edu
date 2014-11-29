@@ -119,6 +119,12 @@
 .l-right-block,
 .l-left-block {
     max-width: 674px;
+    width: 100%;
+
+    &.solo {
+        margin: 0 auto;
+        float: none;
+    }
 }
 
 .l-upperright {

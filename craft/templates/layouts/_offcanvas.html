@@ -2,6 +2,7 @@
 
 <div class="l-withsidebar scrollbar" id="scrollable">
     <div class="l-sidebar" data-sidebar="is-closed" id="sidenav">
+        {% block sidebar %}
         <nav class="chapter-nav" id="chapterNav">
             <h2>{{ entry }}</h2>
             <div class="l-upperright">
@@ -27,17 +28,21 @@
             </ul>
         </nav>
         <!-- .chapter-nav -->
+        {% endblock sidebar %}
     </div>
     <!-- .l-sidebar -->
 
-    <div class="l-content">
+    <div class="l-content" id="content">
+        {% block content %}
         <main class="chapter-content">
             <article class="chapter-article">
             {% for chapter in chapters %}
                 <section class="chapter" id="{{ chapter.slug }}">
-                    <h2>{{ chapter }}</h2>
-                {% set content = chapter.multiContent %}
-                {% for block in content %}
+                    <div class="text">
+                        <h2 class="text-title">{{ chapter }}</h2>
+                    </div>
+                    {% set content = chapter.multiContent %}
+                    {% for block in content %}
                     {% if block.type == 'textBlock' %}
                     <div class="text">
                         <div class="text-body">{{ block.text }}</div>
@@ -76,6 +81,7 @@
             <!-- .chapter-article -->
         </main>
         <!-- .chapter-content -->
+        {% endblock content %}
     </div>
     <!-- .l-content -->
 

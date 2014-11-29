@@ -13,6 +13,10 @@
     @include translateX(-100%);
     @include transition(transform 250ms ease-out);
 
+    &.nav--lower {
+        top: 94px;
+    }
+
     @include mq($screen-min) {
         width: auto;
         position: static;
@@ -49,7 +53,6 @@
         text-decoration: none;
         color: $lightergray;
         @include fontsize($font-navlg);
-        @include antialiased;
 
         &:hover,
         &.active {
@@ -156,7 +159,5 @@ h1.nav-logo {
 
 .nav-subtitle {
     text-transform: lowercase;
-    color: white;
-    font-weight: 200;
-    @include antialiased;
+    color: $lightergray;
 }

@@ -12,6 +12,10 @@
         color: $darkgray;
     }
 
+    .nav-subtitle {
+        color: $darkgray;
+    }
+
     @include mq($screen-min) {
         header.l-highlight {
             @include transition(none);

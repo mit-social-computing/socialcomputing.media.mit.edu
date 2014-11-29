@@ -64,9 +64,12 @@ $transition: .3s all linear;
 // FONTS
 $base: 19;
 $font-medium: (small: 17.5, medium: 16);
+$font-large: (small : 20, medium: 22); 
+
+$font-carousel: (small: 24, medium: 43);
+
 $font-medium-header: (small : 20, medium : 23);
 $font-large-header: (small : 25, medium: 30);
-$font-large: (small: 24, medium: 43);
 
 $font-navmed: (small: 27.5, medium: 16); // mobile dropdown links
 $font-navlg: (small: 45, medium: 16); // probably only used on mobile menu

@@ -17,7 +17,6 @@
 .chapter-list {
     font-size: 20px;
     font-size: rems(20);
-    @include antialiased;
 
     a {
         text-transform: lowercase;

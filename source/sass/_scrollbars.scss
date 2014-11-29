@@ -20,6 +20,10 @@
         background-color: $lightergray;
         border-right: 25px solid transparent;
         background-clip: padding-box;
+        margin: rems($base * 2) 0 rems($base * 2);
+    }
+
+    #siteHeader + &::-webkit-scrollbar-track {
         margin: rems($base * 4) 0 rems($base * 2);
     }
 

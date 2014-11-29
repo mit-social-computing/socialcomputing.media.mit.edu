@@ -1,0 +1,32 @@
+{% extends 'layouts/_offcanvas' %}
+{% set articles = craft.entries.section('blog') %}
+
+{% block sidebar %}{% endblock sidebar %}
+
+{% block content %}
+<main class="summary-list">
+
+    {% for article in articles %}
+    {% set categories = article.blogCategory %}
+    <article class="text text-summary">
+
+        <h2 class="text-title"><a href="{{ url(article.uri) }}">{{ article }}</a></h2>
+        <div class="text-body large">
+            {{ article.summary }}
+        </div>
+        <!-- .text-body -->
+
+        <footer class="text-body text-footer">
+            written by <a href="{{ url('blog/author/' ~ article.id) }}">{{ article.author.fullName }}</a> on {{ article.dateCreated|date('F d, Y')|lower }}{% if categories|length %} &mdash; {% for c in categories %}
+            {{ loop.last and not loop.first ? '& ' : '' }}<a href="{{ url(c.uri) }}">{{ c|lower }}</a>{{ not loop.last ? ', ' : '' }}
+            {% endfor %}{% endif %}
+        </footer>
+        <!-- .text-footer -->
+
+    </article>
+    <!-- .text-summary -->
+    {% endfor %}
+
+</main>
+<!-- .summary-list -->
+{% endblock content %}

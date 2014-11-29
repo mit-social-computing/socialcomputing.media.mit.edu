@@ -17493,16 +17493,22 @@ if ( typeof define === 'function' && define.amd ) {
  
 })(window.Zepto || window.jQuery);
 
-/*global location*/
+/*global location,setTimeout*/
 // chapters.js
 
 $(function() {
     var hash = location.hash
 
     if ( hash ) {
+        // need to trigger on gallery layout
+        // use browserify to creat bundles and pass event
         $('#scrollable').animate({
-            scrollTop : $(hash).offset().top - $('#siteHeader').height()
+            scrollTop : $(hash)[0].offsetTop -
+                ( parseInt(getComputedStyle($('#content')[0]).paddingTop, 10) +
+                  $('#siteHeader').height() )
         })
+        $('#sidenav').find('a').not('[href=' + hash + ']').removeClass('active')
+        $('#sidenav').find('[href=' + hash + ']').addClass('active')
     }
 
     $('#sidenavButton').click(function(e) {
@@ -17528,10 +17534,12 @@ $(function() {
     $('#sidenav').on('click', 'a', function(e) {
         e.preventDefault()
 
-        var scrollTo = $(this.hash)[0].offsetTop - $('#siteHeader').height(),
+        var scrollTo = $(this.hash)[0].offsetTop -
+            ( parseInt(getComputedStyle($('#content')[0]).paddingTop, 10) +
+              $('#siteHeader').height() ),
             selector = '[href=' + this.hash +']'
 
-        location.hash = this.hash
+        history.pushState({}, '', this.hash)
         $('#scrollable').animate({
             scrollTop : scrollTo
         })
@@ -18188,6 +18196,7 @@ $(function() {
         centerMode : true,
         dots : true,
         arrows : false,
-        infinite : false
+        infinite : false,
+        focusOnSelect : true
     })
 })

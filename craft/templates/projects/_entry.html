@@ -1,0 +1,4 @@
+{% extends 'layouts/_switch' %}
+{% set projects = [entry] %}
+{% set navsub = craft.request.firstSegment ~ ' > ' ~ entry|lower %}
+

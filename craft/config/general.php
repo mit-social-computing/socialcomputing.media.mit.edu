@@ -11,7 +11,8 @@ return array(
     '*'     => array(
         'omitScriptNameInUrls'  => true,
         'testToEmailAddress'    => 'bwhitton@gmail.com',
-        'enableCsrfProtection'  => true
+        'enableCsrfProtection'  => true,
+        'useEmailAsUsername'    => true
     ),
 
     '.dev'  => array(

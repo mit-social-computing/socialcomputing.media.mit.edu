@@ -1,5 +1,28 @@
 .text {
-    @include antialiased;
+}
+
+.text-summary {
+    text-align: center;
+
+    > .text-title {
+        margin-bottom: 0;
+    }
+
+    &:after {
+        content: url(/assets/img/summary-divider.png);
+        display: block;
+        margin: rems($base * 4) auto;
+        max-width: 376px;
+        opacity: 0.4;
+    }
+
+    &:last-of-type {
+        margin-bottom: rems($base * 4);
+
+        &:after {
+            content: '';
+        }
+    }
 }
 
 .text-body {
@@ -9,14 +32,34 @@
         @include fontsize($font-medium);
     }
 
+    &.large {
+        @include fontsize($font-large);
+    }
+
+    &.text-footer {
+        text-transform: lowercase;
+        color: $lightgray;
+        @include fontsize($font-medium);
+
+        > a {
+            color: $lightgray;
+            &:hover {
+                color: $pink;
+            }
+        }
+    }
+
     &.padded {
         padding: 0 rems($base);
     }
 
     p {
         font-size: inherit;
-        font-weight: inherit;
         line-height: inherit;
+
+        &:first-child {
+            margin-top: 0;
+        }
     }
 
     > ul,
@@ -40,8 +83,8 @@
     max-height: 258px;
 }
 
-.title {
-    margin-bottom: 0;
+.text-title {
+    //margin-bottom: 0;
     font-weight: 200;
     @include fontsize($font-large-header);
     -webkit-font-smoothing: initial;
@@ -49,5 +92,14 @@
 
     + p {
         margin-top: 0;
+    }
+
+    > a {
+        text-decoration: none;
+        color: $darkgray;
+
+        &:hover {
+            color: $pink;
+        }
     }
 }

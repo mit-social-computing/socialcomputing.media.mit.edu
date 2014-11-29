@@ -21,7 +21,8 @@ body {
     color: $gray;
     @include fontsize($font-medium);
     font-family: "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
-    font-weight: 200;
+    font-weight: 100;
+    letter-spacing: 1px;
 
     &.is-flexpage {
         height: 100%;
@@ -55,10 +56,6 @@ h6 {
 
 p {
     @include vertical-rhythm($font-medium);
-
-    // &:last-child {
-    //     margin-bottom: 0;
-    // }
 }
 
 button {

@@ -1,31 +1,3 @@
-{% extends 'layouts/_home' %}
-{% set projects = craft.entries.section(craft.request.firstSegment) %}
+{% extends 'layouts/_switch' %}
+{% set projects = craft.entries.section('projects') %}
 {% set navsub = craft.request.firstSegment %}
-
-{% block content %}
-<main class="l-max scrollable">
-{% for project in projects %}
-    <div class="l-contain">
-        <div class="{{ cycle(['l-left-block','l-right-block'], loop.index0) }}">
-            <article class="project">
-                <section class="project-gallery">
-                {% if project.projectSlideshow|length %}
-                {% for image in project.projectSlideshow %}
-                    <div><img src="{{ image.getUrl('project') }}"></div>
-                {% endfor %}
-                {% endif %}
-                </section>
-                <div class="text">
-                    <div class="text-body centered">
-                        <h2 class="title">{{ project }}</h2>
-                        {{ project.summary }}
-                    </div>
-                </div>
-            </article>
-            <!-- .project -->
-        </div>
-    </div>
-    <!-- .l-contain -->
-{% endfor %}
-</main>
-{% endblock content %}

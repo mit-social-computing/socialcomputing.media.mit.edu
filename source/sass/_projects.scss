@@ -1,6 +1,11 @@
 .project {
     margin-top: rems($base * 2);
     margin-bottom: rems($base * 2);
+    padding: 0 rems($base);
+
+    @include mq($screen-min) {
+        padding: 0;
+    }
 }
 
 .project-gallery {

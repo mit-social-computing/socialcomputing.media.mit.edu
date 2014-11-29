@@ -5,6 +5,7 @@ $(function() {
         centerMode : true,
         dots : true,
         arrows : false,
-        infinite : false
+        infinite : false,
+        focusOnSelect : true
     })
 })
