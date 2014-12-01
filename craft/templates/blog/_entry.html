@@ -11,7 +11,7 @@
     <div class="text-header">
         <h2 class="text-title">{{ entry }}</h2>
         <footer class="text-body text-footer">
-            written by <a href="{{ url('blog/author/' ~ entry.id) }}">{{ entry.author.fullName }}</a> on <time pubdate="{{ entry.dateCreated.w3cDate() }}">{{ entry.dateCreated|date('F d, Y')|lower }}</time>{% if categories|length %} &mdash; {% for c in categories %}
+            written by <a href="{{ url('blog/author/' ~ entry.authorId) }}">{{ entry.author.fullName }}</a> on <time pubdate="{{ entry.dateCreated.w3cDate() }}">{{ entry.dateCreated|date('F d, Y')|lower }}</time>{% if categories|length %} &mdash; {% for c in categories %}
         {{ loop.last and not loop.first ? '& ' : '' }}<a href="{{ url(c.uri) }}">{{ c|lower }}</a>{{ not loop.last ? ', ' : '' }}
     {% endfor %}{% endif %}
         </footer>
@@ -30,7 +30,7 @@
 <div class="nav-sibling nav-sibling--prev">
 {% if prev %}
     <a class="nav-arrow" href="{{ prev.url }}"></a>
-    <span>{{ prev }}</span>
+    <span class="nav-sibling-title">{{ prev }}</span>
     <div class="nav-sibling-bg"></div>
 {% else %}
     <span class="nav-arrow disabled"></a>
@@ -40,7 +40,7 @@
 <div class="nav-sibling nav-sibling--next">
 {% if next %}
     <a class="nav-arrow" href="{{ next.url }}"></a>
-    <span>{{ next }}</span>
+    <span class="nav-sibling-title">{{ next }}</span>
     <div class="nav-sibling-bg"></div>
 {% else %}
     <span class="nav-arrow disabled"></span>

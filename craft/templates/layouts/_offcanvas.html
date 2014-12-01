@@ -15,6 +15,12 @@
 
                 <ul class="chapter-list sidebar-for-open" id="chapterList">
                     {% for chapter in chapters %}
+
+                    {# bugfix for live preview #}
+                    {% if craft.request.isLivePreview and chapter.id == entry.id %}
+                        {% set chapter = entry %}
+                    {% endif %}
+
                     {% if loop.first %}
                     <li><a href="#{{ chapter.slug }}" class="active">{{ chapter }}</a></li>
                     {% else %}
@@ -26,6 +32,12 @@
 
                 <ul class="chapter-bullets sidebar-for-closed">
                     {% for chapter in chapters %}
+
+                    {# bugfix for live preview #}
+                    {% if craft.request.isLivePreview and chapter.id == entry.id %}
+                        {% set chapter = entry %}
+                    {% endif %}
+
                     {% if loop.first %}
                     <li><a href="#{{ chapter.slug }}" class="active"></a></li>
                     {% else %}
@@ -48,6 +60,12 @@
         <main class="chapter-content">
             <article class="chapter-article">
             {% for chapter in chapters %}
+
+                {# bugfix for live preview #}
+                {% if craft.request.isLivePreview and chapter.id == entry.id %}
+                    {% set chapter = entry %}
+                {% endif %}
+
                 <section class="chapter" id="{{ chapter.slug }}">
                     <div class="text">
                         <h2 class="text-title">{{ chapter }}</h2>

@@ -1,0 +1,49 @@
+{% extends 'layouts/_offcanvas' %}
+
+{% if number is not defined %}
+    {% redirect 'blog' %}
+{% else %}
+    {% set author = craft.users.id(number).first() %}
+{% endif %}
+
+{% set articles = craft.entries.authorId(number) %}
+
+{% block sidebar %}
+    {% include 'partials/_blog-sidebar' %}
+{% endblock sidebar %}
+
+{% block content %}
+    <h1 class="visuallyhidden">social computing blog</h1>
+    <div class="text text-media">
+        {% if author.photoUrl is not null %}
+        <img class="text-media-object" src="{{ author.getPhotoUrl('235') }}">
+        {% endif %}
+        <div class="text-body medium">
+            <h2 class="text-title">{{ author.fullName }}</h2>
+            <p>{{ author.position }}</p>
+            <address>
+            {% for block in author.contactLink.limit(1) %}
+                {% if block.type == 'twitter' %}
+                <a href="http://twitter.com/{{ block.twitterHandle }}" target="_blank">twitter</a>
+                {% elseif block.type == 'link' %}
+                <a href="{{ block.linkUrl }}" target="_blank">{{ block.linkText }}</a>
+                {% endif %}
+            {% endfor %}
+            </address>
+        </div>
+    </div>
+
+    <div class="text text--separator">
+        <div class="text-body">
+            {{ author.bio }}
+        </div>
+    </div>
+
+    <section class="summary-list summary-left">
+        <div class="text">
+            <h2 class="text-title text-title--lowkey">recent posts:</h2>
+        </div>
+        {% include 'partials/_blog-list' %}
+    </section>
+    <!-- .summary-list -->
+{% endblock content %}

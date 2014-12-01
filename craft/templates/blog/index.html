@@ -1,9 +1,9 @@
 {% extends 'layouts/_offcanvas' %}
 
 {% if category is defined %}
-{% set articles = craft.entries.relatedTo(category) %}
+    {% set articles = craft.entries.relatedTo(category) %}
 {% else %}
-{% set articles = craft.entries.section('blog') %}
+    {% set articles = craft.entries.section('blog') %}
 {% endif %}
 
 {% block sidebar %}
@@ -11,13 +11,13 @@
 {% endblock sidebar %}
 
 {% block content %}
-<div class="circle-logo">
-    {% include 'svg/sc-logo.svg' %}
-    <h1>blog</h1>
-</div>
+    <div class="circle-logo">
+        {% include 'svg/sc-logo.svg' %}
+        <h1>blog</h1>
+    </div>
 
-<main class="summary-list">
-    {% include 'partials/_blog-list' %}
-</main>
-<!-- .summary-list -->
+    <main class="summary-list">
+        {% include 'partials/_blog-list' %}
+    </main>
+    <!-- .summary-list -->
 {% endblock content %}

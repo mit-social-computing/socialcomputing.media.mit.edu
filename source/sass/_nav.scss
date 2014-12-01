@@ -179,16 +179,21 @@ h1.nav-logo {
     bottom: 0;
     margin: auto;
 
-    > span {
-        opacity: 0;
-        @include transition(opacity 150ms ease);
+}
 
-        &:before {
-            content: '';
-            height: 80px;
-            display: inline-block;
-            vertical-align: middle;
-        }
+.nav-sibling-title {
+    font-family: handwriting;
+    color: $darkgray;
+    text-transform: lowercase;
+
+    opacity: 0;
+    @include transition(opacity 150ms ease);
+
+    &:before {
+        content: '';
+        height: 80px;
+        display: inline-block;
+        vertical-align: middle;
     }
 }
 
@@ -274,7 +279,7 @@ h1.nav-logo {
             @include transition(width 250ms ease, height 250ms ease, border-radius 50ms);
         }
 
-        ~ span {
+        ~ .nav-sibling-title {
             opacity: 1;
             @include transition(opacity 250ms ease);
         }
@@ -291,6 +296,11 @@ h1.nav-logo {
         margin: auto;
 
         border: solid transparent;
+    }
+
+    &.disabled {
+        background-color: $lightergray;
+        opacity: 0.4;
     }
 }
 

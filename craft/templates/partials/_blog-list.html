@@ -3,15 +3,22 @@
 <article class="text text-summary">
 
     <h2 class="text-title"><a href="{{ url(article.uri) }}">{{ article }}</a></h2>
+    {% if author is not defined %}
     <div class="text-body large">
         {{ article.summary }}
     </div>
     <!-- .text-body -->
+    {% endif %}
 
     <footer class="text-body text-footer">
-        written by <a href="{{ url('blog/author/' ~ article.id) }}">{{ article.author.fullName }}</a> on <time datetime="{{ article.dateCreated.w3cDate() }}">{{ article.dateCreated|date('F d, Y')|lower }}</time>{% if categories|length %} &mdash; {% for c in categories %}
+        {% if author is not defined %}
+            written by <a href="{{ url('blog/author/' ~ article.authorId) }}">{{ article.author.fullName }}</a> on 
+        {% endif %}
+
+        <time datetime="{{ article.dateCreated.w3cDate() }}">{{ article.dateCreated|date('F d, Y')|lower }}</time>{% if categories|length %} &mdash; {% for c in categories %}
         {{ loop.last and not loop.first ? '& ' : '' }}<a href="{{ url(c.uri) }}">{{ c|lower }}</a>{{ not loop.last ? ', ' : '' }}
         {% endfor %}{% endif %}
+
     </footer>
     <!-- .text-footer -->
 

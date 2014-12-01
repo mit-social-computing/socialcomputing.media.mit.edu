@@ -2,6 +2,12 @@
 
 <main class="l-max scrollable">
 {% for project in projects %}
+
+    {# bugfix for live preview #}
+    {% if craft.request.isLivePreview and project.id == entry.id %}
+        {% set project = entry %}
+    {% endif %}
+
     <div class="l-contain">
         <div class="{{ cycle(['l-left-block','l-right-block'], loop.index0) }}{% if projects|length == 1 %} solo{% endif %}">
             <article class="project">

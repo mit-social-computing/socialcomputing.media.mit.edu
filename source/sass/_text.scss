@@ -1,8 +1,36 @@
-.text {
+.text {}
+.text--separator {
+    &:after {
+        content : url(/assets/img/long-line-divider.png);
+        display: block;
+        margin: rems($base *2) auto;
+        max-width: 100%;
+        opacity: 0.4;
+    }
+}
+
+.text-media {
+    font-size: 0;
+    margin-bottom: rems($base);
+}
+
+.text-media-object {
+    + .text-body {
+        margin-left: rems($base);
+    }
 }
 
 .text-summary {
     text-align: center;
+
+    .summary-left & {
+        text-align: left;
+        margin-bottom: rems($base * 2);
+
+        &:after {
+            display: none;
+        }
+    }
 
     > .text-title {
         margin-bottom: 0;
@@ -27,6 +55,15 @@
 
 .text-body {
     overflow: hidden;
+
+    .text-media & {
+        display: inline-block;
+        vertical-align: bottom;
+
+        > * {
+            margin: 0;
+        }
+    }
 
     &.medium {
         @include fontsize($font-medium);
@@ -84,11 +121,11 @@
 }
 
 .text-title {
-    //margin-bottom: 0;
     font-weight: 200;
     @include fontsize($font-large-header);
     -webkit-font-smoothing: initial;
     text-transform: lowercase;
+    color: $darkgray;
 
     + p {
         margin-top: 0;
@@ -101,6 +138,13 @@
         &:hover {
             color: $pink;
         }
+    }
+
+    &.text-title--lowkey {
+        @include fontsize($font-medium);
+        font-family: inherit;
+        color: $gray;
+        @include antialiased;
     }
 }
 
