@@ -1465,32 +1465,32 @@ h1.nav-logo > a:hover {
   margin: auto;
 }
 /* line 182, ../../../source/sass/_nav.scss */
-.nav-sibling > div {
-  position: relative;
+.nav-sibling > span {
   opacity: 0;
-  pointer-events: none;
-  -moz-transition: opacity 250ms ease;
-  -o-transition: opacity 250ms ease;
-  -webkit-transition: opacity 250ms ease;
-  transition: opacity 250ms ease;
+  -moz-transition: opacity 150ms ease;
+  -o-transition: opacity 150ms ease;
+  -webkit-transition: opacity 150ms ease;
+  transition: opacity 150ms ease;
 }
-/* line 188, ../../../source/sass/_nav.scss */
-.nav-sibling > div:before {
+/* line 186, ../../../source/sass/_nav.scss */
+.nav-sibling > span:before {
   content: '';
-  display: inline-block;
   height: 80px;
+  display: inline-block;
   vertical-align: middle;
 }
 
-/* line 197, ../../../source/sass/_nav.scss */
+/* line 195, ../../../source/sass/_nav.scss */
 .nav-sibling--prev {
-  left: -100px;
+  padding-left: 65px;
+  padding-right: 25px;
+  left: -50px;
 }
 /* line 200, ../../../source/sass/_nav.scss */
-.nav-sibling--prev > div {
-  padding-left: 25px;
+.nav-sibling--prev .nav-arrow {
+  left: 15px;
 }
-/* line 205, ../../../source/sass/_nav.scss */
+/* line 203, ../../../source/sass/_nav.scss */
 .nav-sibling--prev .nav-arrow:after {
   left: 12px;
   border-right-color: #333;
@@ -1499,16 +1499,26 @@ h1.nav-logo > a:hover {
   border-right-width: 11px;
   border-left-width: 0;
 }
+/* line 213, ../../../source/sass/_nav.scss */
+.nav-sibling--prev .nav-arrow:hover ~ .nav-sibling-bg {
+  left: 0;
+}
+/* line 218, ../../../source/sass/_nav.scss */
+.nav-sibling--prev .nav-sibling-bg {
+  left: 15px;
+}
 
-/* line 217, ../../../source/sass/_nav.scss */
+/* line 223, ../../../source/sass/_nav.scss */
 .nav-sibling--next {
-  right: -100px;
+  padding-left: 25px;
+  padding-right: 65px;
+  right: -50px;
 }
-/* line 220, ../../../source/sass/_nav.scss */
-.nav-sibling--next > div {
-  padding-right: 25px;
+/* line 228, ../../../source/sass/_nav.scss */
+.nav-sibling--next .nav-arrow {
+  right: 15px;
 }
-/* line 225, ../../../source/sass/_nav.scss */
+/* line 231, ../../../source/sass/_nav.scss */
 .nav-sibling--next .nav-arrow:after {
   right: 12px;
   border-left-color: #333;
@@ -1517,33 +1527,57 @@ h1.nav-logo > a:hover {
   border-right-width: 0;
   border-left-width: 11px;
 }
+/* line 241, ../../../source/sass/_nav.scss */
+.nav-sibling--next .nav-arrow:hover ~ .nav-sibling-bg {
+  right: 0;
+}
+/* line 246, ../../../source/sass/_nav.scss */
+.nav-sibling--next .nav-sibling-bg {
+  right: 15px;
+}
 
-/* line 237, ../../../source/sass/_nav.scss */
+/* line 251, ../../../source/sass/_nav.scss */
 .nav-arrow {
-  width: 40px;
-  height: 40px;
-  background-color: #d2d1d1;
-  border-radius: 50%;
   position: absolute;
   top: 0;
   bottom: 0;
   margin: auto;
-  -moz-transition: width 250ms ease, height 250ms ease, border-radius 50ms linear;
-  -o-transition: width 250ms ease, height 250ms ease, border-radius 50ms linear;
-  -webkit-transition: width 250ms ease, height 250ms ease, border-radius 50ms linear;
-  transition: width 250ms ease, height 250ms ease, border-radius 50ms linear;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: rgba(210, 209, 209, 0);
+  -moz-transition: background-color 250ms ease;
+  -o-transition: background-color 250ms ease;
+  -webkit-transition: background-color 250ms ease;
+  transition: background-color 250ms ease;
 }
-/* line 251, ../../../source/sass/_nav.scss */
+/* line 265, ../../../source/sass/_nav.scss */
 .nav-arrow:hover {
-  width: 200px;
-  height: 80px;
+  background-color: #d2d1d1;
+  -moz-transition: background-color 250ms ease;
+  -o-transition: background-color 250ms ease;
+  -webkit-transition: background-color 250ms ease;
+  transition: background-color 250ms ease;
+}
+/* line 269, ../../../source/sass/_nav.scss */
+.nav-arrow:hover ~ .nav-sibling-bg {
+  width: 100%;
+  height: 100%;
   border-radius: 0;
+  -moz-transition: width 250ms ease, height 250ms ease, border-radius 50ms;
+  -o-transition: width 250ms ease, height 250ms ease, border-radius 50ms;
+  -webkit-transition: width 250ms ease, height 250ms ease, border-radius 50ms;
+  transition: width 250ms ease, height 250ms ease, border-radius 50ms;
 }
-/* line 256, ../../../source/sass/_nav.scss */
-.nav-arrow:hover + div {
+/* line 277, ../../../source/sass/_nav.scss */
+.nav-arrow:hover ~ span {
   opacity: 1;
+  -moz-transition: opacity 250ms ease;
+  -o-transition: opacity 250ms ease;
+  -webkit-transition: opacity 250ms ease;
+  transition: opacity 250ms ease;
 }
-/* line 262, ../../../source/sass/_nav.scss */
+/* line 283, ../../../source/sass/_nav.scss */
 .nav-arrow:after {
   content: '';
   height: 0;
@@ -1553,6 +1587,26 @@ h1.nav-logo > a:hover {
   bottom: 0;
   margin: auto;
   border: solid transparent;
+}
+
+/* line 297, ../../../source/sass/_nav.scss */
+.nav-sibling-bg {
+  background-color: #e0e0e0;
+  z-index: -1;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  border-radius: 50%;
+  min-height: 40px;
+  min-width: 40px;
+  width: 0%;
+  height: 0%;
+  -moz-transition: width 250ms ease 150ms, height 250ms ease 150ms, border-radius 50ms ease 150ms, left 25ms linear 150ms, right 25ms linear 150ms;
+  -o-transition: width 250ms ease 150ms, height 250ms ease 150ms, border-radius 50ms ease 150ms, left 25ms linear 150ms, right 25ms linear 150ms;
+  -webkit-transition: width 250ms ease, height 250ms ease, border-radius 50ms ease, left 25ms linear, right 25ms linear;
+  -webkit-transition-delay: 150ms, 150ms, 150ms, 150ms, 150ms;
+  transition: width 250ms ease 150ms, height 250ms ease 150ms, border-radius 50ms ease 150ms, left 25ms linear 150ms, right 25ms linear 150ms;
 }
 
 /* line 1, ../../../source/sass/_buttons.scss */

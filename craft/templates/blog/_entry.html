@@ -30,7 +30,8 @@
 <div class="nav-sibling nav-sibling--prev">
 {% if prev %}
     <a class="nav-arrow" href="{{ prev.url }}"></a>
-    <div>{{ prev }}</div>
+    <span>{{ prev }}</span>
+    <div class="nav-sibling-bg"></div>
 {% else %}
     <span class="nav-arrow disabled"></a>
 {% endif %}
@@ -39,7 +40,8 @@
 <div class="nav-sibling nav-sibling--next">
 {% if next %}
     <a class="nav-arrow" href="{{ next.url }}"></a>
-    <div>{{ next }}</div>
+    <span>{{ next }}</span>
+    <div class="nav-sibling-bg"></div>
 {% else %}
     <span class="nav-arrow disabled"></span>
 {% endif %}
