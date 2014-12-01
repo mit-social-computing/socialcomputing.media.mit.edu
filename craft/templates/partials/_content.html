@@ -1,0 +1,35 @@
+{% for block in content %}
+    {% if block.type == 'textBlock' %}
+
+        <div class="text">
+            <div class="text-body">{{ block.text }}</div>
+        </div>
+
+    {% elseif block.type == 'galleryBlock' %}
+
+        <div class="gallery" data-block="#block-{{ block.id }}">
+        {% for asset in block.gallery %}
+
+            {% if block.gallery|length > 1 %}
+                {% do asset.setTransform('galleryThumb') %}
+            {% else %}
+                {% do asset.setTransform('bodyContent') %}
+            {% endif %}
+
+            <div class="gallery-item">
+                <a href="#" class="lightbox">
+                    <img src="{{ asset.getUrl() }}" alt="{{ asset.caption }}">
+                </a>
+            </div>
+        {% endfor %}
+        </div>
+        <!-- .gallery -->
+
+        <div style="display:none;" id="block-{{ block.id }}">
+        {% for asset in block.gallery %}
+            <img src="{{ asset.getUrl('fullSize') }}" alt="{{ asset.caption }}">
+        {% endfor %}
+        </div>
+
+    {% endif %}
+{% endfor %}

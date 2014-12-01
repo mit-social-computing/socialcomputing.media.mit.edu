@@ -1,9 +1,4 @@
 .chapter-nav {
-    height: 100%;
-    background-color: $lightestgray;
-    position: fixed;
-    padding: rems($base);
-
     > h2 {
         font-family: inherit;
         font-weight: 100;
@@ -17,6 +12,7 @@
 .chapter-list {
     font-size: 20px;
     font-size: rems(20);
+    position: absolute;
 
     a {
         text-transform: lowercase;
@@ -80,13 +76,13 @@
     white-space: nowrap;
 
     &,
-    .chapter-nav {
+    .nav-side {
         @include transition(width 250ms linear);
     }
 
     > h2,
-    .chapter-bullets,
-    .chapter-list {
+    .sidebar-for-open,
+    .sidebar-for-closed {
         @include transition(transform 250ms ease, opacity 250ms ease);
     }
 

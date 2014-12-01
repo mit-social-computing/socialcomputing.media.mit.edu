@@ -1,9 +1,11 @@
 {% extends 'layouts/_offcanvas' %}
 
 {% if craft.request.isLivePreview %}
-    {% set entry = craft.entries.slug(craft.request.getSegment(2)).first() %}
+    {% set chapters = entry.parent.children %}
+    {% set sectionTitle = entry.parent.title %}
+{% else %}
+    {% set chapters = entry.children %}
+    {% set sectionTitle = entry.title %}
 {% endif %}
 
-{% set chapters = entry.children %}
 {% set navsub = craft.request.firstSegment ~ ' > ' ~ craft.request.getSegment(2) %}
-

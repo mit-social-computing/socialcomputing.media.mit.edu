@@ -1,0 +1,29 @@
+input.input-gray {
+    position: relative;
+    display: block;
+    width: 100%;
+    @include box-sizing(border-box);
+
+    padding: rems(10) rems(8);
+    margin-bottom: rems($base);
+    border: none;
+    background-color: $lightergray;
+
+    &::-webkit-input-placeholder {
+        color: $darkgray;
+    }
+}
+
+.input-gray[type="search"] {
+    background-image: url(/assets/img/search-icon.png);
+    background-size: 13px 14px;
+    background-position: 95% center;
+    background-repeat: no-repeat;
+}
+
+.input-gray[type="email"] {
+    background-image: url(/assets/img/envelope-icon.png);
+    background-size: 13px 12px;
+    background-position: 95% center;
+    background-repeat: no-repeat;
+}

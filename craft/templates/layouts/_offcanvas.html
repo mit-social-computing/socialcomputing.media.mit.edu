@@ -1,34 +1,45 @@
 {% include 'partials/_header' %}
 
 <div class="l-withsidebar scrollbar" id="scrollable">
-    <div class="l-sidebar" data-sidebar="is-closed" id="sidenav">
-        {% block sidebar %}
-        <nav class="chapter-nav" id="chapterNav">
-            <h2>{{ entry }}</h2>
+    <div class="l-sidebar" data-sidebar="is-closed" id="sidebar">
+
+        <nav class="nav-side" id="sidenav">
             <div class="l-upperright">
                 <button id="sidenavButton" class="btn btn-menu btn--sidemenu" type="button" role="button" aria-label="Toggle Navigation"><span></span></button>
             </div>
-            <ul class="chapter-list" id="chapterList">
-                {% for chapter in chapters %}
-                {% if loop.first %}
-                <li><a href="#{{ chapter.slug }}" class="active">{{ chapter }}</a></li>
-                {% else %}
-                <li><a href="#{{ chapter.slug }}">{{ chapter }}</a></li>
-                {% endif %}
-                {% endfor %}
-            </ul>
-            <ul class="chapter-bullets">
-                {% for chapter in chapters %}
-                {% if loop.first %}
-                <li><a href="#{{ chapter.slug }}" class="active"></a></li>
-                {% else %}
-                <li><a href="#{{ chapter.slug }}"></a></li>
-                {% endif %}
-                {% endfor %}
-            </ul>
+            <!-- .l-upperright -->
+
+            {% block sidebar %}
+            <div class="chapter-nav sidebar-body" id="chapterNav">
+                <h2>{{ sectionTitle }}</h2>
+
+                <ul class="chapter-list sidebar-for-open" id="chapterList">
+                    {% for chapter in chapters %}
+                    {% if loop.first %}
+                    <li><a href="#{{ chapter.slug }}" class="active">{{ chapter }}</a></li>
+                    {% else %}
+                    <li><a href="#{{ chapter.slug }}">{{ chapter }}</a></li>
+                    {% endif %}
+                    {% endfor %}
+                </ul>
+                <!-- .chapter-list -->
+
+                <ul class="chapter-bullets sidebar-for-closed">
+                    {% for chapter in chapters %}
+                    {% if loop.first %}
+                    <li><a href="#{{ chapter.slug }}" class="active"></a></li>
+                    {% else %}
+                    <li><a href="#{{ chapter.slug }}"></a></li>
+                    {% endif %}
+                    {% endfor %}
+                </ul>
+                <!-- .chatper-bullets -->
+            </div>
+            <!-- .chapter-nav -->
+            {% endblock sidebar %}
         </nav>
-        <!-- .chapter-nav -->
-        {% endblock sidebar %}
+        <!-- .nav-side -->
+
     </div>
     <!-- .l-sidebar -->
 
@@ -41,39 +52,10 @@
                     <div class="text">
                         <h2 class="text-title">{{ chapter }}</h2>
                     </div>
+
                     {% set content = chapter.multiContent %}
-                    {% for block in content %}
-                    {% if block.type == 'textBlock' %}
-                    <div class="text">
-                        <div class="text-body">{{ block.text }}</div>
-                    </div>
-                    {% elseif block.type == 'galleryBlock' %}
-                    <div class="gallery" data-block="#block-{{ block.id }}">
-                    {% for asset in block.gallery %}
 
-                        {% if block.gallery|length > 1 %}
-                        {% do asset.setTransform('galleryThumb') %}
-                        {% else %}
-                        {% do asset.setTransform('bodyContent') %}
-                        {% endif %}
-
-                        <div class="gallery-item">
-                            <a href="#" class="lightbox">
-                                <img src="{{ asset.getUrl() }}" alt="{{ asset.caption }}">
-                            </a>
-                        </div>
-                    {% endfor %}
-                    </div>
-                    <!-- .gallery -->
-                    
-                    <div style="display:none;" id="block-{{ block.id }}">
-                    {% for asset in block.gallery %}
-                    <img src="{{ asset.getUrl('fullSize') }}" alt="{{ asset.caption }}">
-                    {% endfor %}
-                    </div>
-
-                    {% endif %}
-                {% endfor %}
+                    {% include 'partials/_content' %}
                 </section>
                 <!-- #{{ chapter.slug }} .chapter -->
             {% endfor %}
@@ -86,6 +68,7 @@
     <!-- .l-content -->
 
 </div>
+<!-- .l-withsidebar -->
 
 {% include 'partials/_footer' %}
 

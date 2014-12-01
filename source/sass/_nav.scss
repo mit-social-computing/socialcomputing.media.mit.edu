@@ -26,6 +26,16 @@
     }
 }
 
+.nav-side {
+    position: fixed;
+    overflow-y: scroll;
+
+    padding: rems($base);
+    height: 100%;
+
+    background-color: $lightestgray;
+}
+
 .nav-dropdown {
     padding-left: rems($base);
 }
@@ -161,3 +171,105 @@ h1.nav-logo {
     text-transform: lowercase;
     color: $lightergray;
 }
+
+.nav-sibling {
+    height: 80px;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+
+    > div {
+        position: relative;
+        opacity: 0;
+        pointer-events: none;
+
+        @include transition(opacity 250ms ease);
+        &:before {
+            content: '';
+            display: inline-block;
+            height: 80px;
+            vertical-align: middle;
+        }
+    }
+}
+
+.nav-sibling--prev {
+    left: -100px;
+
+    > div {
+        padding-left: 25px;
+    }
+
+    .nav-arrow {
+        &:after {
+            left: 12px;
+
+            border-right-color: $darkgray;
+            border-top-width: 10px;
+            border-bottom-width: 10px;
+            border-right-width: 11px;
+            border-left-width: 0;
+        }
+    }
+}
+
+.nav-sibling--next {
+    right: -100px;
+
+    > div {
+        padding-right: 25px;
+    }
+
+    .nav-arrow {
+        &:after {
+            right: 12px;
+
+            border-left-color: $darkgray;
+            border-top-width: 10px;
+            border-bottom-width: 10px;
+            border-right-width: 0;
+            border-left-width: 11px;
+        }
+    }
+}
+
+.nav-arrow {
+    width: 40px;
+    height: 40px;
+    background-color: $lightergray;
+    border-radius: 50%;
+
+
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+
+    @include transition(width 250ms ease, height 250ms ease, border-radius 50ms linear);
+
+    &:hover {
+        width: 200px;
+        height: 80px;
+        border-radius: 0;
+
+        + div {
+            opacity: 1;
+            //pointer-events: auto;
+        }
+    }
+
+    &:after {
+        content: '';
+        height: 0;
+        width: 0;
+
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        margin: auto;
+
+        border: solid transparent;
+    }
+}
+

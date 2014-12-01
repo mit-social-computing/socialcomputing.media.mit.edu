@@ -1,0 +1,38 @@
+{% set categories = craft.categories.group('blog') %}
+<div class="blog-sidebar" id="blogSidebar">
+
+    <div class="sidebar-for-open">
+        <a href="{{ url() }}" class="blog-header">&lt; social computing site</a>
+
+        <table class="totals">
+            <tr>
+                {% set sumTotal = craft.entries.section('blog').relatedTo({ targetElement : categories  })|length %}
+                <td class="total-label"><a href="{{ url(craft.request.firstSegment) }}">all blog categories</a></td>
+                <td class="total-sum">{{ sumTotal }} {{ sumTotal == 1 ? 'post' : 'posts' }}</td>
+            </tr>
+
+            {% for c in categories %}
+            {% set total = craft.entries.relatedTo(c)|length %}
+            <tr>
+                {% if total > 0 %}
+                <td class="total-label"><a href="{{ url(c.uri) }}">{{ c }}</a></td>
+                {% else %}
+                <td class="total-label">{{ c }}</td>
+                {% endif %}
+                <td class="total-sum">{{ total }} {{ total == 1 ? 'post' : 'posts' }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        <!-- .totals -->
+
+        <form action="{{ url('blog/search') }}">
+            <input class="input-gray" name="q" placeholder="search blog" type="search">
+        </form>
+
+        <form action="">
+            <input class="input-gray" placeholder="subscribe" type="email">
+        </form>
+
+</div>
+<!-- .blog-sidebar -->
+

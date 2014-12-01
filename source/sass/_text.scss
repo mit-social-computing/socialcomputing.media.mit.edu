@@ -9,7 +9,7 @@
     }
 
     &:after {
-        content: url(/assets/img/summary-divider.png);
+        content: url(/assets/img/short-line-divider.png);
         display: block;
         margin: rems($base * 4) auto;
         max-width: 376px;
@@ -101,5 +101,18 @@
         &:hover {
             color: $pink;
         }
+    }
+}
+
+.text-header {
+    > .text-title {
+        margin-bottom: 0;
+    }
+
+    &:after {
+        content: url(/assets/img/long-line-divider.png);
+        display: block;
+        margin: rems($base * 2) 0;
+        opacity: 0.4;
     }
 }

@@ -17502,18 +17502,23 @@ $(function() {
     if ( hash ) {
         // need to trigger on gallery layout
         // use browserify to creat bundles and pass event
-        $('#scrollable').animate({
-            scrollTop : $(hash)[0].offsetTop -
-                ( parseInt(getComputedStyle($('#content')[0]).paddingTop, 10) +
-                  $('#siteHeader').height() )
-        })
-        $('#sidenav').find('a').not('[href=' + hash + ']').removeClass('active')
-        $('#sidenav').find('[href=' + hash + ']').addClass('active')
+        // for now just Timeout
+        setTimeout(function() {
+            $('#scrollable').animate({
+                scrollTop : $(hash)[0].offsetTop -
+                    ( parseInt(getComputedStyle($('#content')[0]).paddingTop, 10) +
+                      $('#siteHeader').height() )
+            })
+        }, 100)
+
+        // only for non-blog pages
+        $('#chapterNav').find('a').not('[href=' + hash + ']').removeClass('active')
+        $('#chapterNav').find('[href=' + hash + ']').addClass('active')
     }
 
     $('#sidenavButton').click(function(e) {
         $(this).toggleClass('close')
-        var open = $('#sidenav').attr('data-sidebar') === 'is-open',
+        var open = $('#sidebar').attr('data-sidebar') === 'is-open',
             width = 0
 
         if ( !open ) {
@@ -17523,15 +17528,15 @@ $(function() {
                     width = textWidth
                 }
             })
-            $('#sidenav, #chapterNav').width(width > 399 ? width : 399)
+            $('#sidenav, #sidebar').width(width > 399 ? width : 399)
         } else {
-            $('#sidenav, #chapterNav').innerWidth(56)
+            $('#sidenav, #sidebar').innerWidth(56)
         }
 
-        $('#sidenav').attr('data-sidebar', open ? 'is-closed' : 'is-open')
+        $('#sidebar').attr('data-sidebar', open ? 'is-closed' : 'is-open')
     })
 
-    $('#sidenav').on('click', 'a', function(e) {
+    $('#chapterNav').on('click', 'a', function(e) {
         e.preventDefault()
 
         var scrollTo = $(this.hash)[0].offsetTop -

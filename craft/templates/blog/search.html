@@ -1,0 +1,44 @@
+{% extends 'layouts/_offcanvas' %}
+
+{% block sidebar %}
+    {% include 'partials/_blog-sidebar' %}
+{% endblock sidebar %}
+
+{% set query = craft.request.getParam('q') %}
+{% set articles = craft.entries.section('blog').search('*' ~ query ~ '*').order('score')|default([]) %}
+
+{% set author = craft.users.search('fullName:*' ~ query ~ '*').first() %}
+{% if author %}
+    {% set authorArticles = craft.entries.section('blog').authorId(author.id).find()|default([]) %}
+    {% set articles = articles|merge(authorArticles) %}
+{% endif %}
+
+{% block content %}
+    <div class="circle-logo">
+        {% include 'svg/sc-logo.svg' %}
+        <h1>blog</h1>
+    </div>
+
+    <main class="summary-list">
+    {% if articles|length %}
+
+        <div class="text centered">
+            <div class="text-body">
+                <h2>Search results for: "{{query}}"</h2>
+            </div>
+        </div>
+
+        {% include 'partials/_blog-list' %}
+
+    {% else %}
+
+        <div class="text medium">
+            <div class="text-body">
+                <p>Your search for "{{ query }}" didn't return any results.</p>
+            </div>
+        </div>
+
+    {% endif %}
+    </main>
+{% endblock content %}
+

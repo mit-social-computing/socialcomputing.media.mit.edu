@@ -1,0 +1,57 @@
+.circle-logo {
+    @include flexbox;
+    @include flex-direction(column);
+    @include justify-content(center);
+    @include align-items(center);
+
+    position: relative;
+    width: 118px;
+    height: 111px;
+    
+    margin: 0 auto rems($base * 3);
+
+    background-image: url(/assets/img/imperfect-circle.png);
+    text-align: center;
+
+    > svg {
+        width: 36px;
+        fill: $lightgray;
+    }
+
+    > h1 {
+        margin: 0;
+        color: $lightgray;
+    }
+}
+
+.blog-header {
+    display: block;
+    margin-bottom: rems($base);
+
+    color: $darkgray;
+
+    &:hover {
+        color: $pink;
+    }
+}
+
+.totals {
+    margin-bottom: rems($base);
+}
+
+.total-label {
+    @include fontsize((small : 22, medium: 20));
+    > a {
+        color: $darkgray;
+        text-decoration: none;
+
+        &:hover {
+            color: $pink;
+        }
+    }
+}
+
+.total-sum {
+    @include fontsize($font-medium);
+    color: $lightgray;
+}
