@@ -17536,6 +17536,7 @@ $(function() {
 $(function() {
     var $feature = $('#carousel'),
         $recentNews = $('#recentNews'),
+        $newsCaption = $('#newsCaption').find('div'),
         path = location.pathname.slice(1).split('/')
 
     if ( !path[0] ) {
@@ -17563,6 +17564,14 @@ $(function() {
         dots : true,
         draggable: false,
         slide : '.ss-slide-small',
+        onBeforeChange : function(Slick, current, upcoming) {
+            $newsCaption
+                .animate({ 'opacity' : 0 }, function() {
+                    var nextCaption = Slick.$slides.eq(upcoming).find('img').attr('alt')
+                    $(this).html(nextCaption)
+                })
+                .animate({ 'opacity' : 1 })
+        },
         onInit : function() {
             this.$dots.prependTo('#recentContainer')
         }

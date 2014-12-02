@@ -53,8 +53,17 @@
                                     {% for slide in entry.recentItems %}
                                     {% set i = slide.image.first() %}
                                     <article class="ss-slide-small">
-                                        <h3 class="visuallyhidden">{{ slide.caption }}</h3>
-                                        <img src="{{ i.getUrl('recentNews') }}">
+                                        {% if slide.linkUrl %}
+                                        <a class="ss-slide-link" href="{{ slide.linkUrl }}" target="_blank" title="Go to {{ slide.linkUrl }}">
+                                        {% elseif slide.siteEntry.first()|length %}
+                                        <a class="ss-slide-link" href="{{ slide.siteEntry.first().getUrl() }}" target="_blank" title="Go to {{ slide.siteEntry.first().getUrl() }}">
+                                        {% endif %}
+                                            <h3 class="visuallyhidden">{{ slide.caption }}</h3>
+                                            <img src="{{ i.getUrl('recentNews') }}" alt="{{ slide.caption }}">
+
+                                        {% if slide.linkUrl or slide.siteEntry.first()|length %}
+                                        </a>
+                                        {% endif %}
                                     </article>
                                     {% endfor %}
 
