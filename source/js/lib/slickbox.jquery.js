@@ -5,6 +5,10 @@
 (function($) {
     var $tpl, options,lazyResize
 
+    function captionSetup() {
+        $('#lbCaption').html($('<div/>').addClass('text').append('<div class="text-body"/>'))
+    }
+
     function keyHandler(e) {
         var key = e.which
         if ( key === 39 ) { // right arrow
@@ -40,15 +44,18 @@
             $('#lightboxBtns').prepend(this.$dots)
         }
 
-        var caption = $(this.$slides[this.currentSlide]).find('img').attr('alt')
-        $('#lbCaption').html(caption)
+        captionSetup()
 
+        var caption = $(this.$slides[this.currentSlide]).find('img').attr('alt')
+        $('#lbCaption').find('.text-body').html(caption).toggleClass('large', $('#lbCaption').height() <= 27)
+
+        $(window).on('resize', lazyResize)
         resizeLightbox()
     }
 
     function onBeforeChange(Slick, current, upcoming) {
         var caption = $(Slick.$slides[upcoming]).find('img').attr('alt')
-        $('#lbCaption').html(caption)
+        $('#lbCaption').find('.text-body').html(caption).toggleClass('large', $('#lbCaption').height() <= 27)
 
         resizeLightbox()
     }
@@ -145,7 +152,5 @@
 
         })
     }
-
-    $(window).on('resize', lazyResize)
 
 }(jQuery))
