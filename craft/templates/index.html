@@ -2,7 +2,7 @@
 
 {% set flexpage = true %}
 {% if craft.request.firstSegment %}
-{% set entry = craft.entries.section('about').first() %}
+    {% set entry = craft.entries.section('about').first() %}
 {% endif %}
 
 {% block content %}
@@ -45,16 +45,16 @@
                             <h2 class="flush">recent</h2>
                             <div class="box--wavy box--gray">
                                 <div class="text" id="newsCaption">
-                                    <div class="text-body padded">{{ recentNewsSet.recentItems.first().desktopHeadline }}</div>
+                                    <div class="text-body padded">{{ entry.recentItems.first().caption }}</div>
                                 </div>
                                 <!-- .text#newsCaption -->
                                 <div id="recentNews" class="ss--small">
 
-                                    {% for slide in recentNewsSet.recentItems %}
+                                    {% for slide in entry.recentItems %}
                                     {% set i = slide.image.first() %}
                                     <article class="ss-slide-small">
-                                        <h3 class="visuallyhidden">{{ slide.desktopHeadline }}</h3>
-                                        <img src="{{ i.getUrl('recentNews') }}" width="{{ i.getWidth('recentNews') }}" height="{{ i.getHeight('recentNews') }}">
+                                        <h3 class="visuallyhidden">{{ slide.caption }}</h3>
+                                        <img src="{{ i.getUrl('recentNews') }}">
                                     </article>
                                     {% endfor %}
 

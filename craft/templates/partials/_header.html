@@ -33,7 +33,7 @@
                             {% endif %}
                                 <h2 class="visuallyhidden">Navigation Bar</h2>
                                 <ul class="nav-list">
-                                {% for nav in navSet.navItems %}
+                                {% for nav in craft.entries.section('navigationMenu') %}
                                     {% set s = craft.sections.getSectionByHandle(nav.slug) %}
                                     {# structures with nested children #}
                                     {% if s is not empty and s.maxLevels > 1 %}
@@ -83,12 +83,17 @@
                                 <div class="box box--gray centered only-small">
                                     <h3 class="box-title">recent</h3>
                                     <ul class="box-list">
-                                    {% for slide in recentNewsSet.recentItems %}
-                                        {% if slide.mobileHeadline %}
-                                        <li>{{ slide.mobileHeadline }}</li>
+                                    {% set recentItems = craft.entries.section('about').first().recentItems %}
+                                    {% for slide in recentItems %}
+
+                                        {% if slide.siteEntry.first()|length %}
+                                        <li><a href="{{ slide.siteEntry.first().getUrl() }}">{{ slide.caption }}</a></li>
+                                        {% elseif slide.linkUrl %}
+                                        <li><a href="{{ slide.linkUrl }}">{{ slide.caption }}</a></li>
                                         {% else %}
-                                        <li>{{ slide.desktopHeadline }}</li>
+                                        <li>{{ slide.caption }}</li>
                                         {% endif %}
+
                                     {% endfor %}
                                     </ul>
                                 </div>
