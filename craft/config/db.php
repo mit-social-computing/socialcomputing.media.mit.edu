@@ -18,6 +18,13 @@ return array(
         'user'      => 'root',
         'password'  => 'root',
         'database'  => 'social_computing'
+    ),
+
+    '162.243.54.103' => array(
+        'server'    => 'localhost',
+        'user'      => 'admin',
+        'password'  => 'cLi7BEUv9Ug7pLXX',
+        'database'  => 'social_computing_dev'  
     )
 
 );
