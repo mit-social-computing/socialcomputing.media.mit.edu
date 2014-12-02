@@ -17626,17 +17626,19 @@ $(function() {
         }
     })
 
-    $(window).on('resize', _.debounce((function a() {
-        var scrollbox = $('#scrollbox').get(0),
-            contentHeight = scrollbox.scrollHeight,
-            boxHeight = scrollbox.clientHeight
+    if ( !!$('#scrollbox').length ) {
+        $(window).on('resize', _.debounce((function a() {
+            var scrollbox = $('#scrollbox').get(0),
+                contentHeight = scrollbox.scrollHeight,
+                boxHeight = scrollbox.clientHeight
 
-        scrollbox.classList.toggle('is-not-scrolling', contentHeight <= boxHeight)
+            scrollbox.classList.toggle('is-not-scrolling', contentHeight <= boxHeight)
 
-        // iife to run on load
-        // return self to debounce
-        return a
-    })(), 100))
+            // iife to run on load
+            // return self to debounce
+            return a
+        })(), 100))
+    }
 })
 
 /**
@@ -18248,15 +18250,16 @@ $(function() {
             width = 0
 
         if ( !open ) {
-            $('#chapterList').find('li').each(function(e) {
-                var textWidth = $(this).text().length * 7
-                if ( textWidth > width ) {
-                    width = textWidth
-                }
-            })
-            $('#sidenav, #sidebar').innerWidth(width > 399 ? width : 399)
+            // $('#chapterList').find('li').each(function(e) {
+            //     var textWidth = $(this).text().length * 7
+            //     if ( textWidth > width ) {
+            //         width = textWidth
+            //     }
+            // })
+            //$('#sidenav, #sidebar').innerWidth(width > 399 ? width : 399)
+            //$('#sidenav, #sidebar').innerWidth(390)
         } else {
-            $('#sidenav, #sidebar').innerWidth(56)
+            //$('#sidenav, #sidebar').innerWidth(56)
         }
 
         $('#sidebar').attr('data-sidebar', open ? 'is-closed' : 'is-open')

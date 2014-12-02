@@ -41,15 +41,16 @@ $(function() {
             width = 0
 
         if ( !open ) {
-            $('#chapterList').find('li').each(function(e) {
-                var textWidth = $(this).text().length * 7
-                if ( textWidth > width ) {
-                    width = textWidth
-                }
-            })
-            $('#sidenav, #sidebar').innerWidth(width > 399 ? width : 399)
+            // $('#chapterList').find('li').each(function(e) {
+            //     var textWidth = $(this).text().length * 7
+            //     if ( textWidth > width ) {
+            //         width = textWidth
+            //     }
+            // })
+            //$('#sidenav, #sidebar').innerWidth(width > 399 ? width : 399)
+            //$('#sidenav, #sidebar').innerWidth(390)
         } else {
-            $('#sidenav, #sidebar').innerWidth(56)
+            //$('#sidenav, #sidebar').innerWidth(56)
         }
 
         $('#sidebar').attr('data-sidebar', open ? 'is-closed' : 'is-open')

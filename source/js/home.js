@@ -47,15 +47,17 @@ $(function() {
         }
     })
 
-    $(window).on('resize', _.debounce((function a() {
-        var scrollbox = $('#scrollbox').get(0),
-            contentHeight = scrollbox.scrollHeight,
-            boxHeight = scrollbox.clientHeight
+    if ( !!$('#scrollbox').length ) {
+        $(window).on('resize', _.debounce((function a() {
+            var scrollbox = $('#scrollbox').get(0),
+                contentHeight = scrollbox.scrollHeight,
+                boxHeight = scrollbox.clientHeight
 
-        scrollbox.classList.toggle('is-not-scrolling', contentHeight <= boxHeight)
+            scrollbox.classList.toggle('is-not-scrolling', contentHeight <= boxHeight)
 
-        // iife to run on load
-        // return self to debounce
-        return a
-    })(), 100))
+            // iife to run on load
+            // return self to debounce
+            return a
+        })(), 100))
+    }
 })

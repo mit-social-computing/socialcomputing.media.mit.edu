@@ -71,6 +71,7 @@
 .sidebar-for-closed {
 
 }
+
 [data-sidebar="is-closed"] {
     &,
     > .nav-side {
@@ -97,6 +98,11 @@
 }
 
 [data-sidebar="is-open"] {
+    &,
+    > .nav-side {
+        width: 390px;
+    }
+
     h2,
     .sidebar-for-open {
         pointer-events: auto;

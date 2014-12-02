@@ -1243,12 +1243,12 @@ address {
   transform: rotate(90deg);
 }
 
-/* line 75, ../../../source/sass/_state.scss */
+/* line 76, ../../../source/sass/_state.scss */
 [data-sidebar="is-closed"],
 [data-sidebar="is-closed"] > .nav-side {
   width: 56px;
 }
-/* line 80, ../../../source/sass/_state.scss */
+/* line 81, ../../../source/sass/_state.scss */
 [data-sidebar="is-closed"] h2,
 [data-sidebar="is-closed"] .sidebar-for-open {
   pointer-events: none;
@@ -1257,7 +1257,7 @@ address {
   -webkit-transform: translate3d(-100%, 0, 0);
   transform: translate3d(-100%, 0, 0);
 }
-/* line 87, ../../../source/sass/_state.scss */
+/* line 88, ../../../source/sass/_state.scss */
 [data-sidebar="is-closed"] .sidebar-for-closed {
   pointer-events: auto;
   opacity: 1;
@@ -1265,13 +1265,18 @@ address {
   -webkit-transform: translate3d(0%, 0, 0);
   transform: translate3d(0%, 0, 0);
 }
-/* line 93, ../../../source/sass/_state.scss */
+/* line 94, ../../../source/sass/_state.scss */
 [data-sidebar="is-closed"] .l-upperright {
   right: 0;
   left: 0;
 }
 
-/* line 100, ../../../source/sass/_state.scss */
+/* line 101, ../../../source/sass/_state.scss */
+[data-sidebar="is-open"],
+[data-sidebar="is-open"] > .nav-side {
+  width: 390px;
+}
+/* line 106, ../../../source/sass/_state.scss */
 [data-sidebar="is-open"] h2,
 [data-sidebar="is-open"] .sidebar-for-open {
   pointer-events: auto;
@@ -1280,7 +1285,7 @@ address {
   -webkit-transform: translate3d(0%, 0, 0);
   transform: translate3d(0%, 0, 0);
 }
-/* line 107, ../../../source/sass/_state.scss */
+/* line 113, ../../../source/sass/_state.scss */
 [data-sidebar="is-open"] .sidebar-for-closed {
   pointer-events: none;
   opacity: 0;
