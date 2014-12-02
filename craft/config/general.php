@@ -27,7 +27,7 @@ return array(
 
     '162.243.54.103' => array(
         'environmentVariables'  => array(
-            'basePath'  => '/home/web/www/social/public',
+            'basePath'  => '/home/web/www/social/public/',
             'baseUrl'   => 'http://162.243.54.103/'
         )
 
