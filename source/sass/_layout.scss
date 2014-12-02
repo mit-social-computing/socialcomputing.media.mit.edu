@@ -61,7 +61,7 @@
     @include flex-wrap(nowrap);
 }
 
-.l-content {
+.l-content-withsidebar {
     position: relative;
     @include flex(1);
     width: 100%;
@@ -71,6 +71,11 @@
     padding-top: rems($base * 2);
 
     @include translate3d(0,0,0);
+}
+
+.l-content {
+    width: 100%;
+    padding: 0 rems($base);
 }
 
 .l-sidebar {
@@ -181,6 +186,7 @@
 
         > :first-child {
             @include flex(1);
+            @include flex-basis(60%);
         }
     //}
 }
