@@ -119,6 +119,30 @@
 .text-scroll {
     overflow-y: scroll;
     max-height: 258px;
+
+    &::-webkit-scrollbar {
+        width: 25px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background-color: $lightergray;
+        border-left: 5px solid transparent;
+        border-right: 5px solid transparent;
+        background-clip: padding-box;
+        margin: rems($base) 0 rems($base);
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: rgba($pink, 1);
+        border-left: 5px solid transparent;
+        border-right: 5px solid transparent;
+        background-clip: padding-box;
+
+        &:hover {
+            background-color: rgba($pink, 0.75);
+        }
+    }
+
 }
 
 .text-title {

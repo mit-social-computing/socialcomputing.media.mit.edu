@@ -1129,21 +1129,23 @@ address {
   }
 }
 
-/* line 2, ../../../source/sass/_state.scss */
+/* line 4, ../../../source/sass/_state.scss */
+.is-not-scrolling#scrollbox::-webkit-scrollbar,
 .is-not-scrolling .scrollbar::-webkit-scrollbar {
   width: 0;
   display: none;
 }
-/* line 7, ../../../source/sass/_state.scss */
+/* line 9, ../../../source/sass/_state.scss */
+.is-not-scrolling#scrollbox::-webkit-scrollbar-track,
 .is-not-scrolling .scrollbar::-webkit-scrollbar-track {
   background: transparent;
 }
 
-/* line 13, ../../../source/sass/_state.scss */
+/* line 16, ../../../source/sass/_state.scss */
 .is-menu-open header.l-highlight {
   background-color: #d175a1;
 }
-/* line 17, ../../../source/sass/_state.scss */
+/* line 20, ../../../source/sass/_state.scss */
 .is-menu-open .nav {
   -moz-transition: -moz-transform 250ms ease-out;
   -o-transition: -o-transform 250ms ease-out;
@@ -1154,16 +1156,16 @@ address {
   -webkit-transform: translateX(0);
   transform: translateX(0);
 }
-/* line 22, ../../../source/sass/_state.scss */
+/* line 25, ../../../source/sass/_state.scss */
 .is-menu-open .nav-logo > a {
   color: #333;
 }
-/* line 26, ../../../source/sass/_state.scss */
+/* line 29, ../../../source/sass/_state.scss */
 .is-menu-open .nav-subtitle {
   color: #333;
 }
 @media only screen and (min-width: 33.625rem) {
-  /* line 31, ../../../source/sass/_state.scss */
+  /* line 34, ../../../source/sass/_state.scss */
   .is-menu-open header.l-highlight {
     -moz-transition: none;
     -o-transition: none;
@@ -1171,30 +1173,30 @@ address {
     transition: none;
     background-color: #333;
   }
-  /* line 35, ../../../source/sass/_state.scss */
+  /* line 38, ../../../source/sass/_state.scss */
   .is-menu-open .nav-logo > a {
     color: #d2d1d1;
   }
 }
 
-/* line 41, ../../../source/sass/_state.scss */
+/* line 44, ../../../source/sass/_state.scss */
 [data-dropdown="is-closed"] > .nav-dropdown {
   max-height: 0;
 }
 
-/* line 45, ../../../source/sass/_state.scss */
+/* line 48, ../../../source/sass/_state.scss */
 [data-dropdown="is-open"] > .nav-dropdown {
   max-height: 200px;
 }
 
 @media only screen and (min-width: 33.625rem) {
-  /* line 51, ../../../source/sass/_state.scss */
+  /* line 54, ../../../source/sass/_state.scss */
   [data-dropdown="is-open"] > .nav-dropdown,
   [data-dropdown="is-closed"] > .nav-dropdown {
     max-height: initial;
   }
 }
-/* line 58, ../../../source/sass/_state.scss */
+/* line 61, ../../../source/sass/_state.scss */
 [data-dropdown="is-closed"] > a:after {
   -moz-transform: rotate(0deg);
   -ms-transform: rotate(0deg);
@@ -1202,7 +1204,7 @@ address {
   transform: rotate(0deg);
 }
 
-/* line 62, ../../../source/sass/_state.scss */
+/* line 65, ../../../source/sass/_state.scss */
 [data-dropdown="is-open"] > a:after {
   cursor: default;
   -moz-transform: rotate(90deg);
@@ -1211,12 +1213,12 @@ address {
   transform: rotate(90deg);
 }
 
-/* line 72, ../../../source/sass/_state.scss */
+/* line 75, ../../../source/sass/_state.scss */
 [data-sidebar="is-closed"],
 [data-sidebar="is-closed"] > .nav-side {
   width: 56px;
 }
-/* line 77, ../../../source/sass/_state.scss */
+/* line 80, ../../../source/sass/_state.scss */
 [data-sidebar="is-closed"] h2,
 [data-sidebar="is-closed"] .sidebar-for-open {
   pointer-events: none;
@@ -1225,7 +1227,7 @@ address {
   -webkit-transform: translate3d(-100%, 0, 0);
   transform: translate3d(-100%, 0, 0);
 }
-/* line 84, ../../../source/sass/_state.scss */
+/* line 87, ../../../source/sass/_state.scss */
 [data-sidebar="is-closed"] .sidebar-for-closed {
   pointer-events: auto;
   opacity: 1;
@@ -1233,13 +1235,13 @@ address {
   -webkit-transform: translate3d(0%, 0, 0);
   transform: translate3d(0%, 0, 0);
 }
-/* line 90, ../../../source/sass/_state.scss */
+/* line 93, ../../../source/sass/_state.scss */
 [data-sidebar="is-closed"] .l-upperright {
   right: 0;
   left: 0;
 }
 
-/* line 97, ../../../source/sass/_state.scss */
+/* line 100, ../../../source/sass/_state.scss */
 [data-sidebar="is-open"] h2,
 [data-sidebar="is-open"] .sidebar-for-open {
   pointer-events: auto;
@@ -1248,7 +1250,7 @@ address {
   -webkit-transform: translate3d(0%, 0, 0);
   transform: translate3d(0%, 0, 0);
 }
-/* line 104, ../../../source/sass/_state.scss */
+/* line 107, ../../../source/sass/_state.scss */
 [data-sidebar="is-open"] .sidebar-for-closed {
   pointer-events: none;
   opacity: 0;
@@ -1938,8 +1940,31 @@ h1.nav-logo > a:hover {
   overflow-y: scroll;
   max-height: 258px;
 }
+/* line 123, ../../../source/sass/_text.scss */
+.text-scroll::-webkit-scrollbar {
+  width: 25px;
+}
+/* line 127, ../../../source/sass/_text.scss */
+.text-scroll::-webkit-scrollbar-track {
+  background-color: #d2d1d1;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  background-clip: padding-box;
+  margin: 1.1875rem 0 1.1875rem;
+}
+/* line 135, ../../../source/sass/_text.scss */
+.text-scroll::-webkit-scrollbar-thumb {
+  background-color: #d175a1;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  background-clip: padding-box;
+}
+/* line 141, ../../../source/sass/_text.scss */
+.text-scroll::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(209, 117, 161, 0.75);
+}
 
-/* line 124, ../../../source/sass/_text.scss */
+/* line 148, ../../../source/sass/_text.scss */
 .text-title {
   font-weight: 200;
   font-size: 25px;
@@ -1949,26 +1974,26 @@ h1.nav-logo > a:hover {
   color: #333;
 }
 @media only screen and (min-width: 33.625rem) {
-  /* line 124, ../../../source/sass/_text.scss */
+  /* line 148, ../../../source/sass/_text.scss */
   .text-title {
     font-size: 30px;
     font-size: 1.875rem;
   }
 }
-/* line 131, ../../../source/sass/_text.scss */
+/* line 155, ../../../source/sass/_text.scss */
 .text-title + p {
   margin-top: 0;
 }
-/* line 135, ../../../source/sass/_text.scss */
+/* line 159, ../../../source/sass/_text.scss */
 .text-title > a {
   text-decoration: none;
   color: #333;
 }
-/* line 139, ../../../source/sass/_text.scss */
+/* line 163, ../../../source/sass/_text.scss */
 .text-title > a:hover {
   color: #d175a1;
 }
-/* line 144, ../../../source/sass/_text.scss */
+/* line 168, ../../../source/sass/_text.scss */
 .text-title.text-title--lowkey {
   font-size: 17.5px;
   font-size: 1.09375rem;
@@ -1977,18 +2002,18 @@ h1.nav-logo > a:hover {
   -webkit-font-smoothing: antialiased;
 }
 @media only screen and (min-width: 33.625rem) {
-  /* line 144, ../../../source/sass/_text.scss */
+  /* line 168, ../../../source/sass/_text.scss */
   .text-title.text-title--lowkey {
     font-size: 16px;
     font-size: 1rem;
   }
 }
 
-/* line 153, ../../../source/sass/_text.scss */
+/* line 177, ../../../source/sass/_text.scss */
 .text-header > .text-title {
   margin-bottom: 0;
 }
-/* line 157, ../../../source/sass/_text.scss */
+/* line 181, ../../../source/sass/_text.scss */
 .text-header:after {
   content: url(/assets/img/long-line-divider.png);
   display: block;
@@ -2272,24 +2297,24 @@ h1.nav-logo > a:hover {
 .scrollbar::-webkit-scrollbar {
   width: 45px;
 }
-/* line 19, ../../../source/sass/_scrollbars.scss */
+/* line 18, ../../../source/sass/_scrollbars.scss */
 .scrollbar::-webkit-scrollbar-track {
   background-color: #d2d1d1;
   border-right: 25px solid transparent;
   background-clip: padding-box;
   margin: 2.375rem 0 2.375rem;
 }
-/* line 26, ../../../source/sass/_scrollbars.scss */
+/* line 25, ../../../source/sass/_scrollbars.scss */
 #siteHeader + .scrollbar::-webkit-scrollbar-track {
   margin: 4.75rem 0 2.375rem;
 }
-/* line 30, ../../../source/sass/_scrollbars.scss */
+/* line 29, ../../../source/sass/_scrollbars.scss */
 .scrollbar::-webkit-scrollbar-thumb {
   background-color: #d175a1;
   border-right: 25px solid transparent;
   background-clip: padding-box;
 }
-/* line 35, ../../../source/sass/_scrollbars.scss */
+/* line 34, ../../../source/sass/_scrollbars.scss */
 .scrollbar::-webkit-scrollbar-thumb:hover {
   background-color: rgba(209, 117, 161, 0.75);
 }
