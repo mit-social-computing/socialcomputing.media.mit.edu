@@ -29,9 +29,10 @@
 
 <div class="nav-sibling nav-sibling--prev">
 {% if prev %}
-    <a class="nav-arrow" href="{{ prev.url }}"></a>
-    <span class="nav-sibling-title">{{ prev }}</span>
-    <div class="nav-sibling-bg"></div>
+    <div class="nav-sibling-clip">
+        <a class="nav-arrow" href="{{ prev.url }}"></a>
+        <span class="nav-sibling-title">{{ prev }}</span>
+    </div>
 {% else %}
     <span class="nav-arrow disabled"></a>
 {% endif %}
@@ -39,9 +40,10 @@
 
 <div class="nav-sibling nav-sibling--next">
 {% if next %}
-    <a class="nav-arrow" href="{{ next.url }}"></a>
-    <span class="nav-sibling-title">{{ next }}</span>
-    <div class="nav-sibling-bg"></div>
+    <div class="nav-sibling-clip" id="nextBlog">
+        <a class="nav-arrow" href="{{ next.url }}"></a>
+        <span class="nav-sibling-title">{{ next }}</span>
+    </div>
 {% else %}
     <span class="nav-arrow disabled"></span>
 {% endif %}

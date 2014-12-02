@@ -178,16 +178,16 @@ h1.nav-logo {
     top: 0;
     bottom: 0;
     margin: auto;
-
 }
 
 .nav-sibling-title {
+    display: block;
+    white-space: nowrap;
+
     font-family: handwriting;
     color: $darkgray;
     text-transform: lowercase;
 
-    opacity: 0;
-    @include transition(opacity 150ms ease);
 
     &:before {
         content: '';
@@ -198,9 +198,21 @@ h1.nav-logo {
 }
 
 .nav-sibling--prev {
-    padding-left: 65px;
-    padding-right: 25px;
     left: -85px;
+
+    .nav-sibling-clip {
+        left: 0;
+        -webkit-clip-path: circle(20px at 35px 40px);
+
+        &:hover {
+            -webkit-clip-path: circle(300px at 35px 40px);
+        }
+    }
+
+    .nav-sibling-title {
+        margin-left: 65px;
+        padding-right: 25px;
+    }
 
     .nav-arrow {
         left: 15px;
@@ -214,21 +226,25 @@ h1.nav-logo {
             border-right-width: 11px;
             border-left-width: 0;
         }
-
-        &:hover ~ .nav-sibling-bg {
-            left: 0;
-        }
-    }
-
-    .nav-sibling-bg {
-        left: 15px;
     }
 }
 
 .nav-sibling--next {
-    padding-left: 25px;
-    padding-right: 65px;
     right: -85px;
+
+    .nav-sibling-clip {
+        right: 0;
+        //-webkit-clip-path: circle(20px at 84%);
+
+        &:hover {
+            -webkit-clip-path: circle(300px at center) !important;
+        }
+    }
+
+    .nav-sibling-title {
+        margin-right: 65px;
+        padding-left: 25px;
+    }
 
     .nav-arrow {
         right: 15px;
@@ -242,14 +258,6 @@ h1.nav-logo {
             border-right-width: 0;
             border-left-width: 11px;
         }
-
-        &:hover ~ .nav-sibling-bg {
-            right: 0;
-        }
-    }
-
-    .nav-sibling-bg {
-        right: 15px;
     }
 }
 
@@ -265,24 +273,11 @@ h1.nav-logo {
 
     background-color: rgba($lightergray, 0);
 
-    @include transition(background-color 250ms ease);
+    @include transition(background-color 250ms ease 250ms);
 
     &:hover {
         background-color: rgba($lightergray, 1);
-        @include transition(background-color 250ms ease);
-
-        ~ .nav-sibling-bg {
-            width: 100%;
-            height: 100%;
-            border-radius: 0;
-
-            @include transition(width 250ms ease, height 250ms ease, border-radius 50ms);
-        }
-
-        ~ .nav-sibling-title {
-            opacity: 1;
-            @include transition(opacity 250ms ease);
-        }
+        @include transition(background-color 250ms ease 100ms);
     }
 
     &:after {
@@ -304,20 +299,20 @@ h1.nav-logo {
     }
 }
 
-.nav-sibling-bg {
-    background-color: $lightestgray;
-    z-index: -1;
-
+.nav-sibling-clip {
+    background-color: rgba($lightestgray, 0);
     position: absolute;
-    top: 0;
-    bottom: 0;
-    margin: auto;
 
-    border-radius: 50%;
-    min-height: 40px;
-    min-width: 40px;
-    width: 0%;
-    height: 0%;
+    .loaded & {
+        background-color: rgba($lightestgray, 1);
+        @include transition(background-color 250ms ease, -webkit-clip-path 250ms ease 150ms);
+    }
 
-    @include transition(width 250ms ease 150ms, height 250ms ease 150ms, border-radius 50ms ease 150ms, left 25ms linear 150ms, right 25ms linear 150ms);
+    &:hover {
+        transition: -webkit-clip-path 250ms ease;
+
+        > .nav-arrow {
+            background-color: rgba($lightergray, 1);
+        }
+    }
 }

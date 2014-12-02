@@ -3,23 +3,6 @@
 $(function() {
     var hash = location.hash
 
-    if ( hash ) {
-        // need to trigger on gallery layout
-        // use browserify to creat bundles and pass event
-        // for now just Timeout
-        setTimeout(function() {
-            $('#scrollable').animate({
-                scrollTop : $(hash)[0].offsetTop -
-                    ( parseInt(getComputedStyle($('#content')[0]).paddingTop, 10) +
-                      $('#siteHeader').height() )
-            })
-        }, 100)
-
-        // only for non-blog pages
-        $('#chapterNav').find('a').not('[href=' + hash + ']').removeClass('active')
-        $('#chapterNav').find('[href=' + hash + ']').addClass('active')
-    }
-
     $('#chapterNav').on('click', 'a', function(e) {
         e.preventDefault()
 
@@ -71,4 +54,29 @@ $(function() {
 
         $('#sidebar').attr('data-sidebar', open ? 'is-closed' : 'is-open')
     })
+
+    if ( hash ) {
+        // need to trigger on gallery layout
+        // use browserify to creat bundles and pass event
+        // for now just Timeout
+        setTimeout(function() {
+            $('#scrollable').animate({
+                scrollTop : $(hash)[0].offsetTop -
+                    ( parseInt(getComputedStyle($('#content')[0]).paddingTop, 10) +
+                      $('#siteHeader').height() )
+            })
+        }, 100)
+
+        // only for non-blog pages
+        $('#chapterNav').find('a').not('[href=' + hash + ']').removeClass('active')
+        $('#chapterNav').find('[href=' + hash + ']').addClass('active')
+    }
+
+    if ( !!$('#nextBlog').length ) {
+        // set clip path for all browsers
+        var center = $('#nextBlog').outerWidth() - 35
+        $('#nextBlog').css({ 'webkitClipPath' : 'circle(20px at ' + center + 'px)' })
+        $('.nav-sibling').addClass('loaded')
+    }
+
 })
