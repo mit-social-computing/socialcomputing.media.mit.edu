@@ -31,6 +31,7 @@ $(function() {
         arrows : false,
         dots : true,
         draggable: false,
+        fade : true,
         slide : '.ss-slide-small',
         onBeforeChange : function(Slick, current, upcoming) {
             $newsCaption
