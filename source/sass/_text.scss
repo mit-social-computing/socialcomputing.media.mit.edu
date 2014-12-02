@@ -1,4 +1,5 @@
 .text {}
+
 .text--separator {
     &:after {
         content : url(/assets/img/long-line-divider.png);
@@ -87,7 +88,7 @@
     }
 
     &.padded {
-        padding: 0 rems($base);
+        padding: rems($base) rems($base) 0;
     }
 
     p {
