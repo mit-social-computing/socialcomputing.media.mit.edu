@@ -41,7 +41,8 @@ $(function() {
                 .animate({ 'opacity' : 1 })
         },
         onInit : function() {
-            this.$dots.prependTo('#recentContainer')
+            $('#carousel, #recentContainer').addClass('loaded')
+            this.$dots.prependTo('#recentContainer').addClass('loaded')
         }
     })
 })

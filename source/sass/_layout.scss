@@ -144,6 +144,8 @@
 
 .l-twocolumn {
     @extend .clearfix;
+    height: 264px;
+    overflow: hidden;
 
 
     @include mq($screen-min) {
@@ -186,7 +188,7 @@
 
         > :first-child {
             @include flex(1);
-            @include flex-basis(60%);
+            //@include flex-basis(60%);
         }
     //}
 }

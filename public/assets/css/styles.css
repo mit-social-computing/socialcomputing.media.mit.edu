@@ -970,38 +970,43 @@ address {
   right: 1.1875rem;
 }
 
+/* line 145, ../../../source/sass/_layout.scss */
+.l-twocolumn {
+  height: 264px;
+  overflow: hidden;
+}
 @media only screen and (min-width: 33.625rem) {
-  /* line 151, ../../../source/sass/_layout.scss */
+  /* line 153, ../../../source/sass/_layout.scss */
   .l-twocolumn > * {
     float: left;
   }
 }
 
-/* line 161, ../../../source/sass/_layout.scss */
+/* line 163, ../../../source/sass/_layout.scss */
 .l-2of3 {
   width: 100%;
   padding: 0 0.59375rem;
 }
 @media only screen and (min-width: 33.625rem) {
-  /* line 161, ../../../source/sass/_layout.scss */
+  /* line 163, ../../../source/sass/_layout.scss */
   .l-2of3 {
     width: 66.66667%;
   }
 }
 
-/* line 170, ../../../source/sass/_layout.scss */
+/* line 172, ../../../source/sass/_layout.scss */
 .l-1of3 {
   width: 100%;
 }
 @media only screen and (min-width: 33.625rem) {
-  /* line 170, ../../../source/sass/_layout.scss */
+  /* line 172, ../../../source/sass/_layout.scss */
   .l-1of3 {
     width: 33.33333%;
     padding-right: 0.59375rem;
   }
 }
 
-/* line 180, ../../../source/sass/_layout.scss */
+/* line 182, ../../../source/sass/_layout.scss */
 .l-flexpage {
   display: -webkit-box;
   display: -webkit-flex;
@@ -1016,7 +1021,7 @@ address {
   flex-direction: column;
   height: 100%;
 }
-/* line 187, ../../../source/sass/_layout.scss */
+/* line 189, ../../../source/sass/_layout.scss */
 .l-flexpage > :first-child {
   -webkit-box-flex: 1;
   -webkit-flex: 1;
@@ -1024,13 +1029,9 @@ address {
   -moz-flex: 1;
   -ms-flex: 1;
   flex: 1;
-  -webkit-flex-basis: 60%;
-  -moz-flex-basis: 60%;
-  -ms-flex-preferred-size: 60%;
-  flex-basis: 60%;
 }
 
-/* line 194, ../../../source/sass/_layout.scss */
+/* line 196, ../../../source/sass/_layout.scss */
 .l-slideshow {
   position: relative;
 }
@@ -1996,6 +1997,34 @@ h1.nav-logo > a:hover {
 }
 
 /* line 1, ../../../source/sass/_carousel.scss */
+#carousel {
+  opacity: 0;
+}
+/* line 4, ../../../source/sass/_carousel.scss */
+#carousel.loaded {
+  opacity: 1;
+  -moz-transition: opacity 250ms ease;
+  -o-transition: opacity 250ms ease;
+  -webkit-transition: opacity 250ms ease;
+  transition: opacity 250ms ease;
+}
+
+/* line 11, ../../../source/sass/_carousel.scss */
+#recentContainer .ss--small,
+#recentContainer > .slick-dots {
+  opacity: 0;
+}
+/* line 17, ../../../source/sass/_carousel.scss */
+#recentContainer.loaded .ss--small,
+#recentContainer.loaded > .slick-dots {
+  opacity: 1;
+  -moz-transition: opacity 250ms ease;
+  -o-transition: opacity 250ms ease;
+  -webkit-transition: opacity 250ms ease;
+  transition: opacity 250ms ease;
+}
+
+/* line 25, ../../../source/sass/_carousel.scss */
 .ss.slick-slider {
   margin-bottom: 0;
   position: absolute;
@@ -2005,36 +2034,36 @@ h1.nav-logo > a:hover {
   left: 0;
 }
 
-/* line 10, ../../../source/sass/_carousel.scss */
+/* line 34, ../../../source/sass/_carousel.scss */
 #recentContainer {
   position: relative;
   color: #333;
 }
-/* line 14, ../../../source/sass/_carousel.scss */
+/* line 38, ../../../source/sass/_carousel.scss */
 #recentContainer > .slick-dots {
   top: 0;
   right: 0;
   bottom: auto;
   width: auto;
 }
-/* line 20, ../../../source/sass/_carousel.scss */
+/* line 44, ../../../source/sass/_carousel.scss */
 #recentContainer > .slick-dots > li {
   margin: 0 2px;
 }
 
-/* line 26, ../../../source/sass/_carousel.scss */
+/* line 50, ../../../source/sass/_carousel.scss */
 .ss--small.slick-slider {
   margin-bottom: 0;
 }
 
-/* line 31, ../../../source/sass/_carousel.scss */
+/* line 55, ../../../source/sass/_carousel.scss */
 .ss .slick-list,
 .ss .slick-track,
 .ss .ss-slide {
   height: 100%;
 }
 
-/* line 38, ../../../source/sass/_carousel.scss */
+/* line 62, ../../../source/sass/_carousel.scss */
 #carousel .slick-slide {
   display: -webkit-box;
   display: -webkit-flex;
@@ -2047,13 +2076,13 @@ h1.nav-logo > a:hover {
   flex-flow: column nowrap;
 }
 @media only screen and (min-width: 33.625rem) {
-  /* line 38, ../../../source/sass/_carousel.scss */
+  /* line 62, ../../../source/sass/_carousel.scss */
   #carousel .slick-slide {
     display: block;
   }
 }
 
-/* line 47, ../../../source/sass/_carousel.scss */
+/* line 71, ../../../source/sass/_carousel.scss */
 .ss-slide {
   background-position: center;
   background-size: cover;
@@ -2070,7 +2099,7 @@ h1.nav-logo > a:hover {
   flex: 1;
 }
 
-/* line 55, ../../../source/sass/_carousel.scss */
+/* line 79, ../../../source/sass/_carousel.scss */
 .ss-caption {
   text-align: center;
   padding: 0 15px;
@@ -2082,13 +2111,13 @@ h1.nav-logo > a:hover {
   flex: 1;
 }
 @media only screen and (min-width: 33.625rem) {
-  /* line 55, ../../../source/sass/_carousel.scss */
+  /* line 79, ../../../source/sass/_carousel.scss */
   .ss-caption {
     display: none;
   }
 }
 
-/* line 65, ../../../source/sass/_carousel.scss */
+/* line 89, ../../../source/sass/_carousel.scss */
 .ss-headline {
   display: none;
   text-align: center;
@@ -2099,14 +2128,14 @@ h1.nav-logo > a:hover {
   font-size: 1.5rem;
 }
 @media only screen and (min-width: 33.625rem) {
-  /* line 65, ../../../source/sass/_carousel.scss */
+  /* line 89, ../../../source/sass/_carousel.scss */
   .ss-headline {
     font-size: 43px;
     font-size: 2.6875rem;
   }
 }
 @media only screen and (min-width: 33.625rem) {
-  /* line 65, ../../../source/sass/_carousel.scss */
+  /* line 89, ../../../source/sass/_carousel.scss */
   .ss-headline {
     display: block;
     margin: auto;
@@ -2114,11 +2143,11 @@ h1.nav-logo > a:hover {
     padding: 0 15px;
   }
 }
-/* line 78, ../../../source/sass/_carousel.scss */
+/* line 102, ../../../source/sass/_carousel.scss */
 .ss-headline.white {
   color: white;
 }
-/* line 82, ../../../source/sass/_carousel.scss */
+/* line 106, ../../../source/sass/_carousel.scss */
 .ss-headline.black {
   color: #333;
 }

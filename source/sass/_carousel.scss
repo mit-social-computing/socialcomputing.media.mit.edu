@@ -1,3 +1,27 @@
+#carousel {
+    opacity: 0;
+
+    &.loaded {
+        opacity: 1;
+        @include transition(opacity 250ms ease);
+    }
+}
+
+#recentContainer {
+    .ss--small,
+    > .slick-dots {
+        opacity: 0;
+    }
+
+    &.loaded {
+        .ss--small,
+        > .slick-dots {
+            opacity: 1;
+            @include transition(opacity 250ms ease);
+        }
+    }
+}
+
 .ss.slick-slider { // featured carousel
     margin-bottom: 0;
     position: absolute;
