@@ -23,5 +23,14 @@ return array(
             'basePath'  => '/Users/noSlouch/www/social_computing/lab-site/public/',
             'baseUrl'   => 'http://lab.dev/'
         )
+    ),
+
+    '162.243.54.103' => array(
+        'environmentVariables'  => array(
+            'basePath'  => '/home/web/www/social/public',
+            'baseUrl'   => 'http://162.243.54.103/'
+        )
+
     )
+
 );
