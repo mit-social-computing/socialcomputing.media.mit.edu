@@ -9,7 +9,7 @@
 
 #recentContainer { // wrapper for recent news carousel
     position: relative;
-    @include antialiased;
+    color: $darkgray;
 
     > .slick-dots {
         top: 0;
