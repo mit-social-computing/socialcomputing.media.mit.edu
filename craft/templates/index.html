@@ -2,7 +2,7 @@
 
 {% set flexpage = true %}
 {% if craft.request.firstSegment %}
-    {% set entry = craft.entries.section('about').first() %}
+    {% set entry = craft.entries.type('about').first() %}
 {% endif %}
 
 {% block content %}

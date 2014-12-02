@@ -12,7 +12,7 @@
     {% else %}
     <body>
     {% endif %}
-    {% set slug = craft.request.firstSegment ? craft.request.firstSegment : 'about' %}
+    {% set slug = craft.request.firstSegment ? craft.request.firstSegment : craft.entries.type('about').first().slug %}
     {% if craft.sections.getSectionByHandle(slug).type != 'channel' %}
         <header class="l-highlight l-fixed-top" id="siteHeader">
             <div class="l-max">
@@ -41,12 +41,12 @@
                                         {% if s1 == s|lower or ( s.isHomepage() and s1 is empty ) %}
 
                                         <li class="nav-item" data-dropdown="is-closed">
-                                            <a href="{{ url(nav|lower) }}" class="active">{{ s }}</a>
+                                            <a href="{{ url(nav.slug) }}" class="active">{{ s }}</a>
 
                                         {% else %}
 
                                         <li class="nav-item" data-dropdown="is-closed">
-                                            <a href="{{ url(nav|lower) }}">{{ s }}</a>
+                                            <a href="{{ url(nav.slug) }}">{{ s }}</a>
 
                                         {% endif %}
 
@@ -70,9 +70,9 @@
                                     <li class="nav-item">
 
                                         {% if s1 == nav|lower or ( s is not empty and s.isHomepage() and s1 is empty ) %}
-                                        <a href="{{ url(nav|lower) }}" class="active">{{ nav }}</a>
+                                        <a href="{{ url(nav.slug) }}" class="active">{{ nav }}</a>
                                         {% else %}
-                                        <a href="{{ url(nav|lower) }}">{{ nav }}</a>
+                                        <a href="{{ url(nav.slug) }}">{{ nav }}</a>
                                         {% endif %}
 
                                     </li>
@@ -83,7 +83,7 @@
                                 <div class="box box--gray centered only-small">
                                     <h3 class="box-title">recent</h3>
                                     <ul class="box-list">
-                                    {% set recentItems = craft.entries.section('about').first().recentItems %}
+                                    {% set recentItems = craft.entries.type('about').first().recentItems %}
                                     {% for slide in recentItems %}
 
                                         {% if slide.siteEntry.first()|length %}
