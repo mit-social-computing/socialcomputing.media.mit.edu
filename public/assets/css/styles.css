@@ -649,7 +649,7 @@ body {
   font-size: 1.09375rem;
   font-family: "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
   font-weight: 100;
-  letter-spacing: 1px;
+  letter-spacing: 0.8px;
 }
 @media only screen and (min-width: 33.625rem) {
   /* line 19, ../../../source/sass/_base.scss */
@@ -976,37 +976,63 @@ address {
   overflow: hidden;
 }
 @media only screen and (min-width: 33.625rem) {
-  /* line 153, ../../../source/sass/_layout.scss */
-  .l-twocolumn > * {
+  /* line 145, ../../../source/sass/_layout.scss */
+  .l-twocolumn {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flexbox;
+    display: flex;
+  }
+  /* line 155, ../../../source/sass/_layout.scss */
+  .no-flexbox .l-twocolumn > * {
     float: left;
   }
 }
 
-/* line 163, ../../../source/sass/_layout.scss */
+/* line 162, ../../../source/sass/_layout.scss */
 .l-2of3 {
   width: 100%;
   padding: 0 0.59375rem;
 }
 @media only screen and (min-width: 33.625rem) {
-  /* line 163, ../../../source/sass/_layout.scss */
+  /* line 162, ../../../source/sass/_layout.scss */
   .l-2of3 {
+    -webkit-box-flex: 1;
+    -webkit-flex: 1;
+    -moz-box-flex: 1;
+    -moz-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+  }
+  /* line 169, ../../../source/sass/_layout.scss */
+  .no-flexbox .l-2of3 {
     width: 66.66667%;
   }
 }
 
-/* line 172, ../../../source/sass/_layout.scss */
+/* line 175, ../../../source/sass/_layout.scss */
 .l-1of3 {
   width: 100%;
 }
 @media only screen and (min-width: 33.625rem) {
-  /* line 172, ../../../source/sass/_layout.scss */
+  /* line 175, ../../../source/sass/_layout.scss */
   .l-1of3 {
-    width: 33.33333%;
     padding-right: 0.59375rem;
+    -webkit-box-flex: 0;
+    -webkit-flex: 0 0 332px;
+    -moz-box-flex: 0;
+    -moz-flex: 0 0 332px;
+    -ms-flex: 0 0 332px;
+    flex: 0 0 332px;
+  }
+  /* line 183, ../../../source/sass/_layout.scss */
+  .no-flexbox .l-1of3 {
+    width: 33.33333%;
   }
 }
 
-/* line 182, ../../../source/sass/_layout.scss */
+/* line 189, ../../../source/sass/_layout.scss */
 .l-flexpage {
   display: -webkit-box;
   display: -webkit-flex;
@@ -1021,7 +1047,7 @@ address {
   flex-direction: column;
   height: 100%;
 }
-/* line 189, ../../../source/sass/_layout.scss */
+/* line 194, ../../../source/sass/_layout.scss */
 .l-flexpage > :first-child {
   -webkit-box-flex: 1;
   -webkit-flex: 1;
@@ -1030,8 +1056,12 @@ address {
   -ms-flex: 1;
   flex: 1;
 }
+/* line 197, ../../../source/sass/_layout.scss */
+.no-flexbox .l-flexpage > :first-child {
+  min-height: 65%;
+}
 
-/* line 196, ../../../source/sass/_layout.scss */
+/* line 203, ../../../source/sass/_layout.scss */
 .l-slideshow {
   position: relative;
 }
