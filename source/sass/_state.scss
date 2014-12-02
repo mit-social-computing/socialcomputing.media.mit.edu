@@ -1,3 +1,14 @@
+.is-not-scrolling .scrollbar {
+    &::-webkit-scrollbar {
+        width: 0;
+        display: none;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: transparent;
+    }
+}
+
 .is-menu-open {
     header.l-highlight {
         background-color: $pink;
