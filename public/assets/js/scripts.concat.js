@@ -18209,12 +18209,10 @@ $(function() {
         $('#chapterNav').find('[href=' + hash + ']').addClass('active')
     }
 
-    if ( !!$('#nextBlog').length ) {
-        // set clip path for all browsers
-        var center = $('#nextBlog').outerWidth() - 35
-        $('#nextBlog').css({ 'webkitClipPath' : 'circle(20px at ' + center + 'px)' })
-        $('.nav-sibling').addClass('loaded')
-    }
+    // TODO detect clip path flavor
+    var center = $('#nextBlog').outerWidth() - 35
+    $('#nextBlog').css({ 'webkitClipPath' : 'circle(20px at ' + center + 'px)' })
+    $('.nav-sibling').addClass('loaded')
 
 })
 
