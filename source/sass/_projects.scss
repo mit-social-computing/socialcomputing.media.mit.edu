@@ -15,6 +15,23 @@
 }
 
 .project-gallery {
+    position: relative;
+    margin-bottom: 30px;
+
+    .project-slide {
+        opacity: 0;
+    }
+
+    .project-slide:not(:first-child) {
+        position: absolute;
+    }
+
+    &.loaded .project-slide {
+        position: relative;
+        opacity: 1;
+        @include transition(opacity 250ms ease);
+    }
+
     .slick-list {
         @include perspective(400px);
         //overflow: visible;

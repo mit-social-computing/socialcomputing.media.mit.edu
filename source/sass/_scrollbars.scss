@@ -12,12 +12,12 @@
     }
 
     &::-webkit-scrollbar {
-        width: 45px;
+        width: 37px;
     }
 
     &::-webkit-scrollbar-track {
         background-color: $lightergray;
-        border-right: 25px solid transparent;
+        border-right: rems($base) solid transparent;
         background-clip: padding-box;
         margin: rems($base * 2) 0 rems($base * 2);
     }
@@ -28,7 +28,7 @@
 
     &::-webkit-scrollbar-thumb {
         background-color: rgba($pink, 1);
-        border-right: 25px solid transparent;
+        border-right: rems($base) solid transparent;
         background-clip: padding-box;
 
         &:hover {

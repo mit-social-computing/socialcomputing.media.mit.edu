@@ -18316,6 +18316,9 @@ $(function() {
         dots : true,
         arrows : false,
         infinite : false,
-        focusOnSelect : true
+        focusOnSelect : true,
+        onInit : function() {
+            this.$slider.addClass('loaded')
+        }
     })
 })

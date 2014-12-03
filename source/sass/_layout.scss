@@ -1,5 +1,6 @@
 .l-highlight {
     background-color: $darkgray;
+    padding: 0 rems($base);
 
     @include transition(background-color 250ms ease-in);
 }
