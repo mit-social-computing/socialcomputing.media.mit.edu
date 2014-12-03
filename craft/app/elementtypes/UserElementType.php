@@ -96,6 +96,50 @@ class UserElementType extends BaseElementType
 	}
 
 	/**
+	 * @inheritDoc IElementType::getAvailableActions()
+	 *
+	 * @param string|null $source
+	 *
+	 * @return array|null
+	 */
+	public function getAvailableActions($source = null)
+	{
+		$actions = array();
+
+		// Edit
+		$editAction = craft()->elements->getAction('Edit');
+		$editAction->setParams(array(
+			'label' => Craft::t('Edit user'),
+		));
+		$actions[] = $editAction;
+
+		if (craft()->userSession->checkPermission('administrateUsers'))
+		{
+			// Suspend
+			$actions[] = 'SuspendUsers';
+
+			// Unsuspend
+			$actions[] = 'UnsuspendUsers';
+		}
+
+		if (craft()->userSession->checkPermission('deleteUsers'))
+		{
+			// Delete
+			$actions[] = 'DeleteUsers';
+		}
+
+		// Allow plugins to add additional actions
+		$allPluginActions = craft()->plugins->call('addUserActions', array($source), true);
+
+		foreach ($allPluginActions as $pluginActions)
+		{
+			$actions = array_merge($actions, $pluginActions);
+		}
+
+		return $actions;
+	}
+
+	/**
 	 * @inheritDoc IElementType::defineSearchableAttributes()
 	 *
 	 * @return array
@@ -136,6 +180,9 @@ class UserElementType extends BaseElementType
 			);
 		}
 
+		// Allow plugins to modify the attributes
+		craft()->plugins->call('modifyUserTableAttributes', array(&$attributes, $source));
+
 		return $attributes;
 	}
 
@@ -149,6 +196,14 @@ class UserElementType extends BaseElementType
 	 */
 	public function getTableAttributeHtml(BaseElementModel $element, $attribute)
 	{
+		// First give plugins a chance to set this
+		$pluginAttributeHtml = craft()->plugins->callFirst('getUserTableAttributeHtml', array($element, $attribute), true);
+
+		if ($pluginAttributeHtml !== null)
+		{
+			return $pluginAttributeHtml;
+		}
+
 		switch ($attribute)
 		{
 			case 'email':
@@ -171,7 +226,7 @@ class UserElementType extends BaseElementType
 
 				if ($date)
 				{
-					return $date->localeDate();
+					return $date->uiTimestamp();
 				}
 				else
 				{
@@ -220,7 +275,33 @@ class UserElementType extends BaseElementType
 	 */
 	public function getElementQueryStatusCondition(DbCommand $query, $status)
 	{
-		return 'users.status = "'.$status.'"';
+		switch ($status)
+		{
+			case UserStatus::Active:
+			{
+				return 'users.archived = 0 AND users.suspended = 0 AND users.locked = 0 and users.pending = 0';
+			}
+
+			case UserStatus::Pending:
+			{
+				return 'users.pending = 1';
+			}
+
+			case UserStatus::Locked:
+			{
+				return 'users.locked = 1';
+			}
+
+			case UserStatus::Suspended:
+			{
+				return 'users.suspended = 1';
+			}
+
+			case UserStatus::Archived:
+			{
+				return 'users.archived = 1';
+			}
+		}
 	}
 
 	/**
@@ -234,7 +315,7 @@ class UserElementType extends BaseElementType
 	public function modifyElementsQuery(DbCommand $query, ElementCriteriaModel $criteria)
 	{
 		$query
-			->addSelect('users.username, users.photo, users.firstName, users.lastName, users.email, users.admin, users.client, users.status, users.lastLoginDate, users.lockoutDate, users.preferredLocale')
+			->addSelect('users.username, users.photo, users.firstName, users.lastName, users.email, users.admin, users.client, users.locked, users.pending, users.suspended, users.archived, users.lastLoginDate, users.lockoutDate, users.preferredLocale')
 			->join('users users', 'users.id = elements.id');
 
 		if ($criteria->admin)
@@ -385,6 +466,50 @@ class UserElementType extends BaseElementType
 	public function populateElementModel($row)
 	{
 		return UserModel::populateModel($row);
+	}
+
+	/**
+	 * @inheritDoc IElementType::getEditorHtml()
+	 *
+	 * @param BaseElementModel $element
+	 *
+	 * @return string
+	 */
+	public function getEditorHtml(BaseElementModel $element)
+	{
+		$html = craft()->templates->render('users/_accountfields', array(
+			'account'      => $element,
+			'isNewAccount' => false,
+		));
+
+		$html .= parent::getEditorHtml($element);
+
+		return $html;
+	}
+
+	/**
+	 * @inheritdoc BaseElementType::saveElement()
+	 *
+	 * @return bool
+	 */
+	public function saveElement(BaseElementModel $element, $params)
+	{
+		if (isset($params['username']))
+		{
+			$element->username = $params['username'];
+		}
+
+		if (isset($params['firstName']))
+		{
+			$element->firstName = $params['firstName'];
+		}
+
+		if (isset($params['lastName']))
+		{
+			$element->lastName = $params['lastName'];
+		}
+
+		return craft()->users->saveUser($element);
 	}
 
 	// Private Methods
