@@ -2551,18 +2551,14 @@ body.lightbox-open {
 .project-gallery.loaded .project-slide {
   position: relative;
   opacity: 1;
-  -moz-transition: opacity 250ms ease;
-  -o-transition: opacity 250ms ease;
-  -webkit-transition: opacity 250ms ease;
-  transition: opacity 250ms ease;
 }
-/* line 35, ../../../source/sass/_projects.scss */
+/* line 34, ../../../source/sass/_projects.scss */
 .project-gallery .slick-list {
   -moz-perspective: 400px;
   -webkit-perspective: 400px;
   perspective: 400px;
 }
-/* line 40, ../../../source/sass/_projects.scss */
+/* line 39, ../../../source/sass/_projects.scss */
 .project-gallery .slick-track {
   padding: 10px 0;
   -moz-transform-style: preserve-3d;
@@ -2574,7 +2570,7 @@ body.lightbox-open {
   display: -ms-flexbox;
   display: flex;
 }
-/* line 46, ../../../source/sass/_projects.scss */
+/* line 45, ../../../source/sass/_projects.scss */
 .project-gallery .slick-slide {
   position: relative;
   height: auto;
@@ -2583,27 +2579,27 @@ body.lightbox-open {
   display: -moz-flex;
   display: -ms-flexbox;
   display: flex;
-  -moz-transition: -moz-transform 150ms ease;
-  -o-transition: -o-transform 150ms ease;
-  -webkit-transition: -webkit-transform 150ms ease;
-  transition: transform 150ms ease;
+  -moz-transition: -moz-transform 150ms ease, opacity 250ms ease;
+  -o-transition: -o-transform 150ms ease, opacity 250ms ease;
+  -webkit-transition: -webkit-transform 150ms ease, opacity 250ms ease;
+  transition: transform 150ms ease, opacity 250ms ease;
   -moz-transform: translateZ(-100px);
   -webkit-transform: translateZ(-100px);
   transform: translateZ(-100px);
 }
-/* line 56, ../../../source/sass/_projects.scss */
+/* line 55, ../../../source/sass/_projects.scss */
 .project-gallery .slick-slide > img {
   margin: auto;
   box-shadow: 20px 0px 7px -10px transparent, -20px 0px 7px -10px transparent;
 }
-/* line 62, ../../../source/sass/_projects.scss */
+/* line 61, ../../../source/sass/_projects.scss */
 .project-gallery .slick-slide.slick-center {
   z-index: 300;
   -moz-transform: translateZ(0px);
   -webkit-transform: translateZ(0px);
   transform: translateZ(0px);
 }
-/* line 66, ../../../source/sass/_projects.scss */
+/* line 65, ../../../source/sass/_projects.scss */
 .project-gallery .slick-slide.slick-center > img {
   box-shadow: 12px 0px 15px -10px rgba(0, 0, 0, 0.15), -12px 0px 15px -10px rgba(0, 0, 0, 0.15);
   -moz-transition: box-shadow 150ms ease;
@@ -2611,7 +2607,7 @@ body.lightbox-open {
   -webkit-transition: box-shadow 150ms ease;
   transition: box-shadow 150ms ease;
 }
-/* line 76, ../../../source/sass/_projects.scss */
+/* line 75, ../../../source/sass/_projects.scss */
 .project-gallery .slick-dots {
   bottom: -25px;
 }

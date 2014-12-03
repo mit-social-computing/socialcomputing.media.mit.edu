@@ -29,7 +29,6 @@
     &.loaded .project-slide {
         position: relative;
         opacity: 1;
-        @include transition(opacity 250ms ease);
     }
 
     .slick-list {
@@ -49,7 +48,7 @@
 
         @include flexbox;
 
-        @include transition(transform 150ms ease);
+        @include transition(transform 150ms ease, opacity 250ms ease);
         //@include translateZ(-100px);
         @include translateZ(-100px);
 
