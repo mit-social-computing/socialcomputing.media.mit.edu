@@ -18215,7 +18215,9 @@ $(function() {
 // nav.js
 
 $(function() {
-    var hash = location.hash
+    var hash = location.hash,
+        seenMenu = !!sessionStorage.getItem('seenMenu'),
+        $sidenavButton = $('#sidenavButton')
 
     $('#chapterNav').on('click', 'a', function(e) {
         e.preventDefault()
@@ -18249,7 +18251,7 @@ $(function() {
         }
     })
 
-    $('#sidenavButton').click(function(e) {
+    $sidenavButton.click(function(e) {
         $(this).toggleClass('close')
         var open = $('#sidebar').attr('data-sidebar') === 'is-open',
             width = 0
@@ -18269,6 +18271,17 @@ $(function() {
 
         $('#sidebar').attr('data-sidebar', open ? 'is-closed' : 'is-open')
     })
+
+    //
+    // INIT
+    //
+
+    if ( !seenMenu && !!$sidenavButton.length ) {
+        setTimeout(function() {
+            sessionStorage.setItem('seenMenu', true)
+            $sidenavButton.click()
+        }, 1000)
+    }
 
     if ( hash ) {
         // need to trigger on gallery layout
