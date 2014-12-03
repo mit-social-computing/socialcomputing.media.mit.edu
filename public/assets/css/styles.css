@@ -952,7 +952,7 @@ address {
 /* line 127, ../../../source/sass/_layout.scss */
 .l-right-block,
 .l-left-block {
-  max-width: 674px;
+  max-width: 724px;
   width: 100%;
 }
 /* line 132, ../../../source/sass/_layout.scss */
@@ -2526,37 +2526,69 @@ body.lightbox-open {
     padding: 0;
   }
 }
+/* line 10, ../../../source/sass/_projects.scss */
+.project > .text {
+  width: 100%;
+  max-width: 674px;
+  margin: 0 auto;
+}
 
-/* line 12, ../../../source/sass/_projects.scss */
+/* line 18, ../../../source/sass/_projects.scss */
+.project-gallery .slick-list {
+  -moz-perspective: 400px;
+  -webkit-perspective: 400px;
+  perspective: 400px;
+}
+/* line 23, ../../../source/sass/_projects.scss */
+.project-gallery .slick-track {
+  padding: 10px 0;
+  -moz-transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+/* line 29, ../../../source/sass/_projects.scss */
 .project-gallery .slick-slide {
   position: relative;
+  height: auto;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flexbox;
+  display: flex;
   -moz-transition: -moz-transform 150ms ease;
   -o-transition: -o-transform 150ms ease;
   -webkit-transition: -webkit-transform 150ms ease;
   transition: transform 150ms ease;
-  -moz-transform: scale(0.9) translateX(70%);
-  -ms-transform: scale(0.9) translateX(70%);
-  -webkit-transform: scale(0.9) translateX(70%);
-  transform: scale(0.9) translateX(70%);
-  z-index: 0;
+  -moz-transform: translateZ(-100px);
+  -webkit-transform: translateZ(-100px);
+  transform: translateZ(-100px);
 }
-/* line 19, ../../../source/sass/_projects.scss */
+/* line 39, ../../../source/sass/_projects.scss */
+.project-gallery .slick-slide > img {
+  margin: auto;
+  box-shadow: 20px 0px 7px -10px transparent, -20px 0px 7px -10px transparent;
+}
+/* line 45, ../../../source/sass/_projects.scss */
 .project-gallery .slick-slide.slick-center {
-  -moz-transform: scale(1, 1);
-  -ms-transform: scale(1, 1);
-  -webkit-transform: scale(1, 1);
-  transform: scale(1, 1);
   z-index: 300;
+  -moz-transform: translateZ(0px);
+  -webkit-transform: translateZ(0px);
+  transform: translateZ(0px);
 }
-/* line 24, ../../../source/sass/_projects.scss */
-.project-gallery .slick-center ~ .slick-slide {
-  -moz-transform: scale(0.9) translateX(-70%);
-  -ms-transform: scale(0.9) translateX(-70%);
-  -webkit-transform: scale(0.9) translateX(-70%);
-  transform: scale(0.9) translateX(-70%);
-  z-index: 0;
+/* line 49, ../../../source/sass/_projects.scss */
+.project-gallery .slick-slide.slick-center > img {
+  box-shadow: 12px 0px 15px -10px rgba(0, 0, 0, 0.15), -12px 0px 15px -10px rgba(0, 0, 0, 0.15);
+  -moz-transition: box-shadow 150ms ease;
+  -o-transition: box-shadow 150ms ease;
+  -webkit-transition: box-shadow 150ms ease;
+  transition: box-shadow 150ms ease;
 }
-/* line 29, ../../../source/sass/_projects.scss */
+/* line 59, ../../../source/sass/_projects.scss */
 .project-gallery .slick-dots {
   bottom: -25px;
 }

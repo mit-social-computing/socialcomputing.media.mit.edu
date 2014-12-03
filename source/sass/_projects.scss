@@ -6,24 +6,54 @@
     @include mq($screen-min) {
         padding: 0;
     }
+
+    > .text {
+        width: 100%;
+        max-width: 674px;
+        margin: 0 auto;
+    }
 }
 
 .project-gallery {
+    .slick-list {
+        @include perspective(400px);
+        //overflow: visible;
+    }
+
+    .slick-track {
+        padding: 10px 0;
+        @include transform-style(preserve-3d);
+        @include flexbox;
+    }
+
     .slick-slide {
         position: relative;
+        height: auto;
+
+        @include flexbox;
+
         @include transition(transform 150ms ease);
-        @include transform(scale(0.9) translateX(70%));
-        z-index: 0;
+        //@include translateZ(-100px);
+        @include translateZ(-100px);
+
+        > img {
+            margin: auto;
+            box-shadow: 20px 0px 7px -10px rgba(0, 0, 0, 0), -20px 0px 7px -10px rgba(0, 0, 0, 0);
+        }
     }
 
     .slick-slide.slick-center {
-        @include scale(1);
         z-index: 300;
+        @include translateZ(0px);
+
+        > img {
+            box-shadow: 12px 0px 15px -10px rgba(0, 0, 0, 0.15), -12px 0px 15px -10px rgba(0, 0, 0, 0.15);
+            @include transition(box-shadow 150ms ease);
+        }
     }
 
     .slick-center ~ .slick-slide {
-        @include transform(scale(0.9) translateX(-70%));
-        z-index: 0;
+        //@include translate3d(-70%,0,-60px);
     }
 
     .slick-dots {
