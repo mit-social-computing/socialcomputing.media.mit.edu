@@ -1980,6 +1980,40 @@ Craft.BaseElementIndex = Garnish.Base.extend(
 				this._setupNewElements($newElements);
 
 				this._onUpdateElements(response, false, $newElements);
+
+				// Listen for double-clicks
+				if (this.settings.context == 'index')
+				{
+					this.addListener(this.$elementContainer, 'dblclick', function(ev)
+					{
+						var $target = $(ev.target);
+
+						if ($target.prop('nodeName') == 'A')
+						{
+							// Let the link do its thing
+							return;
+						}
+
+						if ($target.hasClass('element'))
+						{
+							var $element = $target;
+						}
+						else
+						{
+							var $element = $target.closest('.element');
+
+							if (!$element.length)
+							{
+								return;
+							}
+						}
+
+						if (Garnish.hasAttr($element, 'data-editable'))
+						{
+							new Craft.ElementEditor($element);
+						}
+					});
+				}
 			}
 
 		}, this));
@@ -5184,9 +5218,6 @@ Craft.AssetIndex = Craft.BaseElementIndex.extend(
 	{
 		if (this.settings.context == 'index')
 		{
-			var $enabledElements = $newElements.filter(':not(.disabled)');
-			this._attachElementEvents($enabledElements);
-
 			if (!append)
 			{
 				this._fileDrag.removeAllItems();
@@ -5218,19 +5249,6 @@ Craft.AssetIndex = Craft.BaseElementIndex.extend(
 		}
 
 		this.base(append, $newElements)
-	},
-
-	_attachElementEvents: function($elements)
-	{
-		// Doubleclick opens the HUD for editing
-		this.removeListener($elements, 'dblclick');
-		this.addListener($elements, 'dblclick', $.proxy(this, '_editProperties'));
-	},
-
-	_editProperties: function(event)
-	{
-		var $element = $(event.currentTarget).find('.element');
-		new Craft.ElementEditor($element);
 	},
 
 	/**
@@ -10068,7 +10086,7 @@ Craft.LivePreview = Garnish.Base.extend(
 		for (var i= 0; i < $fields.length; i++)
 		{
 			var $field = $($fields[i]),
-				$clone = $field.clone();
+				$clone = this._getClone($field);
 
 			// It's important that the actual field is added to the DOM *after* the clone,
 			// so any radio buttons in the field get deselected from the clone rather than the actual field.
@@ -10185,7 +10203,7 @@ Craft.LivePreview = Garnish.Base.extend(
 		for (var i = 0; i < this.fields.length; i++)
 		{
 			var field = this.fields[i];
-			field.$newClone = field.$field.clone();
+			field.$newClone = this._getClone(field.$field);
 
 			// It's important that the actual field is added to the DOM *after* the clone,
 			// so any radio buttons in the field get deselected from the clone rather than the actual field.
@@ -10270,6 +10288,20 @@ Craft.LivePreview = Garnish.Base.extend(
 		{
 			return false;
 		}
+	},
+
+	_getClone: function($field)
+	{
+		var $clone = $field.clone();
+
+		// clone() won't account for input values that have changed since the original HTML set them
+		Garnish.copyInputValues($field, $clone);
+
+		// Remove any id= attributes
+		$clone.attr('id', '');
+		$clone.find('[id]').attr('id', '');
+
+		return $clone;
 	},
 
 	_onDragStart: function()
