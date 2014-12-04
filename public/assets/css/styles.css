@@ -1840,9 +1840,25 @@ h1.nav-logo > a:hover {
   position: absolute;
   top: 0;
   left: 0;
-  padding: 1px;
 }
-/* line 38, ../../../source/sass/_box.scss */
+/* line 37, ../../../source/sass/_box.scss */
+.box--wavy > img.profile {
+  opacity: 0;
+}
+/* line 40, ../../../source/sass/_box.scss */
+.box--wavy > img.profile.loaded {
+  opacity: 1;
+  -moz-transition: opacity 250ms ease;
+  -o-transition: opacity 250ms ease;
+  -webkit-transition: opacity 250ms ease;
+  transition: opacity 250ms ease;
+}
+/* line 46, ../../../source/sass/_box.scss */
+.box--wavy > img.mask {
+  height: 100%;
+  width: 100%;
+}
+/* line 51, ../../../source/sass/_box.scss */
 .box--wavy > svg {
   position: absolute;
   top: 0;

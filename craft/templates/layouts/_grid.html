@@ -8,12 +8,13 @@
                 <div class="box--wavy">
 
                 {% if user.photoUrl %}
-                    <img src="{{ user.getPhotoUrl('537') }}">
+                    <img class="profile" src="{{ user.getPhotoUrl('537') }}">
                     {% else %}
-                    <img src="/assets/img/temp/people.jpg">
+                    <img class="profile" src="/assets/img/temp/people.jpg">
                 {% endif %}
 
-                {% include 'svg/thumbnailBorder.svg' %}
+                    <img class="mask" src="/assets/img/mask.gif" alt="" />
+
                 </div>
                 <div class="text">
                     <div class="text-body text-body--collapse medium">
