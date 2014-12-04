@@ -3,6 +3,8 @@
 {% if craft.request.isLivePreview %}
     {% set chapters = entry.parent.children %}
     {% set sectionTitle = entry.parent.title %}
+{% elseif craft.request.getSegment(3) %}
+    {% redirect craft.request.firstSegment ~ '/' ~ craft.request.getSegment(2) ~ '/#' ~ craft.request.getSegment(3) %}
 {% else %}
     {% set chapters = entry.children %}
     {% set sectionTitle = entry.title %}

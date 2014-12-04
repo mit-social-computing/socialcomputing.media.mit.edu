@@ -1,5 +1,1 @@
-{% extends 'layouts/_offcanvas' %}
-
-{% set chapters = craft.entries.section('manifesto') %}
-{% set sectionTitle = craft.sections.getSectionByHandle('manifesto').name %}
-{% set navsub = craft.request.firstSegment %}
+{% redirect craft.request.firstSegment ~ '/#' ~ craft.request.getSegment(2) %}

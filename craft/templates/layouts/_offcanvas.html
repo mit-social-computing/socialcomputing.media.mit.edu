@@ -14,36 +14,28 @@
                 <h2>{{ sectionTitle }}</h2>
 
                 <ul class="chapter-list sidebar-for-open" id="chapterList">
-                    {% for chapter in chapters %}
-
-                    {# bugfix for live preview #}
-                    {% if craft.request.isLivePreview and chapter.id == entry.id %}
-                        {% set chapter = entry %}
-                    {% endif %}
+                {% for chapter in chapters %}
 
                     {% if loop.first %}
                     <li><a href="#{{ chapter.slug }}" class="active">{{ chapter }}</a></li>
                     {% else %}
                     <li><a href="#{{ chapter.slug }}">{{ chapter }}</a></li>
                     {% endif %}
-                    {% endfor %}
+
+                {% endfor %}
                 </ul>
                 <!-- .chapter-list -->
 
                 <ul class="chapter-bullets sidebar-for-closed">
-                    {% for chapter in chapters %}
-
-                    {# bugfix for live preview #}
-                    {% if craft.request.isLivePreview and chapter.id == entry.id %}
-                        {% set chapter = entry %}
-                    {% endif %}
+                {% for chapter in chapters %}
 
                     {% if loop.first %}
                     <li><a href="#{{ chapter.slug }}" class="active"></a></li>
                     {% else %}
                     <li><a href="#{{ chapter.slug }}"></a></li>
                     {% endif %}
-                    {% endfor %}
+
+                {% endfor %}
                 </ul>
                 <!-- .chatper-bullets -->
             </div>
@@ -60,11 +52,6 @@
         <main class="chapter-content">
             <article class="chapter-article">
             {% for chapter in chapters %}
-
-                {# bugfix for live preview #}
-                {% if craft.request.isLivePreview and chapter.id == entry.id %}
-                    {% set chapter = entry %}
-                {% endif %}
 
                 <section class="chapter" id="{{ chapter.slug }}">
                     <div class="text">
