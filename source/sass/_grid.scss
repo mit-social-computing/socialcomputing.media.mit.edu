@@ -1,0 +1,29 @@
+.grid {
+    width: 100%;
+    max-width: 790px;
+    margin: rems($base) auto;
+    text-align: justify;
+    font-size: 0;
+
+    &:after {
+        content: '';
+        display: inline-block;
+        width: 100%;
+    }
+}
+
+.grid-item,
+.grid-spacer {
+    display: inline-block;
+    width: 100%;
+
+    @include mq($screen-min) {
+        width: (100% / 3.1);
+    }
+}
+
+.grid-item {
+    vertical-align: top;
+    margin-bottom: rems($base);
+    padding: 0 2px;
+}

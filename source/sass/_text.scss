@@ -114,6 +114,18 @@
             font-weight: 500;
         }
     }
+
+    &.text-body--collapse {
+        > * {
+            margin-top: 0;
+            margin-bottom: 0;
+        }
+    }
+}
+
+.text-title.text-title--plain {
+    font-family: inherit;
+    @include fontsize(( small: 20, medium: 20 ));
 }
 
 .text-scroll {

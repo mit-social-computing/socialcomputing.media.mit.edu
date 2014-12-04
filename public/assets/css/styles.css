@@ -767,20 +767,21 @@ ol {
 /* line 75, ../../../source/sass/_base.scss */
 img {
   max-width: 100%;
+  border: none;
 }
 
-/* line 79, ../../../source/sass/_base.scss */
+/* line 80, ../../../source/sass/_base.scss */
 b,
 strong {
   font-weight: 400;
 }
 
-/* line 84, ../../../source/sass/_base.scss */
+/* line 85, ../../../source/sass/_base.scss */
 table {
   width: 100%;
 }
 
-/* line 88, ../../../source/sass/_base.scss */
+/* line 89, ../../../source/sass/_base.scss */
 address {
   font-style: normal;
 }
@@ -1829,6 +1830,28 @@ h1.nav-logo > a:hover {
   background-color: #e0e0e0;
 }
 
+/* line 27, ../../../source/sass/_box.scss */
+.box--wavy {
+  position: relative;
+  padding-top: 100%;
+}
+/* line 31, ../../../source/sass/_box.scss */
+.box--wavy > img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 1px;
+}
+/* line 38, ../../../source/sass/_box.scss */
+.box--wavy > svg {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  fill: white;
+}
+
 /* line 4, ../../../source/sass/_text.scss */
 .text--separator:after {
   content: url(/assets/img/long-line-divider.png);
@@ -1970,17 +1993,36 @@ h1.nav-logo > a:hover {
   content: counter(counter) " ";
   font-weight: 500;
 }
-
 /* line 119, ../../../source/sass/_text.scss */
+.text-body.text-body--collapse > * {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+/* line 126, ../../../source/sass/_text.scss */
+.text-title.text-title--plain {
+  font-family: inherit;
+  font-size: 20px;
+  font-size: 1.25rem;
+}
+@media only screen and (min-width: 33.625rem) {
+  /* line 126, ../../../source/sass/_text.scss */
+  .text-title.text-title--plain {
+    font-size: 20px;
+    font-size: 1.25rem;
+  }
+}
+
+/* line 131, ../../../source/sass/_text.scss */
 .text-scroll {
   overflow-y: scroll;
   max-height: 258px;
 }
-/* line 123, ../../../source/sass/_text.scss */
+/* line 135, ../../../source/sass/_text.scss */
 .text-scroll::-webkit-scrollbar {
   width: 25px;
 }
-/* line 127, ../../../source/sass/_text.scss */
+/* line 139, ../../../source/sass/_text.scss */
 .text-scroll::-webkit-scrollbar-track {
   background-color: #d2d1d1;
   border-left: 5px solid transparent;
@@ -1988,19 +2030,19 @@ h1.nav-logo > a:hover {
   background-clip: padding-box;
   margin: 1.1875rem 0 1.1875rem;
 }
-/* line 135, ../../../source/sass/_text.scss */
+/* line 147, ../../../source/sass/_text.scss */
 .text-scroll::-webkit-scrollbar-thumb {
   background-color: #d175a1;
   border-left: 5px solid transparent;
   border-right: 5px solid transparent;
   background-clip: padding-box;
 }
-/* line 141, ../../../source/sass/_text.scss */
+/* line 153, ../../../source/sass/_text.scss */
 .text-scroll::-webkit-scrollbar-thumb:hover {
   background-color: rgba(209, 117, 161, 0.75);
 }
 
-/* line 148, ../../../source/sass/_text.scss */
+/* line 160, ../../../source/sass/_text.scss */
 .text-title {
   font-weight: 200;
   font-size: 25px;
@@ -2010,26 +2052,26 @@ h1.nav-logo > a:hover {
   color: #333;
 }
 @media only screen and (min-width: 33.625rem) {
-  /* line 148, ../../../source/sass/_text.scss */
+  /* line 160, ../../../source/sass/_text.scss */
   .text-title {
     font-size: 30px;
     font-size: 1.875rem;
   }
 }
-/* line 155, ../../../source/sass/_text.scss */
+/* line 167, ../../../source/sass/_text.scss */
 .text-title + p {
   margin-top: 0;
 }
-/* line 159, ../../../source/sass/_text.scss */
+/* line 171, ../../../source/sass/_text.scss */
 .text-title > a {
   text-decoration: none;
   color: #333;
 }
-/* line 163, ../../../source/sass/_text.scss */
+/* line 175, ../../../source/sass/_text.scss */
 .text-title > a:hover {
   color: #d175a1;
 }
-/* line 168, ../../../source/sass/_text.scss */
+/* line 180, ../../../source/sass/_text.scss */
 .text-title.text-title--lowkey {
   font-size: 17.5px;
   font-size: 1.09375rem;
@@ -2038,18 +2080,18 @@ h1.nav-logo > a:hover {
   -webkit-font-smoothing: antialiased;
 }
 @media only screen and (min-width: 33.625rem) {
-  /* line 168, ../../../source/sass/_text.scss */
+  /* line 180, ../../../source/sass/_text.scss */
   .text-title.text-title--lowkey {
     font-size: 16px;
     font-size: 1rem;
   }
 }
 
-/* line 177, ../../../source/sass/_text.scss */
+/* line 189, ../../../source/sass/_text.scss */
 .text-header > .text-title {
   margin-bottom: 0;
 }
-/* line 181, ../../../source/sass/_text.scss */
+/* line 193, ../../../source/sass/_text.scss */
 .text-header:after {
   content: url(/assets/img/long-line-divider.png);
   display: block;
@@ -2644,4 +2686,40 @@ input.input-gray::-webkit-input-placeholder {
   background-size: 13px 12px;
   background-position: 95% center;
   background-repeat: no-repeat;
+}
+
+/* line 1, ../../../source/sass/_grid.scss */
+.grid {
+  width: 100%;
+  max-width: 790px;
+  margin: 1.1875rem auto;
+  text-align: justify;
+  font-size: 0;
+}
+/* line 8, ../../../source/sass/_grid.scss */
+.grid:after {
+  content: '';
+  display: inline-block;
+  width: 100%;
+}
+
+/* line 15, ../../../source/sass/_grid.scss */
+.grid-item,
+.grid-spacer {
+  display: inline-block;
+  width: 100%;
+}
+@media only screen and (min-width: 33.625rem) {
+  /* line 15, ../../../source/sass/_grid.scss */
+  .grid-item,
+  .grid-spacer {
+    width: 32.25806%;
+  }
+}
+
+/* line 25, ../../../source/sass/_grid.scss */
+.grid-item {
+  vertical-align: top;
+  margin-bottom: 1.1875rem;
+  padding: 0 2px;
 }

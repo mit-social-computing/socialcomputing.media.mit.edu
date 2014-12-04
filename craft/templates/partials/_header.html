@@ -13,7 +13,7 @@
     <body>
     {% endif %}
     {% set slug = craft.request.firstSegment ? craft.request.firstSegment : craft.entries.type('about').first().slug %}
-    {% if craft.sections.getSectionByHandle(slug).type != 'channel' %}
+    {% if slug != 'blog' %}
         <header class="l-highlight l-fixed-top" id="siteHeader">
             <!--<div class="l-max">-->
                 <div class="l-vpadding">

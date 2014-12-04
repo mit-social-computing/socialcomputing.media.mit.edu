@@ -16,3 +16,29 @@
 .box--gray {
     background-color: $lightestgray;
 }
+
+.box--wavy-border {
+}
+//.box--wavy > img {
+//    -webkit-mask-box-image: url(/assets/img/thumbnailMask.svg);
+//    mask : url(/assets/img/thumbnailMask.svg#mask);
+//}
+
+.box--wavy {
+    position: relative;
+    padding-top: 100%;
+
+    > img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        padding: 1px;
+    }
+
+    > svg {
+        position: absolute;
+        top: 0; right: 0;
+        bottom: 0; left: 0;
+        fill : white;
+    }
+}

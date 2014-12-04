@@ -1,3 +1,42 @@
 {% include 'partials/_header' %}
 
+<div class="l-max scrollbar">
+    <div class="l-content" id="content">
+        <div class="grid">
+            {% for user in users %}
+            <div class="grid-item">
+                <div class="box--wavy">
+
+                {% if user.photoUrl %}
+                    <img src="{{ user.getPhotoUrl('537') }}">
+                    {% else %}
+                    <img src="/assets/img/temp/people.jpg">
+                {% endif %}
+
+                {% include 'svg/thumbnailBorder.svg' %}
+                </div>
+                <div class="text">
+                    <div class="text-body text-body--collapse medium">
+                        <h3 class="text-title text-title--plain">{{ user.fullName|lower }}</h3>
+                        <p>{{ user.position }}</p>
+                        {% for contact in user.contactLink %}
+                            {% if contact.type == 'linkBlock' %}
+                            <a href="{{ contact.linkUrl }}">{{ contact.linkText }}</a>
+                            {% elseif contact.type == 'twitterBlock' %}
+                            <a href="http://twitter.com/{{ contact.twitterHandle }}">twitter</a>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+            <div class="grid-spacer"></div>
+        </div>
+        <!-- .grid -->
+    </div>
+    <!-- .l-content -->
+</div>
+<!-- .l-max -->
+
+
 {% include 'partials/_footer' %}
