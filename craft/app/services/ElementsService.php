@@ -1197,8 +1197,23 @@ class ElementsService extends BaseApplicationComponent
 							}
 						}
 
-						// Set a valid/unique slug and URI
+						// Capture the original slug, in case it's entirely composed of invalid characters
+						$originalSlug = $localizedElement->slug;
+
+						// Clean up the slug
 						ElementHelper::setValidSlug($localizedElement);
+
+						// If the slug was entirely composed of invalid characters, it will be blank now.
+						if ($originalSlug && !$localizedElement->slug)
+						{
+							$localizedElement->slug = $originalSlug;
+							$element->addError('slug', Craft::t('{attribute} is invalid.', array('attribute' => Craft::t('Slug'))));
+
+							// Don't bother with any of the other locales
+							$success = false;
+							break;
+						}
+
 						ElementHelper::setUniqueUri($localizedElement);
 
 						$localeRecord->slug = $localizedElement->slug;
@@ -1766,6 +1781,7 @@ class ElementsService extends BaseApplicationComponent
 							if ($refTagsByThing)
 							{
 								$criteria = craft()->elements->getCriteria($elementTypeHandle);
+								$criteria->status = null;
 								$criteria->$thing = array_keys($refTagsByThing);
 								$elements = $criteria->find();
 

@@ -769,11 +769,9 @@ body.rtl .element.loading:after { left: 3px; }
 
 .elements .tableview td { position: relative; }
 
-.elements .tableview .move { display: block; font-size: 11px; }
-body.ltr .elements .tableview .move { float: left; }
-body.rtl .elements .tableview .move { float: right; }
-body.ltr .elements .tableview .move { margin: 5px 0 0 -14px ; }
-body.rtl .elements .tableview .move { margin: 5px -14px 0 0 ; }
+.elements .tableview .move { display: block; position: absolute; top: 50%; font-size: 11px; }
+body.ltr .elements .tableview .move { margin: -13px 0 0 -14px ; }
+body.rtl .elements .tableview .move { margin: -13px -14px 0 0 ; }
 
 /* thumbs views */
 body.ltr .elements .thumbsview { margin: -14px 0 0 -14px ; }
