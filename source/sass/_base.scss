@@ -21,8 +21,9 @@ body {
     color: $gray;
     @include fontsize($font-medium);
     font-family: "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
-    font-weight: 100;
-    letter-spacing: 0.8px;
+    letter-spacing: 0.5px;
+    font-weight: 200;
+    @include antialiased;
 
     &.is-flexpage {
         height: 100%;

@@ -16,12 +16,16 @@ body.lightbox-open {
     @include transition(background-color, 150ms);
 
     .logo {
-        opacity: 0.1;
-        width: 33px;
+        display: none;
     }
 
     @include mq($screen-min) {
         background-color: white;
+
+        .logo {
+            opacity: 0.1;
+            width: 33px;
+        }
     }
 }
 
@@ -40,9 +44,16 @@ body.lightbox-open {
 
 .lightbox-body {
     height: 100%;
-    padding: 75px;
+    padding: 35px 0;
     opacity: 0;
     @include transition(opacity 150ms ease-out);
+
+    overflow-y: scroll;
+
+    @include mq($screen-min) {
+        overflow: auto;
+        padding: 75px;
+    }
 
     &.is-visible {
         opacity: 1;
@@ -76,17 +87,18 @@ body.lightbox-open {
 
     background-color: black;
     //background-image: url("/assets/css/img/loader.gif") !important;
+
     background-position: center center;
     background-repeat: no-repeat;
 
-    @include mq($screen-min) {
-        background-color: white;
-    }
-
-    opacity: 0;
-    @include transition(opacity 250ms ease);
     &.active {
         opacity: 1;
+    }
+
+    @include mq($screen-min) {
+        opacity: 0;
+        @include transition(opacity 250ms ease);
+        background-color: white;
     }
 }
 
@@ -105,12 +117,20 @@ body.lightbox-open {
     max-height: 100%;
 }
 
+.lightbox-body .lb-mask {
+    display: none;
+
+    @include mq($screen-min) {
+        display: block;
+    }
+}
+
 
 .lb-caption {
     max-width: 640px;
     width: 100%;
-    position: absolute;
-    bottom: 41px;
+
+    padding: 15px;
 
     color: white;
     @include transition(opacity 150ms ease);
@@ -121,10 +141,12 @@ body.lightbox-open {
 
     p {
         margin-bottom: 0;
-        font-weight: 100;
     }
 
     @include mq($screen-min) {
+        position: absolute;
+        bottom: 41px;
+        padding: 0;
 
         p {
             font-weight: 300;

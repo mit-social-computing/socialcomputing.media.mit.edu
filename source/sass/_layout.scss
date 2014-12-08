@@ -71,8 +71,13 @@
 }
 
 .l-fixed--upperright {
-    top: 25px;
-    right: 25px;
+    top: 7px;
+    right: 7px;
+
+    @include mq($screen-min) {
+        top: 25px;
+        right: 25px;
+    }
 }
 
 .l-fixed--lowerleft {
@@ -238,4 +243,8 @@
 
 .l-slideshow {
     position: relative;
+}
+
+.l-fixbody {
+    overflow: hidden;
 }
