@@ -2827,20 +2827,25 @@ input.input-gray {
   position: relative;
   display: block;
   width: 100%;
+  max-width: 256px;
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
   padding: 0.625rem 0.5rem;
   margin-bottom: 1.1875rem;
   border: none;
-  background-color: #d2d1d1;
+  background-color: #e0e0e0;
 }
-/* line 12, ../../../source/sass/_forms.scss */
+/* line 14, ../../../source/sass/_forms.scss */
 input.input-gray::-webkit-input-placeholder {
   color: #333;
 }
+/* line 18, ../../../source/sass/_forms.scss */
+input.input-gray:focus {
+  outline: none;
+}
 
-/* line 17, ../../../source/sass/_forms.scss */
+/* line 24, ../../../source/sass/_forms.scss */
 .input-gray[type="search"] {
   background-image: url(/assets/img/search-icon.png);
   background-size: 13px 14px;
@@ -2848,12 +2853,39 @@ input.input-gray::-webkit-input-placeholder {
   background-repeat: no-repeat;
 }
 
-/* line 24, ../../../source/sass/_forms.scss */
+/* line 31, ../../../source/sass/_forms.scss */
 .input-gray[type="email"] {
   background-image: url(/assets/img/envelope-icon.png);
   background-size: 13px 12px;
   background-position: 95% center;
   background-repeat: no-repeat;
+}
+
+/* line 38, ../../../source/sass/_forms.scss */
+.input-border {
+  position: relative;
+}
+/* line 41, ../../../source/sass/_forms.scss */
+.input-border:before, .input-border:after {
+  content: '';
+  display: block;
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 6px;
+  background-size: 256px 100%;
+  background-repeat: no-repeat;
+  pointer-events: none;
+}
+/* line 57, ../../../source/sass/_forms.scss */
+.input-border:before {
+  background-image: url(/assets/img/masks/input-top.png);
+  top: 0;
+}
+/* line 62, ../../../source/sass/_forms.scss */
+.input-border:after {
+  background-image: url(/assets/img/masks/input-bottom.png);
+  bottom: 0;
 }
 
 /* line 1, ../../../source/sass/_grid.scss */

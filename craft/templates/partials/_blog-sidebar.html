@@ -26,13 +26,23 @@
         <!-- .totals -->
 
         <form action="{{ url('blog/search') }}">
-            <input class="input-gray" name="q" placeholder="search blog" type="search">
+            <div class="input-border">
+                <input class="input-gray" name="q" placeholder="search blog" type="search">
+            </div>
         </form>
 
-        <form action="">
-            <input class="input-gray" placeholder="subscribe" type="email">
+        <form action="//mit.us9.list-manage.com/subscribe/post?u=9cde8c8439ca04bbe743061f7&amp;id=6c54aeb152" method="post">
+            <input type="hidden" name="b_9cde8c8439ca04bbe743061f7_6c54aeb152" tabindex="-1" value="">
+            <div class="input-border">
+                <input class="input-gray" placeholder="subscribe" type="email" value="" name="EMAIL">
+            </div>
         </form>
 
+        <a href="https://twitter.com/socialcomputing" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @socialcomputing</a>
+        <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
+    </div>
+    <!-- .sidebar-for-open -->
 </div>
 <!-- .blog-sidebar -->
 
