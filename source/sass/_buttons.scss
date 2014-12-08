@@ -27,6 +27,7 @@
     > span {
         position: relative;
         vertical-align: middle;
+        background-image: url(/assets/img/masks/hamburger-middle.png);
         @include line;
 
         &:before,
@@ -39,10 +40,12 @@
 
         &:before {
             @include translateY( rems($button-size/5) );
+            background-image: url(/assets/img/masks/hamburger-top.png);
         }
 
         &:after {
             @include translateY( -(rems($button-size/5)) );
+            background-image: url(/assets/img/masks/hamburger-bottom.png);
         }
     }
 

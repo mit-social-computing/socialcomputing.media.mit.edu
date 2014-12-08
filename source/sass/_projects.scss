@@ -18,14 +18,6 @@
     position: relative;
     margin-bottom: 30px;
 
-    .project-slide {
-        opacity: 0;
-    }
-
-    .project-slide:not(:first-child) {
-        position: absolute;
-    }
-
     &.loaded .project-slide {
         position: relative;
         opacity: 1;
@@ -33,7 +25,6 @@
 
     .slick-list {
         @include perspective(400px);
-        //overflow: visible;
     }
 
     .slick-track {
@@ -49,30 +40,48 @@
         @include flexbox;
 
         @include transition(transform 150ms ease, opacity 250ms ease);
-        //@include translateZ(-100px);
         @include translateZ(-100px);
 
-        > img {
-            margin: auto;
-            box-shadow: 20px 0px 7px -10px rgba(0, 0, 0, 0), -20px 0px 7px -10px rgba(0, 0, 0, 0);
-        }
     }
 
     .slick-slide.slick-center {
         z-index: 300;
         @include translateZ(0px);
 
-        > img {
+        .project-image {
             box-shadow: 12px 0px 15px -10px rgba(0, 0, 0, 0.15), -12px 0px 15px -10px rgba(0, 0, 0, 0.15);
             @include transition(box-shadow 150ms ease);
         }
     }
 
-    .slick-center ~ .slick-slide {
-        //@include translate3d(-70%,0,-60px);
-    }
-
     .slick-dots {
         bottom: -25px;
     }
+}
+
+.project-slide {
+    opacity: 0;
+}
+
+.project-slide:not(:first-child) {
+    position: absolute;
+}
+
+.project-wrapper {
+    display: inline-block;
+    margin: 0 auto;
+    position: relative;
+}
+
+.project-image {
+    margin: auto;
+    box-shadow: 20px 0px 7px -10px rgba(0, 0, 0, 0), -20px 0px 7px -10px rgba(0, 0, 0, 0);
+}
+
+.project-mask {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
 }

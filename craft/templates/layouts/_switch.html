@@ -16,7 +16,12 @@
                         <section class="project-gallery">
                         {% if project.projectSlideshow|length %}
                         {% for image in project.projectSlideshow %}
-                            <div class="project-slide"><img src="{{ image.getUrl('project') }}"></div>
+                            <div class="project-slide">
+                                <div class="project-wrapper">
+                                    <img class="project-image" src="{{ image.getUrl('project') }}">
+                                    <img class="project-mask" src="/assets/img/masks/image_lg.png">
+                                </div>
+                            </div>
                         {% endfor %}
                         {% endif %}
                         </section>

@@ -44,51 +44,36 @@ body.lightbox-open {
     opacity: 0;
     @include transition(opacity 150ms ease-out);
 
-    // @include mq($screen-min) {
-    //     padding: 55px;
-    // }
-
     &.is-visible {
         opacity: 1;
     }
 
     .slick-slider {
         margin: auto;
-        //height: calc(100% - 110px);
     }
 
     .slick-list,
     .slick-track {
-        height: 100%
+        height: 100%;
     }
 
     .slick-initialized .slick-slide {
         margin: auto;
-        position: relative
+        position: relative;
     }
 
     .slick-prev,
     .slick-next {
         height: auto;
-        width: auto
+        width: auto;
     }
-}
-
-.lb-content > img {
-    height: auto;
-    width: auto;
-    max-height: 100%;
-
-    position: absolute;
-    top: 0;
-    right: 0;
-    left: 0;
-    bottom: 0;
-    margin: auto;
 }
 
 .lb-content {
     height: 100%;
+    text-align: center;
+    position: relative;
+
     background-color: black;
     //background-image: url("/assets/css/img/loader.gif") !important;
     background-position: center center;
@@ -97,7 +82,29 @@ body.lightbox-open {
     @include mq($screen-min) {
         background-color: white;
     }
+
+    opacity: 0;
+    @include transition(opacity 250ms ease);
+    &.active {
+        opacity: 1;
+    }
 }
+
+
+.lb-img,
+.lb-mask {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+}
+
+.lb-img {
+    max-height: 100%;
+}
+
 
 .lb-caption {
     max-width: 640px;
@@ -106,6 +113,11 @@ body.lightbox-open {
     bottom: 41px;
 
     color: white;
+    @include transition(opacity 150ms ease);
+
+    &.fade-out {
+        opacity: 0;
+    }
 
     p {
         margin-bottom: 0;

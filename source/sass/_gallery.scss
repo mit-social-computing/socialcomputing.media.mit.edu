@@ -3,7 +3,24 @@
 }
 
 .gallery-item {
-    > img {
+    position: relative;
+
+    .thumb {
+        opacity: 0;
         min-width: 138px;
+        height: 100%;
+
+        &.loaded {
+            opacity: 1;
+            @include transition(opacity 250ms ease);
+        }
+    }
+
+    .mask {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
     }
 }

@@ -18091,9 +18091,22 @@ $(function() {
 
     function resizeLightbox() {
         var availableHeight = $('.lightbox-body').height(),
-            captionHeight = $('#lbCaption').height()
+            captionHeight = $('#lbCaption').height(),
+            $current, dims = []
 
         $('#slideshow').height(availableHeight - captionHeight)
+
+        if ( arguments[0].type === 'resize' ) {
+            $current = $('.slick-active')
+        } else if ( arguments[0] === 0 ) {
+            $current = $('.slick-slide').eq(0)
+        } else {
+            $current = arguments[0]
+        }
+
+        dims[0] = $current.find('.lb-img').width()
+        dims[1] = $current.find('.lb-img').height()
+        $current.find('.lb-mask').width(dims[0]).height(dims[1])
     }
 
     function close() {
@@ -18118,15 +18131,28 @@ $(function() {
         var caption = $(this.$slides[this.currentSlide]).find('img').attr('alt')
         $('#lbCaption').find('.text-body').html(caption).toggleClass('large', $('#lbCaption').height() <= 27)
 
-        $(window).on('resize', lazyResize)
-        resizeLightbox()
+        $(window).on('resize', resizeLightbox)
+        resizeLightbox(0)
+        $(this.$slides[this.currentSlide]).find('.lb-content').addClass('active')
     }
 
     function onBeforeChange(Slick, current, upcoming) {
-        var caption = $(Slick.$slides[upcoming]).find('img').attr('alt')
-        $('#lbCaption').find('.text-body').html(caption).toggleClass('large', $('#lbCaption').height() <= 27)
+        /*jshint validthis:true*/
+        $(Slick.$slides[current]).find('.lb-content').removeClass('active')
+        $('#lbCaption').addClass('fade-out')
+    }
 
-        resizeLightbox()
+    function onAfterChange(Slick, current) {
+        var caption = $(Slick.$slides[current]).find('img').attr('alt')
+        $('#lbCaption')
+            .find('.text-body')
+                .html(caption).toggleClass('large', $('#lbCaption').height() <= 27)
+            .end()
+                .removeClass('fade-out')
+
+        resizeLightbox( $(Slick.$slides[current]) )
+
+        $(Slick.$slides[current]).find('.lb-content').addClass('active')
     }
 
     options = {
@@ -18146,11 +18172,12 @@ $(function() {
             nextArrow : '<button class="btn btn--right">Next</button>',
             prevArrow : '<button class="btn btn--left">Previous</button>',
             fade : true,
-            speed : 500,
+            speed : 150,
             lazyLoad : 'ondemand',
             slidesToShow : 1,
             onInit : slickInit,
             onBeforeChange : onBeforeChange,
+            onAfterChange : onAfterChange,
             responsive : [
                 {
                     breakpoint : 480,
@@ -18160,6 +18187,7 @@ $(function() {
                         fade : false,
                         onInit : slickInit,
                         onBeforeChange : onBeforeChange,
+                        onAfterChange : onAfterChange,
                         slidesToShow : 1,
                         lazyLoad : 'ondemand'
                     }
@@ -18186,13 +18214,19 @@ $(function() {
                 // TODO check responsive breakpoints and lazyLoad settings
 
                 var $d = $('<div />').addClass(options.slideClass),
+                    $wrapper = $('<div />').attr('class', 'lb-wrapper'),
                     $i = $('<img />').attr({
                         'data-lazy': el.src,
-                        'alt' : el.alt
+                        'alt' : el.alt,
+                        'class' : 'lb-img'
+                    }),
+                    $m = $('<img />').attr({
+                        'src': '/assets/img/masks/white_big.png',
+                        'class': 'lb-mask'
                     })
 
                 $('#lbCaption').html(el.alt)
-                $d.append($i)
+                $d.append($i).append($m)
                 slides.push($('<div/>').append($d))
             })
 

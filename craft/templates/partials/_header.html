@@ -15,104 +15,101 @@
     {% set slug = craft.request.firstSegment ? craft.request.firstSegment : craft.entries.type('about').first().slug %}
     {% if slug != 'blog' %}
         <header class="l-highlight l-fixed-top" id="siteHeader">
-            <!--<div class="l-max">-->
-                <div class="l-vpadding">
-                    <div class="l-contain">
-                        <div class="l-left">
-                            <h1 class="nav-logo"><a href="{{ siteUrl }}">Social Computing</a></h1>
-                        </div>
-                        <!-- .l-left -->
-                        <div class="l-right">
-                            <button id="menu" class="btn btn-menu" type="button" role="button" aria-label="Toggle Navigation"><span></span></button>
+            <div class="l-vpadding">
+                <div class="l-contain">
+                    <div class="l-left">
+                        <h1 class="nav-logo"><a href="{{ siteUrl }}">Social Computing</a></h1>
+                    </div>
+                    <!-- .l-left -->
+                    <div class="l-right">
+                        <button id="menu" class="btn btn-menu" type="button" role="button" aria-label="Toggle Navigation"><span></span></button>
 
-                            {% set s1 = craft.request.firstSegment %}
-                            {% if navsub is defined %}
-                            <nav id="mainNav" class="nav nav--lower">
-                            {% else %}
-                            <nav id="mainNav" class="nav">
-                            {% endif %}
-                                <h2 class="visuallyhidden">Navigation Bar</h2>
-                                <ul class="nav-list">
-                                {% for nav in craft.entries.section('navigationMenu') %}
-                                    {% set s = craft.sections.getSectionByHandle(nav.slug) %}
-                                    {# structures with nested children #}
-                                    {% if s is not empty and s.maxLevels > 1 %}
+                        {% set s1 = craft.request.firstSegment %}
+                        {% if navsub is defined %}
+                        <nav id="mainNav" class="nav nav--lower">
+                        {% else %}
+                        <nav id="mainNav" class="nav">
+                        {% endif %}
+                            <h2 class="visuallyhidden">Navigation Bar</h2>
+                            <ul class="nav-list">
+                            {% for nav in craft.entries.section('navigationMenu') %}
+                                {% set s = craft.sections.getSectionByHandle(nav.slug) %}
+                                {# structures with nested children #}
+                                {% if s is not empty and s.maxLevels > 1 %}
 
-                                        {% if s1 == s|lower or ( s.isHomepage() and s1 is empty ) %}
+                                    {% if s1 == s|lower or ( s.isHomepage() and s1 is empty ) %}
 
-                                        <li class="nav-item" data-dropdown="is-closed">
-                                            <a href="{{ url(nav.slug) }}" class="active">{{ s }}</a>
+                                    <li class="nav-item" data-dropdown="is-closed">
+                                        <a href="{{ url(nav.slug) }}" class="active">{{ s }}</a>
 
-                                        {% else %}
-
-                                        <li class="nav-item" data-dropdown="is-closed">
-                                            <a href="{{ url(nav.slug) }}">{{ s }}</a>
-
-                                        {% endif %}
-
-                                        
-                                        {% set children = craft.entries.section(s).level(1) %}
-                                        <div class="nav-dropdown">
-                                            <ul class="nav-list">
-                                            {% for child in children %}
-                                            {% set s2 = craft.request.getSegment(2) %}
-                                            <li class="nav-item">
-                                                <a href="{{ url(child.url) }}"{% if s2 == child|lower %} class="active"{% endif %}>{{ child }}</a>
-                                            </li>
-                                            {% endfor %}
-                                            </ul>
-                                            <!-- .nav-stacked -->
-                                        </div>
-                                        <!-- .nav-dropdown -->
-                                    </li>
-                                    {# one level structures, singles, and channels #}
                                     {% else %}
-                                    <li class="nav-item">
 
-                                        {% if s1 == nav|lower or ( s is not empty and s.isHomepage() and s1 is empty ) %}
-                                        <a href="{{ url(nav.slug) }}" class="active">{{ nav }}</a>
-                                        {% else %}
-                                        <a href="{{ url(nav.slug) }}">{{ nav }}</a>
-                                        {% endif %}
+                                    <li class="nav-item" data-dropdown="is-closed">
+                                        <a href="{{ url(nav.slug) }}">{{ s }}</a>
 
-                                    </li>
                                     {% endif %}
+
+                                    
+                                    {% set children = craft.entries.section(s).level(1) %}
+                                    <div class="nav-dropdown">
+                                        <ul class="nav-list">
+                                        {% for child in children %}
+                                        {% set s2 = craft.request.getSegment(2) %}
+                                        <li class="nav-item">
+                                            <a href="{{ url(child.url) }}"{% if s2 == child|lower %} class="active"{% endif %}>{{ child }}</a>
+                                        </li>
+                                        {% endfor %}
+                                        </ul>
+                                        <!-- .nav-stacked -->
+                                    </div>
+                                    <!-- .nav-dropdown -->
+                                </li>
+                                {# one level structures, singles, and channels #}
+                                {% else %}
+                                <li class="nav-item">
+
+                                    {% if s1 == nav|lower or ( s is not empty and s.isHomepage() and s1 is empty ) %}
+                                    <a href="{{ url(nav.slug) }}" class="active">{{ nav }}</a>
+                                    {% else %}
+                                    <a href="{{ url(nav.slug) }}">{{ nav }}</a>
+                                    {% endif %}
+
+                                </li>
+                                {% endif %}
+                            {% endfor %}
+                            </ul>
+                            <!-- .stacked-nav -->
+                            <div class="box box--gray centered only-small">
+                                <h3 class="box-title">recent</h3>
+                                <ul class="box-list">
+                                {% set recentItems = craft.entries.type('about').first().recentItems %}
+                                {% for slide in recentItems %}
+
+                                    {% if slide.siteEntry.first()|length %}
+                                    <li><a href="{{ slide.siteEntry.first().getUrl() }}">{{ slide.caption }}</a></li>
+                                    {% elseif slide.linkUrl %}
+                                    <li><a href="{{ slide.linkUrl }}">{{ slide.caption }}</a></li>
+                                    {% else %}
+                                    <li>{{ slide.caption }}</li>
+                                    {% endif %}
+
                                 {% endfor %}
                                 </ul>
-                                <!-- .stacked-nav -->
-                                <div class="box box--gray centered only-small">
-                                    <h3 class="box-title">recent</h3>
-                                    <ul class="box-list">
-                                    {% set recentItems = craft.entries.type('about').first().recentItems %}
-                                    {% for slide in recentItems %}
+                            </div>
+                        </nav>
+                        <!-- .nav-narrow -->
 
-                                        {% if slide.siteEntry.first()|length %}
-                                        <li><a href="{{ slide.siteEntry.first().getUrl() }}">{{ slide.caption }}</a></li>
-                                        {% elseif slide.linkUrl %}
-                                        <li><a href="{{ slide.linkUrl }}">{{ slide.caption }}</a></li>
-                                        {% else %}
-                                        <li>{{ slide.caption }}</li>
-                                        {% endif %}
-
-                                    {% endfor %}
-                                    </ul>
-                                </div>
-                            </nav>
-                            <!-- .nav-narrow -->
-
-                        </div>
-                        <!-- .l-right -->
-                        {% if navsub is defined %}
-                        <div class="l-clear only-small">
-                            <span class="nav-subtitle">{{ navsub }}</span>
-                        </div>
-                        {% endif %}
                     </div>
-                    <!-- .l-contain -->
+                    <!-- .l-right -->
+                    {% if navsub is defined %}
+                    <div class="l-clear only-small">
+                        <span class="nav-subtitle">{{ navsub }}</span>
+                    </div>
+                    {% endif %}
                 </div>
-                <!-- .l-vpadding -->
-            <!--</div>-->
-            <!-- .l-max -->
+                <!-- .l-contain -->
+            </div>
+            <!-- .l-vpadding -->
         </header>
         <!-- .l-highlight -->
     {% endif %}

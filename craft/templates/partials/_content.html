@@ -18,8 +18,10 @@
 
             <div class="gallery-item">
                 <a href="#" class="lightbox">
-                    <img src="{{ asset.getUrl() }}" alt="{{ asset.caption }}">
+                    <img class="thumb" src="{{ asset.getUrl() }}" alt="{{ asset.caption }}">
+                    <img class="mask" src="/assets/img/masks/image_gallery.png" alt="" />
                 </a>
+
             </div>
         {% endfor %}
         </div>

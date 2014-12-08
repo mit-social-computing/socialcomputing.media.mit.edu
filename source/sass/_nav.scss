@@ -28,12 +28,27 @@
 
 .nav-side {
     position: fixed;
-    overflow-y: scroll;
+    //overflow-y: scroll;
 
     padding: rems($base);
     height: 100%;
 
-    background-color: $lightestgray;
+    background-color: $offwhite;
+
+    &:after {
+        content: '';
+        display: block;
+
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 100%;
+        width: 18px;
+
+        background-image: url(/assets/img/masks/sidenav.png);
+        background-size: 100%;
+        background-repeat: no-repeat;
+    }
 }
 
 .nav-dropdown {

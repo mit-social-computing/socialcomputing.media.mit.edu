@@ -1,12 +1,47 @@
 .l-highlight {
     background-color: $darkgray;
     padding: 0 rems($base);
+    position: relative;
 
     @include transition(background-color 250ms ease-in);
+
+    &:after {
+        content: '';
+        display: block;
+        height: 15px;
+
+        background-image: url(/assets/img/masks/header.png);
+        background-size: 100%;
+        background-repeat: no-repeat;
+
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+
+        z-index: -1;
+    }
 }
 
 .l-highlight-offwhite {
     background-color: $offwhite;
+    position: relative;
+
+    &:before {
+        content: '';
+        display: block;
+        height: 10px;
+
+        background-image: url(/assets/img/masks/home);
+        background-size: 100%;
+        background-repeat: no-repeat;
+        background-position: center bottom;
+
+        position: absolute;
+        bottom: 100%;
+        left: 0;
+        right: 0;
+    }
 }
 
 .l-fixed-top {

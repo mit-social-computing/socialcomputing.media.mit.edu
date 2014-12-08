@@ -45,14 +45,16 @@
                     <div class="l-1of3">
                         <aside id="recentContainer">
                             <h2 class="flush">recent</h2>
-                            <div class="box--wavy box--gray">
+                            <div class="box--gray box--wavybottom">
+                                <div class="box--wavy-topbottom">
                                 <div class="text" id="newsCaption">
                                     <div class="text-body padded">{{ entry.recentItems.first().caption }}</div>
                                 </div>
                                 <!-- .text#newsCaption -->
+                                </div>
                                 <div id="recentNews" class="ss--small">
+                                {% for slide in entry.recentItems %}
 
-                                    {% for slide in entry.recentItems %}
                                     {% set i = slide.image.first() %}
                                     <article class="ss-slide-small">
                                         {% if slide.linkUrl %}
@@ -67,8 +69,8 @@
                                         </a>
                                         {% endif %}
                                     </article>
-                                    {% endfor %}
 
+                                {% endfor %}
                                 </div>
                                 <!-- .ss-small#recentNews -->
                             </div>

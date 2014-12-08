@@ -10,15 +10,17 @@
 }
 
 // MIXINS
-$button-size: 38;
+$button-size: 22;
 $transition: .3s all linear;
 
 @mixin line {
     display: inline-block;
     width: rems($button-size);
-    height: 3px;
-    background: white;
+    height: 4px;
     transition: $transition;
+
+    background-repeat: no-repeat;
+    background-size: 100%;
 }
 
 @mixin fontsize($size-map) {
