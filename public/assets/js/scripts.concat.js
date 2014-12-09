@@ -13004,8 +13004,7 @@ $(function() {
     var $tpl, options,lazyResize
 
     function captionSetup() {
-        $('<div/>', {'class': 'text'}).html($('<div/>', {'class': 'text-body'}))
-            .appendTo('#lbCaptionWide')
+        $('#lbCaptionWide').html($('<div/>', {'class': 'text'}).html($('<div/>', {'class': 'text-body'})))
     }
 
     function keyHandler(e) {
@@ -13115,11 +13114,6 @@ $(function() {
                         arrows: false,
                         dots: false,
                         fade : false,
-                        onInit : slickInit,
-                        onBeforeChange : onBeforeChange,
-                        onAfterChange : onAfterChange,
-                        slidesToShow : 1,
-                        lazyLoad : 'ondemand'
                     }
                 }
             ]
@@ -13159,7 +13153,7 @@ $(function() {
                         $('<div/>', {'class' : 'text-body'}).html(el.alt) ) )
 
                 $('#lbCaptionWide').html(el.alt)
-                $d.append($i, $m, $narrowCaption)
+                $d.append($i, $m)
                 slides.push($('<div/>').append($d))
             })
 

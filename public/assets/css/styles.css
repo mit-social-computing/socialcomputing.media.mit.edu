@@ -2652,17 +2652,6 @@ body.lightbox-open {
   height: 100%;
   text-align: center;
   position: relative;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -moz-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-direction: normal;
-  -webkit-box-orient: vertical;
-  -webkit-flex-direction: column;
-  -moz-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
   background-color: black;
   background-position: center center;
   background-repeat: no-repeat;
@@ -2686,7 +2675,6 @@ body.lightbox-open {
 
 @media only screen and (min-width: 33.625rem) {
   /* line 110, ../../../source/sass/_lightbox.scss */
-  .lb-img,
   .lb-mask {
     position: absolute;
     top: 0;
@@ -2697,37 +2685,29 @@ body.lightbox-open {
   }
 }
 
-/* line 122, ../../../source/sass/_lightbox.scss */
+/* line 121, ../../../source/sass/_lightbox.scss */
 .lb-img {
-  max-height: 100%;
-  margin: 0 auto;
-  -webkit-box-flex: 1;
-  -webkit-flex: 1;
-  -moz-box-flex: 1;
-  -moz-flex: 1;
-  -ms-flex: 1;
-  flex: 1;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  margin: auto;
 }
 
-/* line 128, ../../../source/sass/_lightbox.scss */
+/* line 130, ../../../source/sass/_lightbox.scss */
 .lightbox-body .lb-mask {
   display: none;
 }
 @media only screen and (min-width: 33.625rem) {
-  /* line 128, ../../../source/sass/_lightbox.scss */
+  /* line 130, ../../../source/sass/_lightbox.scss */
   .lightbox-body .lb-mask {
     display: block;
   }
 }
 
-/* line 137, ../../../source/sass/_lightbox.scss */
+/* line 139, ../../../source/sass/_lightbox.scss */
 .lb-caption {
-  -webkit-box-flex: 1;
-  -webkit-flex: 1;
-  -moz-box-flex: 1;
-  -moz-flex: 1;
-  -ms-flex: 1;
-  flex: 1;
   max-width: 640px;
   width: 100%;
   color: white;
@@ -2736,58 +2716,41 @@ body.lightbox-open {
   -webkit-transition: opacity 150ms ease;
   transition: opacity 150ms ease;
 }
-/* line 146, ../../../source/sass/_lightbox.scss */
+/* line 148, ../../../source/sass/_lightbox.scss */
 .lb-caption.fade-out {
   opacity: 0;
 }
-/* line 150, ../../../source/sass/_lightbox.scss */
-.lb-content .lb-caption {
-  bottom: 0;
-}
-@media only screen and (min-width: 33.625rem) {
-  /* line 150, ../../../source/sass/_lightbox.scss */
-  .lb-content .lb-caption {
-    display: none;
-  }
-}
-/* line 159, ../../../source/sass/_lightbox.scss */
+/* line 161, ../../../source/sass/_lightbox.scss */
 .lb-caption p {
   margin-bottom: 0;
 }
 @media only screen and (min-width: 33.625rem) {
-  /* line 137, ../../../source/sass/_lightbox.scss */
+  /* line 139, ../../../source/sass/_lightbox.scss */
   .lb-caption {
     position: absolute;
     bottom: 41px;
     padding: 0;
   }
-  /* line 168, ../../../source/sass/_lightbox.scss */
+  /* line 170, ../../../source/sass/_lightbox.scss */
   .lb-caption p {
     font-weight: 300;
     color: initial;
   }
 }
 
-/* line 175, ../../../source/sass/_lightbox.scss */
+/* line 177, ../../../source/sass/_lightbox.scss */
 #lbCaptionWide {
   padding: 15px;
-  display: none;
-  height: 0;
-}
-@media only screen and (min-width: 33.625rem) {
-  /* line 175, ../../../source/sass/_lightbox.scss */
-  #lbCaptionWide {
-    display: block;
-    height: auto;
-  }
+  display: block;
+  height: auto;
 }
 
-/* line 186, ../../../source/sass/_lightbox.scss */
+/* line 188, ../../../source/sass/_lightbox.scss */
 .no-flexbox .lb-content {
   height: auto;
 }
 
-/* line 190, ../../../source/sass/_lightbox.scss */
+/* line 192, ../../../source/sass/_lightbox.scss */
 #lightboxBtns .slick-dots {
   position: static;
   width: auto;
@@ -2797,7 +2760,7 @@ body.lightbox-open {
   -webkit-transition: opacity 150ms;
   transition: opacity 150ms;
 }
-/* line 197, ../../../source/sass/_lightbox.scss */
+/* line 199, ../../../source/sass/_lightbox.scss */
 #lightboxBtns .slick-dots li {
   margin: 0 2px;
 }

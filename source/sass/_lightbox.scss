@@ -85,8 +85,8 @@ body.lightbox-open {
     text-align: center;
     position: relative;
 
-    @include flexbox;
-    @include flex-direction(column);
+    //@include flexbox;
+    //@include flex-direction(column);
 
     background-color: black;
     //background-image: url("/assets/css/img/loader.gif") !important;
@@ -107,7 +107,6 @@ body.lightbox-open {
 }
 
 
-.lb-img,
 .lb-mask {
     @include mq($screen-min) {
         position: absolute;
@@ -120,9 +119,12 @@ body.lightbox-open {
 }
 
 .lb-img {
-    max-height: 100%;
-    margin: 0 auto;
-    @include flex(1);
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: auto;
 }
 
 .lightbox-body .lb-mask {
@@ -135,7 +137,7 @@ body.lightbox-open {
 
 
 .lb-caption {
-    @include flex(1);
+    //@include flex(1);
 
     max-width: 640px;
     width: 100%;
@@ -147,14 +149,14 @@ body.lightbox-open {
         opacity: 0;
     }
 
-    .lb-content & {
-        //position: absolute;
-        bottom: 0;
+    // .lb-content & {
+    //     //position: absolute;
+    //     bottom: 0;
 
-        @include mq($screen-min) {
-            display: none;
-        }
-    }
+    //     @include mq($screen-min) {
+    //         display: none;
+    //     }
+    // }
 
     p {
         margin-bottom: 0;
@@ -174,13 +176,13 @@ body.lightbox-open {
 
 #lbCaptionWide {
     padding: 15px;
-    display: none;
-    height: 0;
+    //display: none;
+    //height: 0;
 
-    @include mq($screen-min) {
+    //@include mq($screen-min) {
         display: block;
         height: auto;
-    }
+    //}
 }
 
 .no-flexbox .lb-content {
