@@ -43,7 +43,7 @@
     function close() {
         $tpl.remove()
         $('body').removeClass(options.bodyClass)
-        $(window).off('resize')
+        $(window).off('resize', resizeLightbox)
 
         window.scrollTo(0, scrollPos)
 

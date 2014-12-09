@@ -8,7 +8,8 @@ $(function() {
         .always(function() {
             $gallery.gallery()
             $gallery.addClass('loaded')
-            $(window).on('resize', _.debounce(function(){ $gallery.gallery() }, 100) )
+            $(window).on('resize', _.debounce($.fn.gallery.bind($gallery), 100))
+            $(document).on('menuToggle', $.fn.gallery.bind($gallery))
         })
         .progress( function(instance, image) {
             image.img.classList.add('loaded')

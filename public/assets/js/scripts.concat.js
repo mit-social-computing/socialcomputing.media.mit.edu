@@ -12436,7 +12436,8 @@ $(function() {
         .always(function() {
             $gallery.gallery()
             $gallery.addClass('loaded')
-            $(window).on('resize', _.debounce(function(){ $gallery.gallery() }, 100) )
+            $(window).on('resize', _.debounce($.fn.gallery.bind($gallery), 100))
+            $(document).on('menuToggle', $.fn.gallery.bind($gallery))
         })
         .progress( function(instance, image) {
             image.img.classList.add('loaded')
@@ -13041,7 +13042,7 @@ $(function() {
     function close() {
         $tpl.remove()
         $('body').removeClass(options.bodyClass)
-        $(window).off('resize')
+        $(window).off('resize', resizeLightbox)
 
         window.scrollTo(0, scrollPos)
 
@@ -13232,20 +13233,12 @@ $(function() {
         var open = $('#sidebar').attr('data-sidebar') === 'is-open',
             width = 0
 
-        if ( !open ) {
-            // $('#chapterList').find('li').each(function(e) {
-            //     var textWidth = $(this).text().length * 7
-            //     if ( textWidth > width ) {
-            //         width = textWidth
-            //     }
-            // })
-            //$('#sidenav, #sidebar').innerWidth(width > 399 ? width : 399)
-            //$('#sidenav, #sidebar').innerWidth(390)
-        } else {
-            //$('#sidenav, #sidebar').innerWidth(56)
-        }
-
         $('#sidebar').attr('data-sidebar', open ? 'is-closed' : 'is-open')
+        $('#sidebar').on('transitionend', function(e) {
+            if ( e.target === this ) {
+                $(document).trigger('menuToggle')
+            }
+        })
     })
 
     //
