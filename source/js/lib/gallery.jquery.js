@@ -1,3 +1,4 @@
+// gallery.jquery.js
 /*jshint globalstrict:true*/
 /*global document,window,_,jQuery,setTimeout,console*/
 'use strict';
@@ -26,17 +27,16 @@
                         resize
 
                     $row.each(function(j, el) {
-                        if ( !el.originalWidth ) {
-                            el.originalWidth = el.clientWidth
-                        }
-                        rowItemsWidth += el.originalWidth
+                        var img = $(el).find('img').get(0)
+                        rowItemsWidth += img.naturalWidth
                     })
 
 
                     resize = rowWidth / (rowItemsWidth + gutters)
 
                     $row.each(function(j, el) {
-                        $(el).width(Math.floor( el.originalWidth * resize ))
+                        var img = $(el).find('img').get(0)
+                        $(el).width(Math.floor( img.naturalWidth * resize ))
                     })
                 }
             })
