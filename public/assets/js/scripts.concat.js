@@ -13001,7 +13001,7 @@ $(function() {
 'use strict';
 
 (function($) {
-    var $tpl, options,lazyResize
+    var $tpl, options, lazyResize, scrollPos
 
     function captionSetup() {
         $('#lbCaptionWide').html($('<div/>', {'class': 'text'}).html($('<div/>', {'class': 'text-body'})))
@@ -13042,6 +13042,8 @@ $(function() {
         $tpl.remove()
         $('body').removeClass(options.bodyClass)
         $(window).off('resize')
+
+        window.scrollTo(0, scrollPos)
 
         if (options.useKeys) {
             $('window').off('keyup', keyHandler)
@@ -13160,6 +13162,7 @@ $(function() {
             $this.on('click', 'img', function(e) {
                 e.preventDefault()
 
+                scrollPos = window.scrollY
                 $tpl = $(options.tpl)
                 $tpl.addClass('loading')
 

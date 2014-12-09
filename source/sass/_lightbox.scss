@@ -1,7 +1,3 @@
-body.lightbox-open {
-    overflow: hidden;
-}
-
 .lightbox-bg {
     position: fixed;
     top: 0;
@@ -125,6 +121,8 @@ body.lightbox-open {
     bottom: 0;
     left: 0;
     margin: auto;
+
+    max-height: 100%;
 }
 
 .lightbox-body .lb-mask {
