@@ -4,8 +4,8 @@ var jsFiles = [
     , 'source/bower_components/jquery/dist/jquery.js'
     , 'source/bower_components/imagesloaded/imagesloaded.pkgd.js'
     , 'source/bower_components/slick-carousel/slick/slick.js'
-    , 'source/bower_components/packery/dist/packery.pkgd.js'
-    , 'source/bower_components/freewall/freewall.js'
+    //, 'source/bower_components/packery/dist/packery.pkgd.js'
+    //, 'source/bower_components/isotope/dist/isotope.pkgd.js'
     , 'source/js/**/*.js'
 ]
 

@@ -11,7 +11,7 @@
         {% for asset in block.gallery %}
 
             {% if block.gallery|length > 1 %}
-                {% do asset.setTransform('galleryThumb') %}
+            {% do asset.setTransform({ height: 400 }) %}
             {% else %}
                 {% do asset.setTransform('bodyContent') %}
             {% endif %}
@@ -19,7 +19,7 @@
             <div class="gallery-item">
                 <a href="#" class="lightbox">
                     <img class="thumb" src="{{ asset.getUrl() }}" alt="{{ asset.caption }}">
-                    <img class="mask" src="/assets/img/masks/image_gallery.png" alt="" />
+                    <!--<img class="mask" src="/assets/img/masks/image_gallery.png" alt="" />-->
                 </a>
 
             </div>

@@ -6,7 +6,8 @@
     var $tpl, options,lazyResize
 
     function captionSetup() {
-        $('#lbCaption').html($('<div/>').addClass('text').append('<div class="text-body"/>'))
+        $('<div/>', {'class': 'text'}).html($('<div/>', {'class': 'text-body'}))
+            .appendTo('#lbCaptionWide')
     }
 
     function keyHandler(e) {
@@ -22,7 +23,7 @@
 
     function resizeLightbox() {
         var availableHeight = $('.lightbox-body').height(),
-            captionHeight = $('#lbCaption').height(),
+            captionHeight = $('#lbCaptionWide').height(),
             $current, dims = []
 
         $('#slideshow').height(availableHeight - captionHeight)
@@ -60,7 +61,7 @@
         captionSetup()
 
         var caption = $(this.$slides[this.currentSlide]).find('img').attr('alt')
-        $('#lbCaption').find('.text-body').html(caption).toggleClass('large', $('#lbCaption').height() <= 27)
+        $('#lbCaptionWide').find('.text-body').html(caption).toggleClass('large', $('#lbCaptionWide').height() <= 27)
 
         $(window).on('resize', resizeLightbox)
         resizeLightbox(0)
@@ -70,14 +71,14 @@
     function onBeforeChange(Slick, current, upcoming) {
         /*jshint validthis:true*/
         $(Slick.$slides[current]).find('.lb-content').removeClass('active')
-        $('#lbCaption').addClass('fade-out')
+        $('#lbCaptionWide').addClass('fade-out')
     }
 
     function onAfterChange(Slick, current) {
         var caption = $(Slick.$slides[current]).find('img').attr('alt')
-        $('#lbCaption')
+        $('#lbCaptionWide')
             .find('.text-body')
-                .html(caption).toggleClass('large', $('#lbCaption').height() <= 27)
+                .html(caption).toggleClass('large', $('#lbCaptionWide').height() <= 27)
             .end()
                 .removeClass('fade-out')
 
@@ -87,7 +88,7 @@
     }
 
     options = {
-        tpl : '<div class="lightbox-bg"><div class="lightbox-body"><div class="lightbox-imgs" id="slideshow"/><div class="lb-caption" id="lbCaption"/><div class="l-fixed l-fixed--upperleft" id="lbLogo"><img src="/assets/img/sc-logo.svg" class="logo"></div><div class="l-fixed l-fixed--upperright"><button class="btn btn--close" id="close">X</button></div><div class="l-fixed l-fixed--lowerright" id="lightboxBtns"/>',
+        tpl : '<div class="lightbox-bg"><div class="lightbox-body"><div class="lightbox-imgs" id="slideshow"/><div class="lb-caption" id="lbCaptionWide"/><div class="l-fixed l-fixed--upperleft" id="lbLogo"><img src="/assets/img/sc-logo.svg" class="logo"></div><div class="l-fixed l-fixed--upperright"><button class="btn btn--close" id="close">X</button></div><div class="l-fixed l-fixed--lowerright" id="lightboxBtns"/>',
         bodyClass : 'l-fixbody',
         useKeys : true,
         thumbs : false,
@@ -144,20 +145,23 @@
             Array.prototype.forEach.call(group, function(el) {
                 // TODO check responsive breakpoints and lazyLoad settings
 
-                var $d = $('<div />').addClass(options.slideClass),
-                    $wrapper = $('<div />').attr('class', 'lb-wrapper'),
-                    $i = $('<img />').attr({
+                var $d = $('<div />', {'class': options.slideClass}),
+                    $wrapper = $('<div />', {'class': 'lb-wrapper'}),
+                    $i = $('<img />', {
                         'data-lazy': el.src,
                         'alt' : el.alt,
                         'class' : 'lb-img'
                     }),
-                    $m = $('<img />').attr({
+                    $m = $('<img />', {
                         'src': '/assets/img/masks/white_big.png',
                         'class': 'lb-mask'
-                    })
+                    }),
+                    $narrowCaption = $('<div/>', {'class' : 'lb-caption'}).html(
+                        $('<div/>', {'class' : 'text'}).html(
+                        $('<div/>', {'class' : 'text-body'}).html(el.alt) ) )
 
-                $('#lbCaption').html(el.alt)
-                $d.append($i).append($m)
+                $('#lbCaptionWide').html(el.alt)
+                $d.append($i, $m, $narrowCaption)
                 slides.push($('<div/>').append($d))
             })
 

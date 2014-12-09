@@ -1,16 +1,30 @@
 .gallery {
-    margin-bottom: rems($base);
+    //margin: -5px -10px rems($base);
+
+    text-align: justify;
+    font-size: 0;
+
+    &:after {
+        content: '';
+        display: inline-block;
+        width: 100%;
+    }
 }
 
 .gallery-item {
     position: relative;
 
+    display: inline-block;
+    vertical-align: top;
+    margin-bottom: 10px;
+    //margin: 5px 10px;
+
     .thumb {
         opacity: 0;
-        min-width: 138px;
-        height: 100%;
+        //min-width: 138px;
+        //height: 100%;
 
-        &.loaded {
+        .loaded & {
             opacity: 1;
             @include transition(opacity 250ms ease);
         }

@@ -2517,28 +2517,36 @@ h1.nav-logo > a:hover {
 
 /* line 1, ../../../source/sass/_gallery.scss */
 .gallery {
-  margin-bottom: 1.1875rem;
+  text-align: justify;
+  font-size: 0;
+}
+/* line 7, ../../../source/sass/_gallery.scss */
+.gallery:after {
+  content: '';
+  display: inline-block;
+  width: 100%;
 }
 
-/* line 5, ../../../source/sass/_gallery.scss */
+/* line 14, ../../../source/sass/_gallery.scss */
 .gallery-item {
   position: relative;
+  display: inline-block;
+  vertical-align: top;
+  margin-bottom: 10px;
 }
-/* line 8, ../../../source/sass/_gallery.scss */
+/* line 22, ../../../source/sass/_gallery.scss */
 .gallery-item .thumb {
   opacity: 0;
-  min-width: 138px;
-  height: 100%;
 }
-/* line 13, ../../../source/sass/_gallery.scss */
-.gallery-item .thumb.loaded {
+/* line 27, ../../../source/sass/_gallery.scss */
+.loaded .gallery-item .thumb {
   opacity: 1;
   -moz-transition: opacity 250ms ease;
   -o-transition: opacity 250ms ease;
   -webkit-transition: opacity 250ms ease;
   transition: opacity 250ms ease;
 }
-/* line 19, ../../../source/sass/_gallery.scss */
+/* line 33, ../../../source/sass/_gallery.scss */
 .gallery-item .mask {
   position: absolute;
   top: 0;
@@ -2607,12 +2615,10 @@ body.lightbox-open {
   -o-transition: opacity 150ms ease-out;
   -webkit-transition: opacity 150ms ease-out;
   transition: opacity 150ms ease-out;
-  overflow-y: scroll;
 }
 @media only screen and (min-width: 33.625rem) {
   /* line 45, ../../../source/sass/_lightbox.scss */
   .lightbox-body {
-    overflow: auto;
     padding: 75px;
   }
 }
@@ -2646,17 +2652,29 @@ body.lightbox-open {
   height: 100%;
   text-align: center;
   position: relative;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-direction: normal;
+  -webkit-box-orient: vertical;
+  -webkit-flex-direction: column;
+  -moz-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
   background-color: black;
   background-position: center center;
   background-repeat: no-repeat;
 }
-/* line 94, ../../../source/sass/_lightbox.scss */
+/* line 97, ../../../source/sass/_lightbox.scss */
 .lb-content.active {
   opacity: 1;
 }
 @media only screen and (min-width: 33.625rem) {
   /* line 83, ../../../source/sass/_lightbox.scss */
   .lb-content {
+    display: block;
     opacity: 0;
     -moz-transition: opacity 250ms ease;
     -o-transition: opacity 250ms ease;
@@ -2666,72 +2684,110 @@ body.lightbox-open {
   }
 }
 
-/* line 106, ../../../source/sass/_lightbox.scss */
-.lb-img,
-.lb-mask {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  margin: auto;
+@media only screen and (min-width: 33.625rem) {
+  /* line 110, ../../../source/sass/_lightbox.scss */
+  .lb-img,
+  .lb-mask {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+  }
 }
 
-/* line 116, ../../../source/sass/_lightbox.scss */
+/* line 122, ../../../source/sass/_lightbox.scss */
 .lb-img {
   max-height: 100%;
+  margin: 0 auto;
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+  -moz-box-flex: 1;
+  -moz-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
 }
 
-/* line 120, ../../../source/sass/_lightbox.scss */
+/* line 128, ../../../source/sass/_lightbox.scss */
 .lightbox-body .lb-mask {
   display: none;
 }
 @media only screen and (min-width: 33.625rem) {
-  /* line 120, ../../../source/sass/_lightbox.scss */
+  /* line 128, ../../../source/sass/_lightbox.scss */
   .lightbox-body .lb-mask {
     display: block;
   }
 }
 
-/* line 129, ../../../source/sass/_lightbox.scss */
+/* line 137, ../../../source/sass/_lightbox.scss */
 .lb-caption {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+  -moz-box-flex: 1;
+  -moz-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
   max-width: 640px;
   width: 100%;
-  padding: 15px;
   color: white;
   -moz-transition: opacity 150ms ease;
   -o-transition: opacity 150ms ease;
   -webkit-transition: opacity 150ms ease;
   transition: opacity 150ms ease;
 }
-/* line 138, ../../../source/sass/_lightbox.scss */
+/* line 146, ../../../source/sass/_lightbox.scss */
 .lb-caption.fade-out {
   opacity: 0;
 }
-/* line 142, ../../../source/sass/_lightbox.scss */
+/* line 150, ../../../source/sass/_lightbox.scss */
+.lb-content .lb-caption {
+  bottom: 0;
+}
+@media only screen and (min-width: 33.625rem) {
+  /* line 150, ../../../source/sass/_lightbox.scss */
+  .lb-content .lb-caption {
+    display: none;
+  }
+}
+/* line 159, ../../../source/sass/_lightbox.scss */
 .lb-caption p {
   margin-bottom: 0;
 }
 @media only screen and (min-width: 33.625rem) {
-  /* line 129, ../../../source/sass/_lightbox.scss */
+  /* line 137, ../../../source/sass/_lightbox.scss */
   .lb-caption {
     position: absolute;
     bottom: 41px;
     padding: 0;
   }
-  /* line 151, ../../../source/sass/_lightbox.scss */
+  /* line 168, ../../../source/sass/_lightbox.scss */
   .lb-caption p {
     font-weight: 300;
     color: initial;
   }
 }
 
-/* line 158, ../../../source/sass/_lightbox.scss */
+/* line 175, ../../../source/sass/_lightbox.scss */
+#lbCaptionWide {
+  padding: 15px;
+  display: none;
+  height: 0;
+}
+@media only screen and (min-width: 33.625rem) {
+  /* line 175, ../../../source/sass/_lightbox.scss */
+  #lbCaptionWide {
+    display: block;
+    height: auto;
+  }
+}
+
+/* line 186, ../../../source/sass/_lightbox.scss */
 .no-flexbox .lb-content {
   height: auto;
 }
 
-/* line 162, ../../../source/sass/_lightbox.scss */
+/* line 190, ../../../source/sass/_lightbox.scss */
 #lightboxBtns .slick-dots {
   position: static;
   width: auto;
@@ -2741,7 +2797,7 @@ body.lightbox-open {
   -webkit-transition: opacity 150ms;
   transition: opacity 150ms;
 }
-/* line 169, ../../../source/sass/_lightbox.scss */
+/* line 197, ../../../source/sass/_lightbox.scss */
 #lightboxBtns .slick-dots li {
   margin: 0 2px;
 }

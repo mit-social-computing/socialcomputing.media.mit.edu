@@ -48,10 +48,10 @@ body.lightbox-open {
     opacity: 0;
     @include transition(opacity 150ms ease-out);
 
-    overflow-y: scroll;
+    //overflow-y: scroll;
 
     @include mq($screen-min) {
-        overflow: auto;
+        //overflow: auto;
         padding: 75px;
     }
 
@@ -85,6 +85,9 @@ body.lightbox-open {
     text-align: center;
     position: relative;
 
+    @include flexbox;
+    @include flex-direction(column);
+
     background-color: black;
     //background-image: url("/assets/css/img/loader.gif") !important;
 
@@ -96,6 +99,7 @@ body.lightbox-open {
     }
 
     @include mq($screen-min) {
+        display: block;
         opacity: 0;
         @include transition(opacity 250ms ease);
         background-color: white;
@@ -105,16 +109,20 @@ body.lightbox-open {
 
 .lb-img,
 .lb-mask {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    margin: auto;
+    @include mq($screen-min) {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        margin: auto;
+    }
 }
 
 .lb-img {
     max-height: 100%;
+    margin: 0 auto;
+    @include flex(1);
 }
 
 .lightbox-body .lb-mask {
@@ -127,16 +135,25 @@ body.lightbox-open {
 
 
 .lb-caption {
+    @include flex(1);
+
     max-width: 640px;
     width: 100%;
-
-    padding: 15px;
 
     color: white;
     @include transition(opacity 150ms ease);
 
     &.fade-out {
         opacity: 0;
+    }
+
+    .lb-content & {
+        //position: absolute;
+        bottom: 0;
+
+        @include mq($screen-min) {
+            display: none;
+        }
     }
 
     p {
@@ -152,6 +169,17 @@ body.lightbox-open {
             font-weight: 300;
             color: initial;
         }
+    }
+}
+
+#lbCaptionWide {
+    padding: 15px;
+    display: none;
+    height: 0;
+
+    @include mq($screen-min) {
+        display: block;
+        height: auto;
     }
 }
 

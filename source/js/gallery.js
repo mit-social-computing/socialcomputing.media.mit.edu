@@ -6,13 +6,11 @@ $(function() {
 
     $gallery.imagesLoaded()
         .always(function() {
-            $gallery.packery({
-                itemSelector : '.gallery-item',
-                gutter : 10,
-                rowHeight : 207,
-                transitionDuration : 0
+            $gallery.gallery()
+            $gallery.addClass('loaded')
+            $(window).on('resize', function() {
+                $gallery.gallery()
             })
-            $gallery.packery('bindResize')
         })
         .progress( function(instance, image) {
             image.img.classList.add('loaded')
