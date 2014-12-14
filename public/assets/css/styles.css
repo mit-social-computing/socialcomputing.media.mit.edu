@@ -2864,11 +2864,12 @@ h1.nav-logo > a:hover {
 
 /* line 76, ../../../source/sass/_projects.scss */
 .project-image {
+  padding: 1px 0;
   margin: auto;
   box-shadow: 20px 0px 7px -10px transparent, -20px 0px 7px -10px transparent;
 }
 
-/* line 81, ../../../source/sass/_projects.scss */
+/* line 82, ../../../source/sass/_projects.scss */
 .project-mask {
   position: absolute;
   left: 0;
