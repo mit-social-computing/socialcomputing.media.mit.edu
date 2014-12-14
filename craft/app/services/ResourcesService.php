@@ -84,11 +84,17 @@ class ResourcesService extends BaseApplicationComponent
 				case 'js':
 				{
 					// Route to js/compressed/ if useCompressedJs is enabled
-					if (craft()->config->get('useCompressedJs') && !craft()->request->getQuery('uncompressed'))
+					// unless js/uncompressed/* is requested, in which case drop the uncompressed/ seg
+					if (isset($segs[1]) && $segs[1] == 'uncompressed')
+					{
+						array_splice($segs, 1, 1);
+					}
+					else if (craft()->config->get('useCompressedJs'))
 					{
 						array_splice($segs, 1, 0, 'compressed');
-						$path = implode('/', $segs);
 					}
+
+					$path = implode('/', $segs);
 					break;
 				}
 
@@ -302,7 +308,7 @@ class ResourcesService extends BaseApplicationComponent
 	{
 		if (PathHelper::ensurePathIsContained($path) === false)
 		{
-			throw new HttpException(403);
+			throw new HttpException(404);
 		}
 
 		$cachedPath = $this->getCachedResourcePath($path);

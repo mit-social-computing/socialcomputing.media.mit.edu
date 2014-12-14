@@ -7,7 +7,7 @@ namespace Craft;
  * accounts, creating users, saving users, processing user avatars, deleting, suspending and un-suspending users.
  *
  * Note that all actions in the controller, except {@link actionLogin}, {@link actionLogout}, {@link actionGetAuthTimeout},
- * {@link actionSendPasswordResetEmail}, {@link actionSetPassword} and {@link actionSaveUser} require an
+ * {@link actionSendPasswordResetEmail}, {@link actionSetPassword}, {@link actionVerifyEmail} and {@link actionSaveUser} require an
  * authenticated Craft session via {@link BaseController::allowAnonymous}.
  *
  * @author    Pixel & Tonic, Inc. <support@pixelandtonic.com>
@@ -36,7 +36,7 @@ class UsersController extends BaseController
 	 *
 	 * @var bool
 	 */
-	protected $allowAnonymous = array('actionLogin', 'actionLogout', 'actionGetAuthTimeout', 'actionForgotPassword', 'actionSendPasswordResetEmail', 'actionSendActivationEmail', 'actionSaveUser', 'actionSetPassword');
+	protected $allowAnonymous = array('actionLogin', 'actionLogout', 'actionGetAuthTimeout', 'actionForgotPassword', 'actionSendPasswordResetEmail', 'actionSendActivationEmail', 'actionSaveUser', 'actionSetPassword', 'actionVerifyEmail');
 
 	// Public Methods
 	// =========================================================================
@@ -345,17 +345,19 @@ class UsersController extends BaseController
 	/**
 	 * Verifies that a user has access to an email address.
 	 *
-	 * @deprecated Deprecated in 2.3. Use {@link UsersController::actionSetPassword()} instead.
+	 * @deprecated Deprecated in 2.3. Use {@link UsersController::actionVerifyEmail()} instead.
 	 * @return null
 	 */
 	public function actionValidate()
 	{
-		craft()->deprecator->log('UsersController::validate()', 'The users/validate action has been deprecated. Use users/setPassword instead.');
-		$this->actionSetPassword();
+		craft()->deprecator->log('UsersController::validate()', 'The users/validate action has been deprecated. Use users/verifyEmail instead.');
+		$this->actionVerifyEmail();
 	}
 
 	/**
 	 * Verifies that a user has access to an email address.
+	 *
+	 * @return null
 	 */
 	public function actionVerifyEmail()
 	{
@@ -539,11 +541,11 @@ class UsersController extends BaseController
 
 					if (!$variables['account']->isCurrent())
 					{
-						$statusActions[] = array('action' => 'users/sendPasswordResetEmail', 'label' => 'Send password reset email');
+						$statusActions[] = array('action' => 'users/sendPasswordResetEmail', 'label' => Craft::t('Send password reset email'));
 
 						if (craft()->userSession->isAdmin())
 						{
-							$statusActions[] = array('id' => 'copy-passwordreset-url', 'label' => 'Copy password reset URL');
+							$statusActions[] = array('id' => 'copy-passwordreset-url', 'label' => Craft::t('Copy password reset URL'));
 						}
 					}
 
@@ -901,13 +903,20 @@ class UsersController extends BaseController
 
 				try
 				{
-					if ($isNewUser)
+					if ($isNewUser && $thisIsPublicRegistration && $newPassword)
 					{
-						craft()->users->sendActivationEmail($user);
+						craft()->users->sendNewEmailVerifyEmail($user);
 					}
 					else
 					{
-						craft()->users->sendNewEmailVerifyEmail($user);
+						if ($isNewUser)
+						{
+							craft()->users->sendActivationEmail($user);
+						}
+						else
+						{
+							craft()->users->sendNewEmailVerifyEmail($user);
+						}
 					}
 				}
 				catch (\phpmailerException $e)

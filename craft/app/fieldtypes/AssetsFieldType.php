@@ -336,7 +336,9 @@ class AssetsFieldType extends BaseElementFieldType
 
 		if ($settings->useSingleFolder)
 		{
-			$folderPath = 'folder:'.$this->_determineUploadFolderId($settings).':single';
+			$folderId = $this->_determineUploadFolderId($settings);
+			craft()->userSession->authorize('uploadToAssetSource:'.$folderId);
+			$folderPath = 'folder:'.$folderId.':single';
 
 			return array($folderPath);
 		}

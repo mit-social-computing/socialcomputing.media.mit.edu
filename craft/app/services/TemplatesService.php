@@ -738,7 +738,15 @@ class TemplatesService extends BaseApplicationComponent
 	 */
 	public function doesTemplateExist($name)
 	{
-		return (bool) $this->findTemplate($name);
+		try
+		{
+			return (bool) $this->findTemplate($name);
+		}
+		catch (\Twig_Error_Loader $e)
+		{
+			// _validateTemplateName() han an issue with it
+			return false;
+		}
 	}
 
 	/**
@@ -1434,6 +1442,11 @@ class TemplatesService extends BaseApplicationComponent
 			$elementType = craft()->elements->getElementType($context['element']->getElementType());
 		}
 
+		if ($elementType->hasStatuses())
+		{
+			$html .= '<span class="status '.$context['element']->getStatus().'"></span>';
+		}
+
 		$html .= '<span class="title">';
 
 		if ($context['context'] == 'index' && ($cpEditUrl = $context['element']->getCpEditUrl()))
@@ -1445,14 +1458,7 @@ class TemplatesService extends BaseApplicationComponent
 			$html .= $label;
 		}
 
-		$html .= '</span>';
-
-		if ($elementType->hasStatuses())
-		{
-			$html .= '<span class="status '.$context['element']->getStatus().'"></span>';
-		}
-
-		$html .= '</div></div>';
+		$html .= '</span></div></div>';
 
 		return $html;
 	}

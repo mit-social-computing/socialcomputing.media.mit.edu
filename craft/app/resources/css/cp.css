@@ -28,7 +28,7 @@ body.rtl #alerts li:before { margin: -1px 0 0 3px ; }
 
 #header .container { position: relative; }
 
-#header a { color: #d7d9db; -webkit-transition: color linear 100ms; -moz-transition: color linear 100ms; }
+#header a { color: #d7d9db; -webkit-transition: color linear 100ms; -moz-transition: color linear 100ms; -ms-transition: color linear 100ms; transition: color linear 100ms; }
 
 #header a:hover, #header a.active { color: #fff; text-decoration: none; }
 
@@ -78,13 +78,13 @@ body.rtl #header-actions .settingsmenu { padding-right: 0; }
 
 #header-actions #taskicon canvas { display: block; position: absolute; width: 30px; height: 30px; }
 
-#header-actions #taskicon canvas#taskicon-hover { opacity: 0; -webkit-transition: opacity linear 100ms; -moz-transition: opacity linear 100ms; }
+#header-actions #taskicon canvas#taskicon-hover { opacity: 0; -webkit-transition: opacity linear 100ms; -moz-transition: opacity linear 100ms; -ms-transition: opacity linear 100ms; transition: opacity linear 100ms; }
 
 #header-actions #taskicon:hover canvas#taskicon-hover { opacity: 1; }
 
-#header-actions #taskicon .progressbar { position: static; margin: 8px 2px; width: auto; border-color: #d7d9db; -webkit-transition: color linear 100ms; -moz-transition: color linear 100ms; }
+#header-actions #taskicon .progressbar { position: static; margin: 8px 2px; width: auto; border-color: #d7d9db; -webkit-transition: color linear 100ms; -moz-transition: color linear 100ms; -ms-transition: color linear 100ms; transition: color linear 100ms; }
 
-#header-actions #taskicon .progressbar-inner { background: #d7d9db; -webkit-transition: color linear 100ms; -moz-transition: color linear 100ms; }
+#header-actions #taskicon .progressbar-inner { background: #d7d9db; -webkit-transition: color linear 100ms; -moz-transition: color linear 100ms; -ms-transition: color linear 100ms; transition: color linear 100ms; }
 
 #header-actions #taskicon:hover .progressbar { border-color: #fff; }
 
