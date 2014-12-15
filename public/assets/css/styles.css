@@ -1615,16 +1615,20 @@ h1.nav-logo > a:hover {
 .nav-sibling--prev .nav-sibling-clip:hover {
   -webkit-clip-path: circle(300px at 35px 40px);
 }
-/* line 227, ../../../source/sass/_nav.scss */
+/* line 225, ../../../source/sass/_nav.scss */
+.nav-sibling--prev .nav-sibling-clip:hover .nav-arrow:after {
+  border-right-color: white;
+}
+/* line 231, ../../../source/sass/_nav.scss */
 .nav-sibling--prev .nav-sibling-title {
   margin-left: 65px;
   padding-right: 25px;
 }
-/* line 232, ../../../source/sass/_nav.scss */
+/* line 236, ../../../source/sass/_nav.scss */
 .nav-sibling--prev .nav-arrow {
   left: 15px;
 }
-/* line 235, ../../../source/sass/_nav.scss */
+/* line 239, ../../../source/sass/_nav.scss */
 .nav-sibling--prev .nav-arrow:after {
   left: 12px;
   border-right-color: #333;
@@ -1634,28 +1638,32 @@ h1.nav-logo > a:hover {
   border-left-width: 0;
 }
 
-/* line 247, ../../../source/sass/_nav.scss */
+/* line 251, ../../../source/sass/_nav.scss */
 .nav-sibling--next {
   right: -85px;
 }
-/* line 250, ../../../source/sass/_nav.scss */
+/* line 254, ../../../source/sass/_nav.scss */
 .nav-sibling--next .nav-sibling-clip {
   right: 0;
 }
-/* line 254, ../../../source/sass/_nav.scss */
+/* line 257, ../../../source/sass/_nav.scss */
 .nav-sibling--next .nav-sibling-clip:hover {
   -webkit-clip-path: circle(300px at center) !important;
 }
-/* line 259, ../../../source/sass/_nav.scss */
+/* line 260, ../../../source/sass/_nav.scss */
+.nav-sibling--next .nav-sibling-clip:hover .nav-arrow:after {
+  border-left-color: white;
+}
+/* line 266, ../../../source/sass/_nav.scss */
 .nav-sibling--next .nav-sibling-title {
   margin-right: 65px;
   padding-left: 25px;
 }
-/* line 264, ../../../source/sass/_nav.scss */
+/* line 271, ../../../source/sass/_nav.scss */
 .nav-sibling--next .nav-arrow {
   right: 15px;
 }
-/* line 267, ../../../source/sass/_nav.scss */
+/* line 274, ../../../source/sass/_nav.scss */
 .nav-sibling--next .nav-arrow:after {
   right: 12px;
   border-left-color: #333;
@@ -1665,7 +1673,7 @@ h1.nav-logo > a:hover {
   border-left-width: 11px;
 }
 
-/* line 279, ../../../source/sass/_nav.scss */
+/* line 287, ../../../source/sass/_nav.scss */
 .nav-arrow {
   position: absolute;
   top: 0;
@@ -1681,16 +1689,16 @@ h1.nav-logo > a:hover {
   -webkit-transition-delay: 250ms;
   transition: background-color 250ms ease 250ms;
 }
-/* line 293, ../../../source/sass/_nav.scss */
+/* line 301, ../../../source/sass/_nav.scss */
 .nav-arrow:hover {
   background-color: #d2d1d1;
-  -moz-transition: background-color 250ms ease 100ms;
-  -o-transition: background-color 250ms ease 100ms;
+  -moz-transition: background-color 250ms ease 0ms;
+  -o-transition: background-color 250ms ease 0ms;
   -webkit-transition: background-color 250ms ease;
-  -webkit-transition-delay: 100ms;
-  transition: background-color 250ms ease 100ms;
+  -webkit-transition-delay: 0ms;
+  transition: background-color 250ms ease 0ms;
 }
-/* line 298, ../../../source/sass/_nav.scss */
+/* line 306, ../../../source/sass/_nav.scss */
 .nav-arrow:after {
   content: '';
   height: 0;
@@ -1700,34 +1708,39 @@ h1.nav-logo > a:hover {
   bottom: 0;
   margin: auto;
   border: solid transparent;
+  -moz-transition: border-color 250ms ease 0s;
+  -o-transition: border-color 250ms ease 0s;
+  -webkit-transition: border-color 250ms ease;
+  -webkit-transition-delay: 0s;
+  transition: border-color 250ms ease 0s;
 }
-/* line 311, ../../../source/sass/_nav.scss */
+/* line 320, ../../../source/sass/_nav.scss */
 .nav-arrow.disabled {
   background-color: #d2d1d1;
   opacity: 0.4;
 }
 
-/* line 317, ../../../source/sass/_nav.scss */
+/* line 326, ../../../source/sass/_nav.scss */
 .nav-sibling-clip {
   background-color: rgba(224, 224, 224, 0);
   position: absolute;
 }
-/* line 321, ../../../source/sass/_nav.scss */
+/* line 330, ../../../source/sass/_nav.scss */
 .loaded .nav-sibling-clip {
   background-color: #e0e0e0;
-  -moz-transition: background-color 250ms ease, -webkit-clip-path 250ms ease 150ms;
-  -o-transition: background-color 250ms ease, -webkit-clip-path 250ms ease 150ms;
+  -moz-transition: background-color 250ms ease 0s, -webkit-clip-path 250ms ease 150ms;
+  -o-transition: background-color 250ms ease 0s, -webkit-clip-path 250ms ease 150ms;
   -webkit-transition: background-color 250ms ease, -webkit-clip-path 250ms ease;
   -webkit-transition-delay: 0s, 150ms;
-  transition: background-color 250ms ease, -webkit-clip-path 250ms ease 150ms;
+  transition: background-color 250ms ease 0s, -webkit-clip-path 250ms ease 150ms;
 }
-/* line 326, ../../../source/sass/_nav.scss */
+/* line 335, ../../../source/sass/_nav.scss */
 .nav-sibling-clip:hover {
   transition: -webkit-clip-path 250ms ease;
 }
-/* line 329, ../../../source/sass/_nav.scss */
+/* line 338, ../../../source/sass/_nav.scss */
 .nav-sibling-clip:hover > .nav-arrow {
-  background-color: #d2d1d1;
+  background-color: #999999;
 }
 
 /* line 1, ../../../source/sass/_buttons.scss */

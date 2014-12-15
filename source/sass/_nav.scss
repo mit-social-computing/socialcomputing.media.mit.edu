@@ -221,6 +221,10 @@ h1.nav-logo {
 
         &:hover {
             -webkit-clip-path: circle(300px at 35px 40px);
+
+            .nav-arrow:after {
+                border-right-color: white;
+            }
         }
     }
 
@@ -249,10 +253,13 @@ h1.nav-logo {
 
     .nav-sibling-clip {
         right: 0;
-        //-webkit-clip-path: circle(20px at 84%);
 
         &:hover {
             -webkit-clip-path: circle(300px at center) !important;
+
+            .nav-arrow:after {
+                border-left-color: white;
+            }
         }
     }
 
@@ -272,6 +279,7 @@ h1.nav-logo {
             border-bottom-width: 10px;
             border-right-width: 0;
             border-left-width: 11px;
+
         }
     }
 }
@@ -292,7 +300,7 @@ h1.nav-logo {
 
     &:hover {
         background-color: rgba($lightergray, 1);
-        @include transition(background-color 250ms ease 100ms);
+        @include transition(background-color 250ms ease 0ms);
     }
 
     &:after {
@@ -306,6 +314,7 @@ h1.nav-logo {
         margin: auto;
 
         border: solid transparent;
+        @include transition(border-color 250ms ease 0s);
     }
 
     &.disabled {
@@ -320,14 +329,14 @@ h1.nav-logo {
 
     .loaded & {
         background-color: rgba($lightestgray, 1);
-        @include transition(background-color 250ms ease, -webkit-clip-path 250ms ease 150ms);
+        @include transition(background-color 250ms ease 0s, -webkit-clip-path 250ms ease 150ms);
     }
 
     &:hover {
         transition: -webkit-clip-path 250ms ease;
 
         > .nav-arrow {
-            background-color: rgba($lightergray, 1);
+            background-color: rgba($lightgray, 1);
         }
     }
 }
