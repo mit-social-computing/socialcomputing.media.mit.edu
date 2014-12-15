@@ -76,16 +76,11 @@
 
 .box--white {
     position: relative;
-    padding-top: 100%;
-
-    > img {
-        position: absolute;
-        top: 0;
-        left: 0;
-    }
+    //padding-top: 100%;
 
     > img.profile {
         opacity: 0;
+        padding-bottom: 1px;
 
         &.loaded {
             opacity: 1;
@@ -96,5 +91,8 @@
     > img.mask {
         height: 100%;
         width: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
     }
 }

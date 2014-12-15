@@ -7,13 +7,16 @@
 {% set categories = entry.blogCategory %}
 
 {% block content %}
+<div class="l-upperright">
+    <div class="share addthis_toolbox addthis_16x16_style">
+        <a class="addthis_button_compact">+ share</a>
+    </div>
+</div>
 <article class="text">
     <div class="text-header">
         <h2 class="text-title">{{ entry }}</h2>
         <footer class="text-body text-footer">
-            written by <a href="{{ url('blog/author/' ~ entry.authorId) }}">{{ entry.author.fullName }}</a> on <time pubdate="{{ entry.dateCreated.w3cDate() }}">{{ entry.dateCreated|date('F d, Y')|lower }}</time>{% if categories|length %} &mdash; {% for c in categories %}
-        {{ loop.last and not loop.first ? '& ' : '' }}<a href="{{ url(c.uri) }}">{{ c|lower }}</a>{{ not loop.last ? ', ' : '' }}
-    {% endfor %}{% endif %}
+            written by <a href="{{ url('blog/author/' ~ entry.authorId) }}">{{ entry.author.fullName }}</a> on <time pubdate="{{ entry.dateCreated.w3cDate() }}">{{ entry.dateCreated|date('F d, Y')|lower }}</time>
         </footer>
     </div>
     <!-- .text-header -->

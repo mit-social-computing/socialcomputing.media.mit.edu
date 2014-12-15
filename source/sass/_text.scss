@@ -13,10 +13,16 @@
 .text-media {
     font-size: 0;
     margin-bottom: rems($base);
+    margin-left: -4px;
 }
 
 .text-media-object {
+    display: inline-block;
+    vertical-align: bottom;
+
     + .text-body {
+        display: inline-block;
+        vertical-align: bottom;
         margin-left: rems($base);
     }
 }
