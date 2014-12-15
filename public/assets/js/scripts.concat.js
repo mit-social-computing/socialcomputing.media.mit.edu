@@ -13243,6 +13243,8 @@ $(function() {
                 $(document).trigger('menuToggle')
             }
         })
+
+        $(window).trigger('open:sidenav')
     })
 
     //
@@ -13295,6 +13297,13 @@ $(function() {
 
     placeSiblingNav()
     $(window).on('close:lightbox', placeSiblingNav)
+    $(window).on('open:sidenav', function() {
+        $('.nav-sibling').fadeOut(50).delay(250).queue(function(n) {
+            placeSiblingNav()
+            $(this).fadeIn(100)
+            n()
+        })
+    })
     $(window).on('resize', placeSiblingNav)
 })
 
