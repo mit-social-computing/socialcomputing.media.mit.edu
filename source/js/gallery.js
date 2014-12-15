@@ -2,7 +2,8 @@
 
 $(function() {
     var $gallery = $('.gallery'),
-        $grid = $('.grid')
+        $grid = $('.grid'),
+        $others = $('.chapter-image, .text-media')
 
     $gallery.imagesLoaded()
         .always(function() {
@@ -19,6 +20,13 @@ $(function() {
 
     $grid.imagesLoaded()
         .progress(function(instance, image) {
-            image.img.classList.add('loaded')
+            if ( image.img.classList.contains('box-image') ) {
+                $(image.img).parents('.grid-item').addClass('loaded')
+            }
+        })
+
+    $others.imagesLoaded()
+        .progress(function(i, image) {
+            $(image.img).parent().addClass('loaded')
         })
 })

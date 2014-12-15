@@ -54,6 +54,14 @@
             {% for chapter in chapters %}
 
                 <section class="chapter" id="{{ chapter.slug }}">
+
+                    {% if chapter.chapterImage|length %}
+                    <div class="box--white chapter-image">
+                        <img class="box-image" src="{{chapter.chapterImage.first().getUrl('bodyContent')}}">
+                        <img class="box-mask" src="/assets/img/masks/white_full.png">
+                    </div>
+                    {% endif %}
+
                     <div class="text">
                         <h2 class="text-title">{{ chapter }}</h2>
                     </div>

@@ -12430,7 +12430,8 @@ function makeArray( obj ) {
 
 $(function() {
     var $gallery = $('.gallery'),
-        $grid = $('.grid')
+        $grid = $('.grid'),
+        $others = $('.chapter-image, .text-media')
 
     $gallery.imagesLoaded()
         .always(function() {
@@ -12447,7 +12448,14 @@ $(function() {
 
     $grid.imagesLoaded()
         .progress(function(instance, image) {
-            image.img.classList.add('loaded')
+            if ( image.img.classList.contains('box-image') ) {
+                $(image.img).parents('.grid-item').addClass('loaded')
+            }
+        })
+
+    $others.imagesLoaded()
+        .progress(function(i, image) {
+            $(image.img).parent().addClass('loaded')
         })
 })
 
@@ -13293,18 +13301,19 @@ $(function() {
         }
     }
 
-    $('.nav-sibling').addClass('loaded')
-
-    placeSiblingNav()
-    $(window).on('close:lightbox', placeSiblingNav)
-    $(window).on('open:sidenav', function() {
-        $('.nav-sibling').fadeOut(50).delay(250).queue(function(n) {
-            placeSiblingNav()
-            $(this).fadeIn(100)
-            n()
+    if ( !!$('#article').length ) {
+        $('.nav-sibling').addClass('loaded')
+        placeSiblingNav()
+        $(window).on('close:lightbox', placeSiblingNav)
+        $(window).on('open:sidenav', function() {
+            $('.nav-sibling').fadeOut(50).delay(250).queue(function(n) {
+                placeSiblingNav()
+                $(this).fadeIn(100)
+                n()
+            })
         })
-    })
-    $(window).on('resize', placeSiblingNav)
+        $(window).on('resize', placeSiblingNav)
+    }
 })
 
 // projects.js

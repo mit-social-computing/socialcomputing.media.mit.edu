@@ -100,16 +100,17 @@ $(function() {
         }
     }
 
-    $('.nav-sibling').addClass('loaded')
-
-    placeSiblingNav()
-    $(window).on('close:lightbox', placeSiblingNav)
-    $(window).on('open:sidenav', function() {
-        $('.nav-sibling').fadeOut(50).delay(250).queue(function(n) {
-            placeSiblingNav()
-            $(this).fadeIn(100)
-            n()
+    if ( !!$('#article').length ) {
+        $('.nav-sibling').addClass('loaded')
+        placeSiblingNav()
+        $(window).on('close:lightbox', placeSiblingNav)
+        $(window).on('open:sidenav', function() {
+            $('.nav-sibling').fadeOut(50).delay(250).queue(function(n) {
+                placeSiblingNav()
+                $(this).fadeIn(100)
+                n()
+            })
         })
-    })
-    $(window).on('resize', placeSiblingNav)
+        $(window).on('resize', placeSiblingNav)
+    }
 })

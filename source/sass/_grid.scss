@@ -12,6 +12,17 @@
     }
 }
 
+.grid--image {
+    .grid-item {
+        opacity: 0;
+    }
+
+    .loaded.grid-item {
+        opacity: 1;
+        @include transition(opacity 250ms ease);
+    }
+}
+
 .grid-item,
 .grid-spacer {
     display: inline-block;

@@ -2,18 +2,18 @@
 
 <div class="l-max scrollbar">
     <div class="l-content" id="content">
-        <div class="grid">
+        <div class="grid grid--image">
             {% for user in users %}
             <div class="grid-item">
                 <div class="box--white">
 
                 {% if user.photoUrl %}
-                    <img class="profile" src="{{ user.getPhotoUrl('537') }}">
+                    <img class="box-image" src="{{ user.getPhotoUrl('537') }}">
                     {% else %}
-                    <img class="profile" src="/assets/img/temp/people.jpg">
+                    <img class="box-image" src="/assets/img/temp/people.jpg">
                 {% endif %}
 
-                    <img class="mask" src="/assets/img/masks/white_full.png" alt="" />
+                    <img class="box-mask" src="/assets/img/masks/white_full.png" alt="" />
 
                 </div>
                 <div class="text">

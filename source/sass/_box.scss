@@ -78,21 +78,25 @@
     position: relative;
     //padding-top: 100%;
 
-    > img.profile {
+    > img.box-image {
         opacity: 0;
         padding-bottom: 1px;
-
-        &.loaded {
-            opacity: 1;
-            @include transition(opacity 250ms ease);
-        }
     }
 
-    > img.mask {
+    > img.box-mask {
         height: 100%;
         width: 100%;
         position: absolute;
         top: 0;
         left: 0;
     }
+
+    + .text {
+        padding: 0 5px;
+    }
+}
+
+.loaded img.box-image {
+    opacity: 1;
+    @include transition(opacity 250ms ease);
 }
