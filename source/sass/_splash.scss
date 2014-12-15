@@ -1,0 +1,68 @@
+.splash {
+    border: 25px solid white;
+    padding: 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+
+    z-index: 500;
+
+    &.fade-out {
+        opacity: 0;
+        @include transition(opacity 200ms ease);
+    }
+}
+
+.splash-bg {
+    background-color: $darkgray;
+    height: 100%;
+    border-image-source: url(/assets/img/masks/splash.png);
+    border-image-width: 10px;
+    border-image-repeat: stretch;
+    border-image-slice: 10;
+
+    @include flexbox;
+}
+
+.splash-body {
+    margin: auto;
+}
+
+.splash-button {
+    position: absolute;
+    bottom: 25px;
+    right: 25px;
+
+    &:after {
+        content: '';
+        display: block;
+        height: 0;
+        width: 0;
+        border: 15px solid transparent;
+        border-left-color: $pink;
+        border-left-width: 20px;
+    }
+}
+
+.splash-quote {
+    font-weight: 100;
+    font-size: 34px;
+    font-size: rems(34);
+    color: white;
+    text-align: center;
+    max-width: 660px;
+}
+
+.splash-cite {
+    display: block;
+    text-align: right;
+    margin-top: rems($base * 2);
+    margin-right: rems(-$base * 3);
+    font-style: normal;
+
+    &:before {
+        content: '\2014';
+    }
+}

@@ -3050,3 +3050,83 @@ input.input-gray:focus {
   margin: 0;
   display: inline;
 }
+
+/* line 1, ../../../source/sass/_splash.scss */
+.splash {
+  border: 25px solid white;
+  padding: 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 500;
+}
+/* line 12, ../../../source/sass/_splash.scss */
+.splash.fade-out {
+  opacity: 0;
+  -moz-transition: opacity 200ms ease;
+  -o-transition: opacity 200ms ease;
+  -webkit-transition: opacity 200ms ease;
+  transition: opacity 200ms ease;
+}
+
+/* line 18, ../../../source/sass/_splash.scss */
+.splash-bg {
+  background-color: #333;
+  height: 100%;
+  border-image-source: url(/assets/img/masks/splash.png);
+  border-image-width: 10px;
+  border-image-repeat: stretch;
+  border-image-slice: 10;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+/* line 29, ../../../source/sass/_splash.scss */
+.splash-body {
+  margin: auto;
+}
+
+/* line 33, ../../../source/sass/_splash.scss */
+.splash-button {
+  position: absolute;
+  bottom: 25px;
+  right: 25px;
+}
+/* line 38, ../../../source/sass/_splash.scss */
+.splash-button:after {
+  content: '';
+  display: block;
+  height: 0;
+  width: 0;
+  border: 15px solid transparent;
+  border-left-color: #d175a1;
+  border-left-width: 20px;
+}
+
+/* line 49, ../../../source/sass/_splash.scss */
+.splash-quote {
+  font-weight: 100;
+  font-size: 34px;
+  font-size: 2.125rem;
+  color: white;
+  text-align: center;
+  max-width: 660px;
+}
+
+/* line 58, ../../../source/sass/_splash.scss */
+.splash-cite {
+  display: block;
+  text-align: right;
+  margin-top: 2.375rem;
+  margin-right: -3.5625rem;
+  font-style: normal;
+}
+/* line 65, ../../../source/sass/_splash.scss */
+.splash-cite:before {
+  content: '\2014';
+}
