@@ -13049,6 +13049,8 @@ $(function() {
         if (options.useKeys) {
             $('window').off('keyup', keyHandler)
         }
+
+        $(window).trigger('close:lightbox')
     }
 
     function slickInit() {
@@ -13194,7 +13196,9 @@ $(function() {
 $(function() {
     var hash = location.hash,
         seenMenu = !!sessionStorage.getItem('seenMenu'),
-        $sidenavButton = $('#sidenavButton')
+        $sidenavButton = $('#sidenavButton'),
+        $a = $('#article'),
+        center = $('#nextBlog').outerWidth() - 35
 
     $('#chapterNav').on('click', 'a', function(e) {
         e.preventDefault()
@@ -13269,11 +13273,29 @@ $(function() {
         $('#chapterNav').find('[href=' + hash + ']').addClass('active')
     }
 
-    // TODO detect clip path flavor
-    var center = $('#nextBlog').outerWidth() - 35
-    $('#nextBlog').css({ 'webkitClipPath' : 'circle(20px at ' + center + 'px)' })
+    function placeSiblingNav() {
+        if ( window.innerWidth > 884 ) {
+            $('#prev').css({
+                left: $a.offset().left - 85
+            })
+            $('#next').css({
+                left: $a.offset().left + $a.width() + 85
+            })
+        } else {
+            $('#prev').css({
+                left: $a.offset().left - 60
+            })
+            $('#next').css({
+                left: $a.offset().left + $a.width() + 60
+            })
+        }
+    }
+
     $('.nav-sibling').addClass('loaded')
 
+    placeSiblingNav()
+    $(window).on('close:lightbox', placeSiblingNav)
+    $(window).on('resize', placeSiblingNav)
 })
 
 // projects.js

@@ -1,4 +1,9 @@
-.text {}
+.text {
+
+    // @include mq($screen-min) {
+    //     padding: 0;
+    // }
+}
 
 .text--separator {
     &:after {
@@ -194,6 +199,7 @@
 .text-header {
     > .text-title {
         margin-bottom: 0;
+        padding-right: 105px;
     }
 
     &:after {
@@ -201,5 +207,6 @@
         display: block;
         margin: rems($base * 2) 0;
         opacity: 0.4;
+        overflow: hidden;
     }
 }

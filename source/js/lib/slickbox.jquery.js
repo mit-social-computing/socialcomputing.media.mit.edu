@@ -50,6 +50,8 @@
         if (options.useKeys) {
             $('window').off('keyup', keyHandler)
         }
+
+        $(window).trigger('close:lightbox')
     }
 
     function slickInit() {

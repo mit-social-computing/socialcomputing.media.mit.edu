@@ -12,7 +12,7 @@
         <a class="addthis_button_compact">+ share</a>
     </div>
 </div>
-<article class="text">
+<article class="text" id="article">
     <div class="text-header">
         <h2 class="text-title">{{ entry }}</h2>
         <footer class="text-body text-footer">
@@ -30,7 +30,7 @@
 {% set prev = entry.getPrev(params) %}
 {% set next = entry.getNext(params) %}
 
-<div class="nav-sibling nav-sibling--prev">
+<div class="nav-sibling nav-sibling--prev" id="prev">
 {% if prev %}
     <div class="nav-sibling-clip">
         <a class="nav-arrow" href="{{ prev.url }}"></a>
@@ -41,7 +41,7 @@
 {% endif %}
 </div>
 
-<div class="nav-sibling nav-sibling--next">
+<div class="nav-sibling nav-sibling--next" id="next">
 {% if next %}
     <div class="nav-sibling-clip" id="nextBlog">
         <a class="nav-arrow" href="{{ next.url }}"></a>

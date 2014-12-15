@@ -109,9 +109,17 @@
     max-width: #{$content-width}px;
     margin-left: auto;
     margin-right: auto;
-    padding-top: rems($base * 2);
+    padding: rems($base * 2) rems($base) 0;
 
-    @include translate3d(0,0,0);
+    @include mq($screen-min) {
+        padding-left: rems($base * 2.5);
+        padding-right: rems($base * 2.5);
+    }
+
+    @include mq("min-width: 884px") {
+        padding-left: 0;
+        padding-right: 0;
+    }
 }
 
 .l-content {

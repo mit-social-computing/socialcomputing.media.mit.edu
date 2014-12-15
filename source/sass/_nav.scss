@@ -42,7 +42,7 @@
         position: absolute;
         top: 0;
         bottom: 0;
-        left: 100%;
+        right: -10px;
         width: 18px;
 
         background-image: url(/assets/img/masks/sidenav.png);
@@ -188,21 +188,36 @@ h1.nav-logo {
 }
 
 .nav-sibling {
-    height: 80px;
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    margin: auto;
+    display: none;
+    opacity: 0;
+
+    @include transition(opacity 250ms ease);
+
+    @include mq($screen-min) {
+        display: block;
+        height: 80px;
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        margin: auto;
+
+        &.loaded {
+            opacity: 1;
+        }
+    }
 }
 
 .nav-sibling-title {
     display: block;
     white-space: nowrap;
+    background-color: $lightestgray;
+
+    opacity: 0;
+    @include transition(opacity 250ms ease);
 
     font-family: handwriting;
     color: $darkgray;
     text-transform: lowercase;
-
 
     &:before {
         content: '';
@@ -213,23 +228,24 @@ h1.nav-logo {
 }
 
 .nav-sibling--prev {
-    left: -85px;
+    //left: 0;
+
+    //@include mq("min-width: 884px") {
+    //    left: -85px;
+    //}
 
     .nav-sibling-clip {
         left: 0;
-        -webkit-clip-path: circle(20px at 35px 40px);
+        //-webkit-clip-path: circle(20px at 35px 40px);
 
         &:hover {
-            -webkit-clip-path: circle(300px at 35px 40px);
+            //-webkit-clip-path: circle(300px at 35px 40px);
 
-            .nav-arrow:after {
-                border-right-color: white;
-            }
         }
     }
 
     .nav-sibling-title {
-        margin-left: 65px;
+        padding-left: 65px;
         padding-right: 25px;
     }
 
@@ -245,26 +261,31 @@ h1.nav-logo {
             border-right-width: 11px;
             border-left-width: 0;
         }
+
+        &:hover:after {
+            border-right-color: white;
+        }
     }
 }
 
 .nav-sibling--next {
-    right: -85px;
+    // right: 0;
+
+    // @include mq("min-width: 884px") {
+    //     right: -85px;
+    // }
 
     .nav-sibling-clip {
         right: 0;
 
         &:hover {
-            -webkit-clip-path: circle(300px at center) !important;
+            //-webkit-clip-path: circle(300px at center) !important;
 
-            .nav-arrow:after {
-                border-left-color: white;
-            }
         }
     }
 
     .nav-sibling-title {
-        margin-right: 65px;
+        padding-right: 65px;
         padding-left: 25px;
     }
 
@@ -281,11 +302,15 @@ h1.nav-logo {
             border-left-width: 11px;
 
         }
+        &:hover:after {
+            border-left-color: white;
+        }
     }
 }
 
 .nav-arrow {
     position: absolute;
+    z-index: 1;
     top: 0;
     bottom: 0;
     margin: auto;
@@ -294,13 +319,19 @@ h1.nav-logo {
     height: 40px;
     border-radius: 50%;
 
-    background-color: rgba($lightergray, 0);
+    background-color: $lightestgray;
+
+    pointer-events: all;
 
     @include transition(background-color 250ms ease 250ms);
 
     &:hover {
-        background-color: rgba($lightergray, 1);
+        background-color: $lightergray;
         @include transition(background-color 250ms ease 0ms);
+
+        + .nav-sibling-title {
+            opacity: 1;
+        }
     }
 
     &:after {
@@ -324,19 +355,20 @@ h1.nav-logo {
 }
 
 .nav-sibling-clip {
-    background-color: rgba($lightestgray, 0);
+    //background-color: rgba($lightestgray, 0);
     position: absolute;
+    pointer-events: none;
 
-    .loaded & {
-        background-color: rgba($lightestgray, 1);
-        @include transition(background-color 250ms ease 0s, -webkit-clip-path 250ms ease 150ms);
-    }
+    // .loaded & {
+    //     background-color: rgba($lightestgray, 1);
+    //     @include transition(background-color 250ms ease 0s /*, -webkit-clip-path 250ms ease 150ms*/);
+    // }
 
     &:hover {
-        transition: -webkit-clip-path 250ms ease;
+        //transition: -webkit-clip-path 250ms ease;
 
         > .nav-arrow {
-            background-color: rgba($lightgray, 1);
+            //background-color: rgba($lightgray, 1);
         }
     }
 }
