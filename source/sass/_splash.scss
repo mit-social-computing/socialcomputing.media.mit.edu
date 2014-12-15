@@ -9,6 +9,12 @@
 
     z-index: 500;
 
+    opacity: 0;
+    &.step-one {
+        opacity: 1;
+        @include transition(opacity 750ms ease);
+    }
+
     &.fade-out {
         opacity: 0;
         @include transition(opacity 200ms ease);
@@ -28,6 +34,13 @@
 
 .splash-body {
     margin: auto;
+
+    opacity: 0;
+
+    .step-two & {
+        opacity: 1;
+        @include transition(opacity 500ms ease);
+    }
 }
 
 .splash-button {

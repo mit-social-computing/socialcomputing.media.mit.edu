@@ -1,3 +1,12 @@
+.is-splash-page {
+    background: $darkgray;
+
+    > header,
+    > main {
+        opacity: 0;
+    }
+}
+
 .is-not-scrolling {
     &#scrollbox,
     .scrollbar {

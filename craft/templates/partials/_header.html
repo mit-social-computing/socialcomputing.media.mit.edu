@@ -8,7 +8,12 @@
         <link href="/assets/css/styles.css" rel="stylesheet">
     </head>
     {% if flexpage is defined %}
-    <body class="is-flexpage">
+        {% if craft.lj_cookies.get('splash') == 1 %}
+            <body class="is-flexpage">
+        {% else %}
+            <body class="is-flexpage is-splash-page">
+            {% do craft.lj_cookies.set('splash', 1) %}
+        {%endif%}
     {% else %}
     <body>
     {% endif %}
