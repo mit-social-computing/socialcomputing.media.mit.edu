@@ -3,6 +3,7 @@ node_modules/
 source/bower_components/
 
 craft/storage/
+craft/config/db.php
 public/uploads/
 
 *.log

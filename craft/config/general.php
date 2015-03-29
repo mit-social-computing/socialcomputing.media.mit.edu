@@ -31,6 +31,13 @@ return array(
             'baseUrl'   => 'http://162.243.54.103/'
         )
 
+    ),
+
+    'socialstaging.media.mit.edu'   => array(
+        'environmentVariables'  => array(
+            'basePath'  => '/var/www/social-computing-staging/public',
+            'baseUrl'   => 'http://socialstaging.media.mit.edu'
+        )
     )
 
 );
