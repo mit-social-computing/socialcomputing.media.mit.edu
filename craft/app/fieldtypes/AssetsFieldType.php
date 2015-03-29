@@ -157,6 +157,10 @@ class AssetsFieldType extends BaseElementFieldType
 						$fileIds = array_merge($value, $fileIds);
 					}
 
+					// Make it look like the actual POST data contained these file IDs as well,
+					// so they make it into entry draft/version data
+					$this->element->setRawPostContent($this->model->handle, $fileIds);
+
 					return $fileIds;
 				}
 			}
@@ -175,14 +179,13 @@ class AssetsFieldType extends BaseElementFieldType
 		$handle = $this->model->handle;
 		$elementFiles = $this->element->{$handle};
 
-		if (is_object($elementFiles))
+		if ($elementFiles instanceof ElementCriteriaModel)
 		{
 			$elementFiles = $elementFiles->find();
 		}
 
 		if (is_array($elementFiles) && count($elementFiles))
 		{
-
 			$fileIds = array();
 
 			foreach ($elementFiles as $elementFile)
@@ -203,10 +206,6 @@ class AssetsFieldType extends BaseElementFieldType
 			}
 			else
 			{
-				$targetFolderId = $this->_resolveSourcePathToFolderId(
-					$settings->defaultUploadLocationSource,
-					$settings->defaultUploadLocationSubpath);
-
 				// Find the files with temp sources and just move those.
 				$criteria =array(
 					'id' => array_merge(array('in'), $fileIds),
@@ -219,6 +218,14 @@ class AssetsFieldType extends BaseElementFieldType
 				foreach ($filesInTempSource as $file)
 				{
 					$filesToMove[] = $file->id;
+				}
+
+				// If we have some files to move, make sure the folder exists.
+				if (!empty($filesToMove))
+				{
+					$targetFolderId = $this->_resolveSourcePathToFolderId(
+						$settings->defaultUploadLocationSource,
+						$settings->defaultUploadLocationSubpath);
 				}
 			}
 

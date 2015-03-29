@@ -13,6 +13,11 @@ namespace Craft;
  */
 class UrlHelper
 {
+	// Properties
+	// =========================================================================
+
+	private static $_x;
+
 	// Public Methods
 	// =========================================================================
 
@@ -53,7 +58,7 @@ class UrlHelper
 	}
 
 	/**
-	 * Returns whether a given string appears to be a "full" URL (absolute or root-relative).
+	 * Returns whether a given string appears to be a "full" URL (absolute, root-relative or protocol-relative).
 	 *
 	 * @param string $url
 	 *
@@ -61,7 +66,7 @@ class UrlHelper
 	 */
 	public static function isFullUrl($url)
 	{
-		return (static::isAbsoluteUrl($url) || static::isRootRelativeUrl($url));
+		return (static::isAbsoluteUrl($url) || static::isRootRelativeUrl($url) || static::isProtocolRelativeUrl($url));
 	}
 
 	/**
@@ -262,7 +267,15 @@ class UrlHelper
 				{
 					// Just set a random query string param on there, so even if the browser decides to cache it,
 					// the next time this happens, the cache won't be used.
-					$params['x'] = StringHelper::randomString(9);
+
+					// Use a consistent param for all resource requests with uncached paths, in case the same resource
+					// URL is requested multiple times in the same request
+					if (!isset(static::$_x))
+					{
+						static::$_x = StringHelper::randomString(9);
+					}
+
+					$params['x'] = static::$_x;
 				}
 			}
 		}
@@ -283,6 +296,29 @@ class UrlHelper
 		$path = craft()->config->get('actionTrigger').'/'.trim($path, '/');
 
 		return static::getUrl($path, $params, $protocol, true);
+	}
+
+	/**
+	 * Removes the query string from a given URL.
+	 *
+	 * @param $url The URL to check.
+	 *
+	 * @return string The URL without a query string.
+	 */
+	public static function stripQueryString($url)
+	{
+		if (($qIndex = mb_strpos($url, '?')) !== false)
+		{
+			$url = mb_substr($url, 0, $qIndex);
+		}
+
+		// Just in case the URL had an invalid query string
+		if (($qIndex = mb_strpos($url, '&')) !== false)
+		{
+			$url = mb_substr($url, 0, $qIndex);
+		}
+
+		return $url;
 	}
 
 	// Private Methods

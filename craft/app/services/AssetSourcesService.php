@@ -273,7 +273,7 @@ class AssetSourcesService extends BaseApplicationComponent
 			$source->id = $sourceId;
 			$source->name = TempAssetSourceType::sourceName;
 			$source->type = TempAssetSourceType::sourceType;
-			$source->settings = array('path' => craft()->path->getAssetsTempSourcePath(), 'url' => UrlHelper::getResourceUrl('tempassets').'/');
+			$source->settings = array('path' => craft()->path->getAssetsTempSourcePath(), 'url' => rtrim(UrlHelper::getResourceUrl(), '/').'/tempassets/');
 			return $source;
 		}
 		else
@@ -556,7 +556,7 @@ class AssetSourcesService extends BaseApplicationComponent
 
 			if (!$sourceRecord)
 			{
-				throw new Exception(Craft::t('No source exists with the ID “{id}”', array('id' => $sourceId)));
+				throw new Exception(Craft::t('No source exists with the ID “{id}”.', array('id' => $sourceId)));
 			}
 		}
 		else

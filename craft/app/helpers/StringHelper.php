@@ -224,8 +224,8 @@ class StringHelper
 				257 => 'aa', 269 => 'ch', 275 => 'ee', 291 => 'gj', 299 => 'ii',
 				311 => 'kj', 316 => 'lj', 326 => 'nj', 353 => 'sh', 363 => 'uu',
 				382 => 'zh', 256 => 'aa', 268 => 'ch', 274 => 'ee', 290 => 'gj',
-				298 => 'ii', 310 => 'kj', 315 => 'lj', 325 => 'nj', 352 => 'sh',
-				362 => 'uu', 381 => 'zh'
+				298 => 'ii', 310 => 'kj', 315 => 'lj', 325 => 'nj', 337 => 'o',
+				352 => 'sh', 362 => 'uu', 369 => 'u',  381 => 'zh'
 			);
 
 			foreach (craft()->config->get('customAsciiCharMappings') as $ascii => $char)
@@ -274,31 +274,55 @@ class StringHelper
 	public static function asciiString($str)
 	{
 		$asciiStr = '';
-		$strlen = mb_strlen($str);
+		$strlen = strlen($str);
 		$asciiCharMap = static::getAsciiCharMap();
 
-		// If this looks funky, it's because mb_strlen is garbage. For example, it returns 6 for this string: "ü.png"
-		for ($counter = 0; $counter < $strlen; $counter++)
+		// Code adapted from http://php.net/ord#109812
+		$offset = 0;
+
+		while ($offset < $strlen)
 		{
-			if (!isset($str[$counter]))
+			// ord() doesn't support UTF-8 so we need to do some extra work to determine the ASCII code
+			$ascii = ord(substr($str, $offset, 1));
+
+			if ($ascii >= 128) // otherwise 0xxxxxxx
 			{
-				break;
+				if ($ascii < 224)
+				{
+					$bytesnumber = 2; // 110xxxxx
+				}
+				else if ($ascii < 240)
+				{
+					$bytesnumber = 3; // 1110xxxx
+				}
+				else if ($ascii < 248)
+				{
+					$bytesnumber = 4; // 11110xxx
+				}
+
+				$tempAscii = $ascii - 192 - ($bytesnumber > 2 ? 32 : 0) - ($bytesnumber > 3 ? 16 : 0);
+
+				for ($i = 2; $i <= $bytesnumber; $i++)
+				{
+					$offset++;
+					$ascii2 = ord(substr($str, $offset, 1)) - 128; // 10xxxxxx
+					$tempAscii = $tempAscii * 64 + $ascii2;
+				}
+
+				$ascii = $tempAscii;
 			}
 
-			$char = $str[$counter];
-			$ascii = ord($char);
+			$offset++;
 
+			// Is this an ASCII character?
 			if ($ascii >= 32 && $ascii < 128)
 			{
-				$asciiStr .= $char;
+				$asciiStr .= chr($ascii);
 			}
+			// Do we have an ASCII mapping for it?
 			else if (isset($asciiCharMap[$ascii]))
 			{
 				$asciiStr .= $asciiCharMap[$ascii];
-			}
-			else
-			{
-				$strlen++;
 			}
 		}
 
@@ -339,18 +363,16 @@ class StringHelper
 			foreach ($ignore as $word)
 			{
 				$word = preg_quote(static::_normalizeKeywords($word));
-				$str  = preg_replace("/\b{$word}\b/", '', $str);
+				$str  = preg_replace("/\b{$word}\b/u", '', $str);
 			}
 		}
 
 		// Strip out new lines and superfluous spaces
-		$str = preg_replace('/[\n\r]+/', ' ', $str);
-		$str = preg_replace('/\s{2,}/', ' ', $str);
+		$str = preg_replace('/[\n\r]+/u', ' ', $str);
+		$str = preg_replace('/\s{2,}/u', ' ', $str);
 
-		// Trim white space
-		$str = trim($str);
-
-		return $str;
+		// Trim white space and return
+		return trim($str);
 	}
 
 	/**

@@ -17,19 +17,35 @@ return array(
 	'actionTrigger' => 'actions',
 
 	/**
+	 * The URI Craft should use upon successfully activating a user. Note that this only affects front-end site
+	 * requests.
+	 *
+	 * This can be set to a string or an array with locale IDs used as the keys, if you want to set it on a per-locale
+	 * basis.
+	 */
+	'activateAccountSuccessPath' => '',
+
+	/**
 	 * Determines whether auto-generated URLs should have trailing slashes.
 	 */
 	'addTrailingSlashesToUrls' => false,
 
 	/**
 	 * Whether or not to allow auto-updating in Craft. Does not affect manual updates.
+	 *
+	 * Possible values are:
+	 *
+	 * - `true` (all updates are allowed)
+	 * - `'minor-only'` (only minor and build updates are allowed)
+	 * - `'build-only'` (only build updates are allowed)
+	 * - `false` (no updates are allowed)
 	 */
 	'allowAutoUpdates' => true,
 
 	/**
 	 * A list of file extensions that Craft will allow when a user is uploading files.
 	 */
-	'allowedFileExtensions' => '7z,aiff,asf,avi,bmp,csv,doc,docx,fla,flv,gif,gz,gzip,htm,html,jpeg,jpg,js,mid,mov,mp3,mp4,m4a,m4v,mpc,mpeg,mpg,ods,odt,ogg,ogv,pdf,png,ppt,pptx,pxd,qt,ram,rar,rm,rmi,rmvb,rtf,sdc,sitd,svg,swf,sxc,sxw,tar,tgz,tif,tiff,txt,vsd,wav,webm,wma,wmv,xls,xlsx,zip',
+	'allowedFileExtensions' => '7z,aiff,asf,avi,bmp,csv,doc,docx,fla,flv,gif,gz,gzip,htm,html,jpeg,jpg,js,mid,mov,mp3,mp4,m4a,m4v,mpc,mpeg,mpg,ods,odt,ogg,ogv,pdf,png,potx,pps,ppsm,ppsx,ppt,pptm,pptx,ppz,pxd,qt,ram,rar,rm,rmi,rmvb,rtf,sdc,sitd,svg,swf,sxc,sxw,tar,tgz,tif,tiff,txt,vsd,wav,webm,wma,wmv,xls,xlsx,zip',
 
 	/**
 	 * Whether or not to allow uppercase letters in the slug. Defaults to false.
@@ -411,6 +427,17 @@ return array(
 	'rotateImagesOnUploadByExifData' => true,
 
 	/**
+	 * Whether Craft should run pending background tasks automatically over HTTP requests, or leave it up to something
+	 * like a Cron job to call index.php/actions/tasks/runPendingTasks at a regular interval.
+	 *
+	 * This setting should be disabled for servers running Win32, or with Apache’s mod_deflate/mod_gzip installed,
+	 * where PHP’s [flush()](http://php.net/manual/en/function.flush.php) method won’t work.
+	 *
+	 * If disabled, an alternate task running trigger *must* be set up separately.
+	 */
+	'runTasksAutomatically' => true,
+
+	/**
 	 * Words that should be ignored when indexing search keywords and preparing search terms to be matched against the
 	 * keyword index.
 	 */
@@ -499,6 +526,15 @@ return array(
 	 * and cache the test results for 24 hours.
 	 */
 	'usePathInfo' => 'auto',
+
+	/**
+	 * Determines whether Craft will set the "secure" flag when saving cookies when calling `craft()->userSession->saveCookie()`.
+	 *
+	 * Valid values are `true`, `false`, and `'auto'`. Defaults to `'auto'`, which will set the secure flag if the page
+	 * you're currently accessing is over `https://`. `true` will always set the flag, regardless of protocol and `false`
+	 * will never automatically set the flag.
+	 */
+	'useSecureCookies' => 'auto',
 
 	/**
 	 * The amount of time a user stays logged in.

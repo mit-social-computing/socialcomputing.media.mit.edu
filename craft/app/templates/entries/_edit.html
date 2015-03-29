@@ -45,7 +45,7 @@
 
 				{% if craft.isLocalized() and section.getLocales() | length > 1 %}
 					<ul id="locales" class="pane">
-						{% set parentIdParam = craft.request.getParam('parentId') %}
+						{% set parentIdParam = craft.request.getParam('parentId.0') ?: craft.request.getParam('parentId') %}
 						{% for localeId in localeIds %}
 							{% set localeName = craft.i18n.getLocaleById(localeId).name %}
 							<li{% if localeId == entry.locale %} class="sel"{% endif %}>
@@ -108,7 +108,7 @@
 								}) }}
 							{% endif %}
 
-							{% if CraftEdition >= CraftClient and currentUser.can('editPeerEntries'~permissionSuffix) %}
+							{% if CraftEdition == CraftPro and currentUser.can('editPeerEntries'~permissionSuffix) %}
 								{{ forms.elementSelectField({
 									label: "Author"|t,
 									id: 'author',

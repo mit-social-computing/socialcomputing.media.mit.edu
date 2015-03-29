@@ -320,7 +320,7 @@ class SectionsService extends BaseApplicationComponent
 
 			if (!$sectionRecord)
 			{
-				throw new Exception(Craft::t('No section exists with the ID “{id}”', array('id' => $section->id)));
+				throw new Exception(Craft::t('No section exists with the ID “{id}”.', array('id' => $section->id)));
 			}
 
 			$oldSection = SectionModel::populateModel($sectionRecord);
@@ -737,16 +737,23 @@ class SectionsService extends BaseApplicationComponent
 					if (!$isNewSection)
 					{
 						$criteria = craft()->elements->getCriteria(ElementType::Entry);
-						$criteria->locale = array_shift(array_keys($oldSectionLocales));
-						$criteria->sectionId = $section->id;
-						$criteria->status = null;
-						$criteria->localeEnabled = null;
-						$criteria->limit = null;
 
-						craft()->tasks->createTask('ResaveElements', Craft::t('Resaving {section} entries', array('section' => $section->name)), array(
-							'elementType' => ElementType::Entry,
-							'criteria'    => $criteria->getAttributes()
-						));
+						// Get the most-primary locale that this section was already enabled in
+						$locales = array_values(array_intersect(craft()->i18n->getSiteLocaleIds(), array_keys($oldSectionLocales)));
+
+						if ($locales)
+						{
+							$criteria->locale = $locales[0];
+							$criteria->sectionId = $section->id;
+							$criteria->status = null;
+							$criteria->localeEnabled = null;
+							$criteria->limit = null;
+
+							craft()->tasks->createTask('ResaveElements', Craft::t('Resaving {section} entries', array('section' => $section->name)), array(
+								'elementType' => ElementType::Entry,
+								'criteria'    => $criteria->getAttributes()
+							));
+						}
 					}
 
 					$success = true;
@@ -959,7 +966,7 @@ class SectionsService extends BaseApplicationComponent
 
 			if (!$entryTypeRecord)
 			{
-				throw new Exception(Craft::t('No entry type exists with the ID “{id}”', array('id' => $entryType->id)));
+				throw new Exception(Craft::t('No entry type exists with the ID “{id}”.', array('id' => $entryType->id)));
 			}
 
 			$isNewEntryType = false;

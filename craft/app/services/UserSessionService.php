@@ -282,7 +282,7 @@ class UserSessionService extends \CWebUser
 	/**
 	 * Authorizes the user to perform an action for the duration of the session.
 	 *
-	 * @param stirng $action
+	 * @param string $action
 	 *
 	 * @return null
 	 */
@@ -595,18 +595,18 @@ class UserSessionService extends \CWebUser
 			{
 				$this->changeIdentity($id, $this->_identity->getName(), $states);
 
-				if ($this->authTimeout)
-				{
-					if ($this->allowAutoLogin)
-					{
-						$user = craft()->users->getUserById($id);
+				$user = craft()->users->getUserById($id);
 
-						if ($user)
+				if ($user)
+				{
+					if ($this->authTimeout)
+					{
+						if ($this->allowAutoLogin)
 						{
 							// Save the necessary info to the identity cookie.
-							$sessionToken = StringHelper::UUID();
+							$sessionToken = craft()->security->generateRandomString(32);
 							$hashedToken = craft()->security->hashData(base64_encode(serialize($sessionToken)));
-							$uid = craft()->users->handleSuccessfulLogin($user, $hashedToken);
+							$uid = $this->storeSessionToken($user, $hashedToken);
 
 							$data = array(
 								$this->getName(),
@@ -621,13 +621,15 @@ class UserSessionService extends \CWebUser
 						}
 						else
 						{
-							throw new Exception(Craft::t('Could not find a user with Id of {userId}.', array('{userId}' => $this->getId())));
+							throw new Exception(Craft::t('{class}.allowAutoLogin must be set true in order to use cookie-based authentication.', array('{class}' => get_class($this))));
 						}
 					}
-					else
-					{
-						throw new Exception(Craft::t('{class}.allowAutoLogin must be set true in order to use cookie-based authentication.', array('{class}' => get_class($this))));
-					}
+
+					craft()->users->updateUserLoginInfo($user);
+				}
+				else
+				{
+					throw new Exception(Craft::t('Could not find a user with Id of {userId}.', array('{userId}' => $this->getId())));
 				}
 
 				$this->_sessionRestoredFromCookie = false;
@@ -695,6 +697,25 @@ class UserSessionService extends \CWebUser
 	}
 
 	/**
+	 * Saves a new session record for a given user.
+	 *
+	 * @param UserModel $user
+	 * @param string    $sessionToken
+	 *
+	 * @return string The session's UID.
+	 */
+	public function storeSessionToken(UserModel $user, $sessionToken)
+	{
+		$sessionRecord = new SessionRecord();
+		$sessionRecord->userId = $user->id;
+		$sessionRecord->token = $sessionToken;
+
+		$sessionRecord->save();
+
+		return $sessionRecord->uid;
+	}
+
+	/**
 	 * Returns a login error message by a given error code.
 	 *
 	 * @param $errorCode The login error code.
@@ -755,6 +776,11 @@ class UserSessionService extends \CWebUser
 				$error = Craft::t('You cannot access the CP while the system is offline with that account.');
 				break;
 			}
+			case UserIdentity::ERROR_PENDING_VERIFICATION:
+			{
+				$error = Craft::t('Account has not been activated.');
+				break;
+			}
 			default:
 			{
 				$error = Craft::t('Invalid username or password.');
@@ -797,15 +823,10 @@ class UserSessionService extends \CWebUser
 	{
 		$name = $this->getStateKeyPrefix().$name;
 		$cookie = new HttpCookie($name, '');
-		$cookie->httpOnly = true;
+
 		$cookie->expire = time() + $duration;
-
-		if (craft()->request->isSecureConnection())
-		{
-			$cookie->secure = true;
-		}
-
 		$cookie->value = craft()->security->hashData(base64_encode(serialize($data)));
+
 		craft()->request->getCookies()->add($cookie->name, $cookie);
 
 		return $cookie;
@@ -1140,7 +1161,7 @@ class UserSessionService extends \CWebUser
 				// Extend the expiration time
 				$expiration = time() + $this->authTimeout;
 				$cookie->expire = $expiration;
-				$cookie->httpOnly = true;
+
 				craft()->request->getCookies()->add($cookie->name, $cookie);
 			}
 		}
@@ -1191,7 +1212,7 @@ class UserSessionService extends \CWebUser
 					// Make sure the given session token matches what we have in the db.
 					$checkHashedToken= craft()->security->hashData(base64_encode(serialize($currentSessionToken)));
 
-					if (strcmp($checkHashedToken, $dbHashedToken) === 0)
+					if (\CPasswordHelper::same($checkHashedToken, $dbHashedToken))
 					{
 						// It's all good.
 						if($this->beforeLogin($loginName, $states, true))
@@ -1201,7 +1222,7 @@ class UserSessionService extends \CWebUser
 							if ($this->autoRenewCookie)
 							{
 								// Generate a new session token for the database and cookie.
-								$newSessionToken = StringHelper::UUID();
+								$newSessionToken = craft()->security->generateRandomString(32);
 								$hashedNewToken = craft()->security->hashData(base64_encode(serialize($newSessionToken)));
 								$this->_updateSessionToken($loginName, $dbHashedToken, $hashedNewToken);
 
@@ -1323,6 +1344,12 @@ class UserSessionService extends \CWebUser
 
 		// Delete the identity cookie, if there is one
 		$this->deleteStateCookie('');
+
+		if (craft()->config->get('enableCsrfProtection'))
+		{
+			// Let's keep the current nonce around.
+			craft()->request->regenCsrfCookie();
+		}
 
 		// Fire an 'onLogout' event
 		$this->onLogout(new Event($this));

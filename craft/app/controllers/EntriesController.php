@@ -58,7 +58,7 @@ class EntriesController extends BaseEntriesController
 
 		$variables['permissionSuffix'] = ':'.$variables['entry']->sectionId;
 
-		if (craft()->getEdition() >= Craft::Client && $variables['section']->type != SectionType::Single)
+		if (craft()->getEdition() == Craft::Pro && $variables['section']->type != SectionType::Single)
 		{
 			// Author selector variables
 			// ---------------------------------------------------------------------
@@ -389,6 +389,10 @@ class EntriesController extends BaseEntriesController
 		{
 			$entry = $this->_getEntryModel();
 			$this->enforceEditEntryPermissions($entry);
+
+			// Set the language to the user's preferred locale so DateFormatter returns the right format
+			craft()->setLanguage(craft()->getTargetLanguage(true));
+
 			$this->_populateEntryModel($entry);
 		}
 
@@ -501,6 +505,9 @@ class EntriesController extends BaseEntriesController
 	/**
 	 * Deletes an entry.
 	 *
+	 * @throws Exception
+	 * @throws HttpException
+	 * @throws \Exception
 	 * @return null
 	 */
 	public function actionDeleteEntry()
@@ -510,6 +517,12 @@ class EntriesController extends BaseEntriesController
 		$entryId = craft()->request->getRequiredPost('entryId');
 		$localeId = craft()->request->getPost('locale');
 		$entry = craft()->entries->getEntryById($entryId, $localeId);
+
+		if (!$entry)
+		{
+			throw new Exception(Craft::t('No entry exists with the ID “{id}”.', array('id' => $entryId)));
+		}
+
 		$currentUser = craft()->userSession->getUser();
 
 		if ($entry->authorId == $currentUser->id)
@@ -757,6 +770,20 @@ class EntriesController extends BaseEntriesController
 				{
 					$variables['entry']->locale = $variables['localeId'];
 				}
+
+				if (craft()->isLocalized())
+				{
+					// Set the default locale status based on the section's settings
+					foreach ($variables['section']->getLocales() as $locale)
+					{
+						if ($locale->locale == $variables['entry']->locale)
+						{
+							$variables['entry']->localeEnabled = $locale->enabledByDefault;
+							break;
+						}
+					}
+				}
+
 			}
 		}
 
@@ -825,7 +852,7 @@ class EntriesController extends BaseEntriesController
 
 			if (!$entry)
 			{
-				throw new Exception(Craft::t('No entry exists with the ID “{id}”', array('id' => $entryId)));
+				throw new Exception(Craft::t('No entry exists with the ID “{id}”.', array('id' => $entryId)));
 			}
 		}
 		else

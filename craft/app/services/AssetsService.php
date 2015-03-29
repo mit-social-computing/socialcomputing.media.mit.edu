@@ -124,7 +124,7 @@ class AssetsService extends BaseApplicationComponent
 
 			if (!$fileRecord)
 			{
-				throw new Exception(Craft::t("No asset exists with the ID “{id}”", array('id' => $file->id)));
+				throw new Exception(Craft::t("No asset exists with the ID “{id}”.", array('id' => $file->id)));
 			}
 		}
 		else
@@ -170,7 +170,6 @@ class AssetsService extends BaseApplicationComponent
 			// Is the event giving us the go-ahead?
 			if ($event->performAction)
 			{
-
 				// Save the element
 				$success = craft()->elements->saveElement($file, false);
 
@@ -234,56 +233,6 @@ class AssetsService extends BaseApplicationComponent
 		}
 
 		return $success;
-	}
-
-	/**
-	 * Fires an 'onBeforeSaveAsset' event.
-	 *
-	 * @param Event $event
-	 *
-	 * @return null
-	 */
-	public function onBeforeSaveAsset(Event $event)
-	{
-		$this->raiseEvent('onBeforeSaveAsset', $event);
-	}
-
-	/**
-	 * Fires an 'onBeforeUploadAsset' event.
-	 *
-	 * @param Event $event
-	 *
-	 * @return null
-	 */
-	public function onBeforeUploadAsset(Event $event)
-	{
-		$this->raiseEvent('onBeforeUploadAsset', $event);
-	}
-
-	/**
-	 * Fires an 'onSaveAsset' event.
-	 *
-	 * @param Event $event
-	 *
-	 * @return null
-	 */
-	public function onSaveAsset(Event $event)
-	{
-		$this->raiseEvent('onSaveAsset', $event);
-	}
-
-	/**
-	 * Fires an 'onSaveFileContent' event.
-	 *
-	 * @param Event $event
-	 *
-	 * @deprecated Deprecated in 2.0. Use {@link onSaveAsset() `assets.onSaveAsset`} instead.
-	 * @return null
-	 */
-	public function onSaveFileContent(Event $event)
-	{
-		craft()->deprecator->log('AssetsService::onSaveFileContent()', 'The assets.onSaveFileContent event has been deprecated. Use assets.onSaveAsset instead.');
-		$this->raiseEvent('onSaveFileContent', $event);
 	}
 
 	//  Folders
@@ -881,6 +830,18 @@ class AssetsService extends BaseApplicationComponent
 
 		$response = new AssetOperationResponseModel();
 
+		// Make sure the filename is allowed
+		if ($filename)
+		{
+			$extension = IOHelper::getExtension($filename);
+
+			if (!IOHelper::isExtensionAllowed($extension))
+			{
+				$response->setError(Craft::t('This file type is not allowed'));
+				return $response;
+			}
+		}
+
 		$folder = $this->getFolderById($folderId);
 		$newSourceType = craft()->assetSources->getSourceTypeById($folder->sourceId);
 
@@ -1112,6 +1073,83 @@ class AssetsService extends BaseApplicationComponent
 				throw new Exception(Craft::t('You don’t have the required permissions for this operation.'));
 			}
 		}
+	}
+
+	// Events
+	// -------------------------------------------------------------------------
+
+	/**
+	 * Fires an 'onBeforeUploadAsset' event.
+	 *
+	 * @param Event $event
+	 *
+	 * @return null
+	 */
+	public function onBeforeUploadAsset(Event $event)
+	{
+		$this->raiseEvent('onBeforeUploadAsset', $event);
+	}
+
+	/**
+	 * Fires an 'onBeforeSaveAsset' event.
+	 *
+	 * @param Event $event
+	 *
+	 * @return null
+	 */
+	public function onBeforeSaveAsset(Event $event)
+	{
+		$this->raiseEvent('onBeforeSaveAsset', $event);
+	}
+
+	/**
+	 * Fires an 'onSaveAsset' event.
+	 *
+	 * @param Event $event
+	 *
+	 * @return null
+	 */
+	public function onSaveAsset(Event $event)
+	{
+		$this->raiseEvent('onSaveAsset', $event);
+	}
+
+	/**
+	 * Fires an 'onBeforeReplaceFile' event.
+	 *
+	 * @param Event $event
+	 *
+	 * @return null
+	 */
+	public function onBeforeReplaceFile(Event $event)
+	{
+		$this->raiseEvent('onBeforeReplaceFile', $event);
+	}
+
+	/**
+	 * Fires an 'onReplaceFile' event.
+	 *
+	 * @param Event $event
+	 *
+	 * @return null
+	 */
+	public function onReplaceFile(Event $event)
+	{
+		$this->raiseEvent('onReplaceFile', $event);
+	}
+
+	/**
+	 * Fires an 'onSaveFileContent' event.
+	 *
+	 * @param Event $event
+	 *
+	 * @deprecated Deprecated in 2.0. Use {@link onSaveAsset() `assets.onSaveAsset`} instead.
+	 * @return null
+	 */
+	public function onSaveFileContent(Event $event)
+	{
+		craft()->deprecator->log('AssetsService::onSaveFileContent()', 'The assets.onSaveFileContent event has been deprecated. Use assets.onSaveAsset instead.');
+		$this->raiseEvent('onSaveFileContent', $event);
 	}
 
 	/**

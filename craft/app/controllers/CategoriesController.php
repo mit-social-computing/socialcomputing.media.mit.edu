@@ -270,7 +270,7 @@ class CategoriesController extends BaseController
 		else
 		{
 			$variables['docTitle'] = Craft::t($variables['category']->title);
-			$variables['title'] = HtmlHelper::encode(Craft::t($variables['category']->title));
+			$variables['title'] = Craft::t($variables['category']->title);
 		}
 
 		// Breadcrumbs
@@ -430,7 +430,7 @@ class CategoriesController extends BaseController
 
 		if (!$category)
 		{
-			throw new Exception(Craft::t('No category exists with the ID “{id}”', array('id' => $categoryId)));
+			throw new Exception(Craft::t('No category exists with the ID “{id}”.', array('id' => $categoryId)));
 		}
 
 		// Make sure they have permission to do this
@@ -673,7 +673,7 @@ class CategoriesController extends BaseController
 
 			if (!$category)
 			{
-				throw new Exception(Craft::t('No category exists with the ID “{id}”', array('id' => $categoryId)));
+				throw new Exception(Craft::t('No category exists with the ID “{id}”.', array('id' => $categoryId)));
 			}
 		}
 		else

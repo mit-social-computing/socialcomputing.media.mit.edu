@@ -437,11 +437,24 @@ Garnish = $.extend(Garnish, {
 	 */
 	scrollContainerToElement: function(container, elem)
 	{
-		var $container = $(container),
-			$elem = $(elem);
+		if (typeof elem === typeof undefined)
+		{
+			var $elem = $(container);
+				$container = $elem.scrollParent();
+		}
+		else
+		{
+			var $container = $(container),
+				$elem = $(elem);
+		}
+
+		if ($container.prop('nodeName') === 'HTML')
+		{
+			$container = Garnish.$win;
+		}
 
 		var scrollTop = $container.scrollTop(),
-				elemOffset = $elem.offset().top;
+			elemOffset = $elem.offset().top;
 
 		if ($container[0] == window)
 		{
@@ -452,10 +465,12 @@ Garnish = $.extend(Garnish, {
 			var elemScrollOffset = elemOffset - $container.offset().top;
 		}
 
+		var targetScrollTop = false;
+
 		// Is the element above the fold?
 		if (elemScrollOffset < 0)
 		{
-			$container.scrollTop(scrollTop + elemScrollOffset);
+			targetScrollTop = scrollTop + elemScrollOffset - 10;
 		}
 		else
 		{
@@ -465,7 +480,23 @@ Garnish = $.extend(Garnish, {
 			// Is it below the fold?
 			if (elemScrollOffset + elemHeight > containerHeight)
 			{
-				$container.scrollTop(scrollTop + (elemScrollOffset - (containerHeight - elemHeight)));
+				targetScrollTop = scrollTop + (elemScrollOffset - (containerHeight - elemHeight)) + 10;
+			}
+		}
+
+		if (targetScrollTop !== false)
+		{
+			// Velocity only allows you to scroll to an arbitrary position if you're scrolling the main window
+			if ($container[0] == window)
+			{
+				$('html').velocity('scroll', {
+					offset: targetScrollTop+'px',
+					mobileHA: false
+				});
+			}
+			else
+			{
+				$container.scrollTop(targetScrollTop);
 			}
 		}
 	},
@@ -977,13 +1008,6 @@ Garnish.Base = Base.extend({
 						return;
 					}
 
-					// IE < 11 had a proprietary 'resize' event and 'attachEvent' method.
-					// Conveniently both dropped in 11.
-					if (document.attachEvent)
-					{
-						return;
-					}
-
 					// Is this the first resize listener added to this element?
 					if (!elem.__resizeTrigger__)
 					{
@@ -995,7 +1019,7 @@ Garnish.Base = Base.extend({
 
 						var obj = elem.__resizeTrigger__ = document.createElement('object');
 						obj.className = 'resize-trigger';
-						obj.setAttribute('style', 'display: block; position: absolute; top: 0; left: 0; height: 100%; width: 100%; overflow: hidden; pointer-events: none; z-index: -1;');
+						obj.setAttribute('style', 'display: block; position: absolute; top: 0; left: 0; height: 100%; width: 100%; overflow: hidden; pointer-events: none; z-index: -1; visibility: hidden;');
 						obj.__resizeElement__ = $(elem);
 						obj.__resizeElement__.data('initialWidth', obj.__resizeElement__.prop('offsetWidth'));
 						obj.__resizeElement__.data('initialHeight', obj.__resizeElement__.prop('offsetHeight'));
@@ -3156,32 +3180,40 @@ Garnish.HUD = Garnish.Base.extend({
 		this.minVerticalClearance = this.height + this.settings.triggerSpacing + this.settings.windowSpacing;
 
 		// find the actual available top/right/bottom/left clearances
-		var clearances = [
-			this.windowHeight + this.windowScrollTop - this.triggerOffset.bottom, // bottom
-			this.triggerOffset.top - this.windowScrollTop,                        // top
-			this.windowWidth + this.windowScrollLeft - this.triggerOffset.right,  // right
-			this.triggerOffset.left - this.windowScrollLeft                       // left
-		];
+		var clearances = {
+			bottom: this.windowHeight + this.windowScrollTop - this.triggerOffset.bottom,
+			top:    this.triggerOffset.top - this.windowScrollTop,
+			right:  this.windowWidth + this.windowScrollLeft - this.triggerOffset.right,
+			left:   this.triggerOffset.left - this.windowScrollLeft
+		};
 
 		// Find the first position that has enough room
-		for (var i = 0; i < 4; i++)
+		this.position = null;
+
+		for (var i = 0; i < this.settings.positions.length; i++)
 		{
-			var prop = (i < 2 ? 'height' : 'width');
-			if (clearances[i] - (this.settings.windowSpacing + this.settings.triggerSpacing) >= this[prop])
+			var position = this.settings.positions[i],
+				prop = (position == 'top' || position == 'bottom' ? 'height' : 'width');
+
+			if (clearances[position] - (this.settings.windowSpacing + this.settings.triggerSpacing) >= this[prop])
 			{
-				var positionIndex = i;
+				// This is the first position that has enough room in order of preference, so we'll go with this
+				this.position = position;
 				break;
+			}
+
+			if (!this.position || clearances[position] > clearances[this.position])
+			{
+				// Use this as a fallback as it's the position with the most clearance so far
+				this.position = position;
 			}
 		}
 
-		if (typeof positionIndex == 'undefined')
+		// Just in case...
+		if (!this.position || $.inArray(this.position, ['bottom', 'top', 'right', 'left']) == -1)
 		{
-			// Just figure out which one is the biggest
-			var biggestClearance = Math.max.apply(null, clearances),
-				positionIndex = $.inArray(biggestClearance, clearances);
+			this.position = 'bottom'
 		}
-
-		this.position = Garnish.HUD.positions[positionIndex];
 
 		// Update the tip class
 		if (this.tipClass)
@@ -3189,7 +3221,7 @@ Garnish.HUD = Garnish.Base.extend({
 			this.$tip.removeClass(this.tipClass);
 		}
 
-		this.tipClass = this.settings.tipClass+'-'+Garnish.HUD.tipClasses[positionIndex];
+		this.tipClass = this.settings.tipClass+'-'+Garnish.HUD.tipClasses[this.position];
 		this.$tip.addClass(this.tipClass);
 	},
 
@@ -3292,13 +3324,13 @@ Garnish.HUD = Garnish.Base.extend({
 	}
 },
 {
-	positions: ['bottom', 'top', 'right', 'left'],
-	tipClasses: ['top', 'bottom', 'left', 'right'],
+	tipClasses: { bottom: 'top', top: 'bottom', right: 'left', left: 'right'},
 
 	defaults: {
 		hudClass: 'hud',
 		tipClass: 'tip',
 		bodyClass: 'body',
+		positions: ['bottom', 'top', 'right', 'left'],
 		triggerSpacing: 10,
 		windowSpacing: 10,
 		tipWidth: 30,
@@ -4579,7 +4611,8 @@ Garnish.Modal = Garnish.Base.extend({
 			this.$container.show();
 		}
 
-		this.getWidth._width = this.$container.outerWidth();
+		// Chrome might be 1px shy here for some reason
+		this.getWidth._width = this.$container.outerWidth() + 1;
 
 		if (!this.visible)
 		{

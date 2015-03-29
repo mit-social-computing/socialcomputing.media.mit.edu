@@ -25,10 +25,10 @@ $.extend(Craft,
 	asciiCharMap: {
 		'216':'O',  '223':'ss', '224':'a',  '225':'a',  '226':'a',  '229':'a',  '227':'ae', '230':'ae', '228':'ae', '231':'c',
 		'232':'e',  '233':'e',  '234':'e',  '235':'e',  '236':'i',  '237':'i',  '238':'i',  '239':'i',  '241':'n',  '242':'o',
-		'243':'o', 	'244':'o',  '245':'o',  '246':'oe', '248':'o',  '249':'u',  '250':'u',  '251':'u',  '252':'ue', '255':'y',
+		'243':'o',  '244':'o',  '245':'o',  '246':'oe', '248':'o',  '249':'u',  '250':'u',  '251':'u',  '252':'ue', '255':'y',
 		'257':'aa', '269':'ch', '275':'ee', '291':'gj', '299':'ii', '311':'kj', '316':'lj', '326':'nj', '353':'sh', '363':'uu',
-		'382':'zh', '256':'aa', '268':'ch', '274':'ee', '290':'gj', '298':'ii', '310':'kj', '315':'lj', '325':'nj', '352':'sh',
-		'362':'uu', '381':'zh'
+		'382':'zh', '256':'aa', '268':'ch', '274':'ee', '290':'gj', '298':'ii', '310':'kj', '315':'lj', '325':'nj', '337':'o',
+		'352':'sh', '362':'uu', '369':'u',  '381':'zh'
 	},
 
 	/**
@@ -920,6 +920,62 @@ $.extend(Craft,
 		}
 
 		return $ul;
+	},
+
+	appendHeadHtml: function(html)
+	{
+		if (!html)
+		{
+			return;
+		}
+
+		// Prune out any link tags that are already included
+		var $existingCss = $('link[href]');
+
+		if ($existingCss.length)
+		{
+			var existingCss = [];
+
+			for (var i = 0; i < $existingCss.length; i++)
+			{
+				var href = $existingCss.eq(i).attr('href');
+				existingCss.push(href.replace(/[.?*+^$[\]\\(){}|-]/g, "\\$&"));
+			}
+
+			var regexp = new RegExp('<link\\s[^>]*href="(?:'+existingCss.join('|')+')".*?></script>', 'g');
+
+			html = html.replace(regexp, '');
+		}
+
+		$('head').append(html);
+	},
+
+	appendFootHtml: function(html)
+	{
+		if (!html)
+		{
+			return;
+		}
+
+		// Prune out any script tags that are already included
+		var $existingJs = $('script[src]');
+
+		if ($existingJs.length)
+		{
+			var existingJs = [];
+
+			for (var i = 0; i < $existingJs.length; i++)
+			{
+				var src = $existingJs.eq(i).attr('src');
+				existingJs.push(src.replace(/[.?*+^$[\]\\(){}|-]/g, "\\$&"));
+			}
+
+			var regexp = new RegExp('<script\\s[^>]*src="(?:'+existingJs.join('|')+')".*?></script>', 'g');
+
+			html = html.replace(regexp, '');
+		}
+
+		Garnish.$bod.append(html);
 	},
 
 	/**
@@ -2184,6 +2240,9 @@ Craft.BaseElementIndex = Garnish.Base.extend(
 					{
 						Craft.cp.displayNotice(response.message);
 					}
+
+					// There may be a new background task that needs to be run
+					Craft.cp.runPendingTasks();
 				}
 				else
 				{
@@ -2629,21 +2688,37 @@ Craft.BaseElementIndex = Garnish.Base.extend(
 	setStoredSortOptionsForSource: function()
 	{
 		// Default to whatever's first
-		this.setSortAttribute(this.$sortAttributesList.find('a:first').data('attr'));
+		this.setSortAttribute();
 		this.setSortDirection('asc');
 
-		var storedSortAttr = this.getSelectedSourceState('order'),
-			storedSortDir = this.getSelectedSourceState('sort');
+		var sortAttr = this.getSelectedSourceState('order'),
+			sortDir = this.getSelectedSourceState('sort');
 
-		if (storedSortAttr)
+		if (!sortAttr)
 		{
-			this.setSortAttribute(storedSortAttr);
+			// Get the default
+			sortAttr = this.getDefaultSort();
+
+			if (Garnish.isArray(sortAttr))
+			{
+				sortDir = sortAttr[1];
+				sortAttr = sortAttr[0];
+			}
 		}
 
-		if (storedSortDir)
+		if (sortDir != 'asc' && sortDir != 'desc')
 		{
-			this.setSortDirection(storedSortDir);
+			sortDir = 'asc';
 		}
+
+		this.setSortAttribute(sortAttr);
+		this.setSortDirection(sortDir);
+	},
+
+	getDefaultSort: function()
+	{
+		// Default to whatever's first
+		return [this.$sortAttributesList.find('a:first').data('attr'), 'asc'];
 	},
 
 	getViewModesForSource: function()
@@ -3028,8 +3103,8 @@ Craft.BaseElementIndex = Garnish.Base.extend(
 
 	_onUpdateElements: function(response, append, $newElements)
 	{
-		$('head').append(response.headHtml);
-		Garnish.$bod.append(response.footHtml);
+		Craft.appendHeadHtml(response.headHtml);
+		Craft.appendFootHtml(response.footHtml);
 
 		if (this._isStructureTableDraggingLastElements())
 		{
@@ -3292,8 +3367,8 @@ Craft.BaseElementIndex = Garnish.Base.extend(
 		}
 
 		this._$triggers.insertAfter(this.$selectAllContainer);
-		$('head').append(this.actionsHeadHtml);
-		Garnish.$bod.append(this.actionsFootHtml);
+		Craft.appendHeadHtml(this.actionsHeadHtml);
+		Craft.appendFootHtml(this.actionsFootHtml)
 
 		Craft.initUiElements(this._$triggers);
 
@@ -5954,7 +6029,7 @@ Craft.AssetSelectInput = Craft.BaseElementSelectInput.extend(
 		else
 		{
 			var html = $(data.result.html);
-			$('head').append(data.result.css);
+			Craft.appendHeadHtml(data.result.headHtml);
 			this.selectUploadedFile(Craft.getElementInfo(html));
 		}
 
@@ -6255,6 +6330,8 @@ Craft.AuthManager = Garnish.Base.extend(
 	$loginBtn: null,
 	$loginErrorPara: null,
 
+	submitLoginIfLoggedOut: false,
+
 	/**
 	 * Init
 	 */
@@ -6286,9 +6363,16 @@ Craft.AuthManager = Garnish.Base.extend(
 			type: 'GET',
 			complete: $.proxy(function(jqXHR, textStatus)
 			{
-				if (textStatus == 'success' && !isNaN(jqXHR.responseText))
+				if (textStatus == 'success')
 				{
-					this.updateAuthTimeout(jqXHR.responseText);
+					this.updateAuthTimeout(jqXHR.responseJSON.timeout);
+
+					this.submitLoginIfLoggedOut = false;
+
+					if (typeof jqXHR.responseJSON.csrfTokenValue !== 'undefined' && typeof Craft.csrfTokenValue !== 'undefined')
+					{
+						Craft.csrfTokenValue = jqXHR.responseJSON.csrfTokenValue;
+					}
 				}
 				else
 				{
@@ -6328,10 +6412,20 @@ Craft.AuthManager = Garnish.Base.extend(
 					this.showLoginModalTimer = setTimeout($.proxy(this, 'showLoginModal'), this.authTimeout*1000);
 				}
 			}
-			else if (!this.showingLoginModal)
+			else
 			{
-				// Show the login modal
-				this.showLoginModal();
+				if (this.showingLoginModal)
+				{
+					if (this.submitLoginIfLoggedOut)
+					{
+						this.submitLogin();
+					}
+				}
+				else
+				{
+					// Show the login modal
+					this.showLoginModal();
+				}
 			}
 
 			this.setCheckAuthTimeoutTimer(Craft.AuthManager.checkInterval);
@@ -6610,40 +6704,55 @@ Craft.AuthManager = Garnish.Base.extend(
 			this.$passwordSpinner.removeClass('hidden');
 			this.clearLoginError();
 
-			var data = {
-				loginName: Craft.username,
-				password: this.$passwordInput.val()
-			};
-
-			Craft.postActionRequest('users/login', data, $.proxy(function(response, textStatus)
+			if (typeof Craft.csrfTokenValue != 'undefined')
 			{
-				this.$passwordSpinner.addClass('hidden');
+				// Check the auth status one last time before sending this off,
+				// in case the user has already logged back in from another window/tab
+				this.submitLoginIfLoggedOut = true;
+				this.checkAuthTimeout();
+			}
+			else
+			{
+				this.submitLogin();
+			}
+		}
+	},
 
-				if (textStatus == 'success')
+	submitLogin: function()
+	{
+		var data = {
+			loginName: Craft.username,
+			password: this.$passwordInput.val()
+		};
+
+		Craft.postActionRequest('users/login', data, $.proxy(function(response, textStatus)
+		{
+			this.$passwordSpinner.addClass('hidden');
+
+			if (textStatus == 'success')
+			{
+				if (response.success)
 				{
-					if (response.success)
-					{
-						this.hideLoginModal();
-						this.checkAuthTimeout();
-					}
-					else
-					{
-						this.showLoginError(response.error);
-						Garnish.shake(this.loginModal.$container);
-
-						if (!Garnish.isMobileBrowser(true))
-						{
-							this.$passwordInput.focus();
-						}
-					}
+					this.hideLoginModal();
+					this.checkAuthTimeout();
 				}
 				else
 				{
-					this.showLoginError();
-				}
+					this.showLoginError(response.error);
+					Garnish.shake(this.loginModal.$container);
 
-			}, this));
-		}
+					if (!Garnish.isMobileBrowser(true))
+					{
+						this.$passwordInput.focus();
+					}
+				}
+			}
+			else
+			{
+				this.showLoginError();
+			}
+
+		}, this));
 	},
 
 	showLoginError: function(error)
@@ -6944,7 +7053,6 @@ Craft.DeleteUserModal = Garnish.Modal.extend(
 	$deleteActionRadios: null,
 	$deleteSpinner: null,
 
-	currentPasswordModal: null,
 	userSelect: null,
 	_deleting: false,
 
@@ -6964,7 +7072,7 @@ Craft.DeleteUserModal = Garnish.Modal.extend(
 			).appendTo(Garnish.$bod),
 			$body = $(
 				'<div class="body">' +
-					'<p>'+Craft.t('What do you want to do with the their content?')+'</p>' +
+					'<p>'+Craft.t('What do you want to do with their content?')+'</p>' +
 					'<div class="options">' +
 						'<label><input type="radio" name="contentAction" value="transfer"/> '+Craft.t('Transfer it to:')+'</label>' +
 						'<div id="transferselect'+this.id+'" class="elementselect">' +
@@ -7011,6 +7119,8 @@ Craft.DeleteUserModal = Garnish.Modal.extend(
 			},
 			onSelectElements: $.proxy(function()
 			{
+				this.updateSizeAndPosition();
+
 				if (!this.$deleteActionRadios.first().prop('checked'))
 				{
 					this.$deleteActionRadios.first().click();
@@ -7676,8 +7786,14 @@ Craft.ElementEditor = Garnish.Base.extend(
 	{
 		this.locale = response.locale;
 
-		this.$fieldsContainer.html(response.html)
-		Craft.initUiElements(this.$fieldsContainer);
+		this.$fieldsContainer.html(response.html);
+
+		Garnish.requestAnimationFrame($.proxy(function()
+		{
+			Craft.appendHeadHtml(response.headHtml);
+			Craft.appendFootHtml(response.footHtml);
+			Craft.initUiElements(this.$fieldsContainer);
+		}, this));
 	},
 
 	saveElement: function(ev)
@@ -7785,6 +7901,18 @@ Craft.EntryIndex = Craft.BaseElementIndex.extend(
 		}
 
 		return this.base();
+	},
+
+	getDefaultSort: function()
+	{
+		if (Garnish.hasAttr(this.$source, 'data-has-structure'))
+		{
+			return ['structure', 'asc'];
+		}
+		else
+		{
+			return ['postDate', 'desc'];
+		}
 	},
 
 	onSelectSource: function()
@@ -8862,7 +8990,9 @@ Craft.Grid = Garnish.Base.extend(
 		this.addListener(this.$container, 'resize', 'refreshCols');
 
 		// Trigger a window resize event in case anything needs to adjust itself, now that the items are layed out.
-		Garnish.$win.trigger('resize');
+		Garnish.requestAnimationFrame(function() {
+			Garnish.$win.trigger('resize');
+		});
 	},
 
 	addItems: function(items)
@@ -10128,6 +10258,12 @@ Craft.LivePreview = Garnish.Base.extend(
 	dragger: null,
 	dragStartEditorWidth: null,
 
+	_handleSuccessProxy: null,
+	_handleErrorProxy: null,
+
+	_scrollX: null,
+	_scrollY: null,
+
 	_editorWidth: null,
 	_editorWidthInPx: null,
 
@@ -10163,6 +10299,9 @@ Craft.LivePreview = Garnish.Base.extend(
 		{
 			this.basePostData[Craft.csrfTokenName] = Craft.csrfTokenValue;
 		}
+
+		this._handleSuccessProxy = $.proxy(this, 'handleSuccess');
+		this._handleErrorProxy = $.proxy(this, 'handleError');
 
 		// Find the DOM elements
 		this.$extraFields = $(this.settings.extraFields);
@@ -10450,38 +10589,56 @@ Craft.LivePreview = Garnish.Base.extend(
 			this.loading = true;
 
 			var data = $.extend({}, postData, this.basePostData),
-				$doc = $(this.$iframe[0].contentWindow.document),
-				scrollX = $doc.scrollLeft(),
-				scrollY = $doc.scrollTop();
+				$doc = $(this.$iframe[0].contentWindow.document);
 
-			$.post(this.previewUrl, data, $.proxy(function(response)
-			{
-				var html = response +
-					'<script type="text/javascript">window.scrollTo('+scrollX+', '+scrollY+');</script>';
+			this._scrollX = $doc.scrollLeft();
+			this._scrollY = $doc.scrollTop();
 
-				// Set the iframe to use the same bg as the iframe body,
-				// to reduce the blink when reloading the DOM
-				this.$iframe.css('background', $(this.$iframe[0].contentWindow.document.body).css('background'));
-
-				this.$iframe[0].contentWindow.document.open();
-				this.$iframe[0].contentWindow.document.write(html);
-				this.$iframe[0].contentWindow.document.close();
-
-				this.loading = false;
-
-				if (this.checkAgain)
-				{
-					this.checkAgain = false;
-					this.updateIframe();
-				}
-
-			}, this));
+			$.ajax({
+				url: this.previewUrl,
+				method: 'POST',
+				data: $.extend({}, postData, this.basePostData),
+				success: this._handleSuccessProxy,
+				error: this._handleErrorProxy
+			});
 
 			return true;
 		}
 		else
 		{
 			return false;
+		}
+	},
+
+	handleSuccess: function(data, textStatus, jqXHR)
+	{
+		var html = data +
+			'<script type="text/javascript">window.scrollTo('+this._scrollX+', '+this._scrollY+');</script>';
+
+		// Set the iframe to use the same bg as the iframe body,
+		// to reduce the blink when reloading the DOM
+		this.$iframe.css('background', $(this.$iframe[0].contentWindow.document.body).css('background'));
+
+		this.$iframe[0].contentWindow.document.open();
+		this.$iframe[0].contentWindow.document.write(html);
+		this.$iframe[0].contentWindow.document.close();
+
+		this.onResponse();
+	},
+
+	handleError: function(jqXHR, textStatus, errorThrown)
+	{
+		this.onResponse();
+	},
+
+	onResponse: function()
+	{
+		this.loading = false;
+
+		if (this.checkAgain)
+		{
+			this.checkAgain = false;
+			this.updateIframe();
 		}
 	},
 
@@ -11310,7 +11467,7 @@ Craft.SlugGenerator = Craft.BaseInputGenerator.extend(
 			sourceVal = Craft.asciiString(sourceVal);
 		}
 
-		// Get the "words".  Split on anything that is not a unicode letter or number.
+		// Get the "words". Split on anything that is not alphanumeric.
 		var words = Craft.filterArray(XRegExp.matchChain(sourceVal, [XRegExp('[\\p{L}\\p{N}]+')]));
 
 		if (words.length)
@@ -12297,6 +12454,9 @@ Craft.StructureTableSorter = Garnish.DragSort.extend({
 						$spinnerRow.remove();
 						this.elementIndex._expandElement($toggle, true);
 					}
+
+					// See if we should run any pending tasks
+					Craft.cp.runPendingTasks();
 				}
 			}, this));
 		}
@@ -12632,6 +12792,8 @@ Craft.TagSelectInput = Craft.BaseElementSelectInput.extend(
 	$addTagInput: null,
 	$spinner: null,
 
+	_ignoreBlur: false,
+
 	init: function(settings)
 	{
 		// Normalize the settings
@@ -12697,6 +12859,12 @@ Craft.TagSelectInput = Craft.BaseElementSelectInput.extend(
 
 		this.addListener(this.$addTagInput, 'blur', function()
 		{
+			if (this._ignoreBlur)
+			{
+				this._ignoreBlur = false;
+				return;
+			}
+
 			setTimeout($.proxy(function()
 			{
 				if (this.searchMenu)
@@ -12773,6 +12941,11 @@ Craft.TagSelectInput = Craft.BaseElementSelectInput.extend(
 						attachToElement: this.$addTagInput,
 						onOptionSelect: $.proxy(this, 'selectTag')
 					});
+
+					this.addListener($menu, 'mousedown', $.proxy(function()
+					{
+						this._ignoreBlur = true;
+					}, this));
 
 					this.searchMenu.show();
 				}

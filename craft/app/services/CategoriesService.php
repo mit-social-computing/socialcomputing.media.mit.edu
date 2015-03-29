@@ -257,7 +257,7 @@ class CategoriesService extends BaseApplicationComponent
 
 			if (!$groupRecord)
 			{
-				throw new Exception(Craft::t('No category group exists with the ID “{id}”', array('id' => $group->id)));
+				throw new Exception(Craft::t('No category group exists with the ID “{id}”.', array('id' => $group->id)));
 			}
 
 			$oldCategoryGroup = CategoryGroupModel::populateModel($groupRecord);
@@ -631,7 +631,7 @@ class CategoriesService extends BaseApplicationComponent
 
 				if (!$parentCategory)
 				{
-					throw new Exception(Craft::t('No category exists with the ID “{id}”', array('id' => $category->newParentId)));
+					throw new Exception(Craft::t('No category exists with the ID “{id}”.', array('id' => $category->newParentId)));
 				}
 			}
 			else
@@ -649,7 +649,7 @@ class CategoriesService extends BaseApplicationComponent
 
 			if (!$categoryRecord)
 			{
-				throw new Exception(Craft::t('No category exists with the ID “{id}”', array('id' => $category->id)));
+				throw new Exception(Craft::t('No category exists with the ID “{id}”.', array('id' => $category->id)));
 			}
 		}
 		else
@@ -682,7 +682,7 @@ class CategoriesService extends BaseApplicationComponent
 			// Is the event giving us the go-ahead?
 			if ($event->performAction)
 			{
-				$success = craft()->elements->saveElement($category, false);
+				$success = craft()->elements->saveElement($category);
 
 				// If it didn't work, rollback the transaction in case something changed in onBeforeSaveCategory
 				if (!$success)

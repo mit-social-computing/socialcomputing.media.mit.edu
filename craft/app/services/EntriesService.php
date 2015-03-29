@@ -78,7 +78,7 @@ class EntriesService extends BaseApplicationComponent
 
 				if (!$parentEntry)
 				{
-					throw new Exception(Craft::t('No entry exists with the ID “{id}”', array('id' => $entry->parentId)));
+					throw new Exception(Craft::t('No entry exists with the ID “{id}”.', array('id' => $entry->parentId)));
 				}
 			}
 			else
@@ -96,7 +96,7 @@ class EntriesService extends BaseApplicationComponent
 
 			if (!$entryRecord)
 			{
-				throw new Exception(Craft::t('No entry exists with the ID “{id}”', array('id' => $entry->id)));
+				throw new Exception(Craft::t('No entry exists with the ID “{id}”.', array('id' => $entry->id)));
 			}
 		}
 		else
@@ -109,7 +109,7 @@ class EntriesService extends BaseApplicationComponent
 
 		if (!$section)
 		{
-			throw new Exception(Craft::t('No section exists with the ID “{id}”', array('id' => $entry->sectionId)));
+			throw new Exception(Craft::t('No section exists with the ID “{id}”.', array('id' => $entry->sectionId)));
 		}
 
 		// Verify that the section is available in this locale
@@ -302,28 +302,40 @@ class EntriesService extends BaseApplicationComponent
 			foreach ($entries as $entry)
 			{
 				// Fire an 'onBeforeDeleteEntry' event
-				$this->onBeforeDeleteEntry(new Event($this, array(
+				$event = new Event($this, array(
 					'entry' => $entry
-				)));
+				));
 
-				$section = $entry->getSection();
+				$this->onBeforeDeleteEntry($event);
 
-				if ($section->type == SectionType::Structure)
+				if ($event->performAction)
 				{
-					// First let's move the entry's children up a level, so this doesn't mess up the structure
-					$children = $entry->getChildren()->status(null)->localeEnabled(false)->limit(null)->find();
+					$section = $entry->getSection();
 
-					foreach ($children as $child)
+					if ($section->type == SectionType::Structure)
 					{
-						craft()->structures->moveBefore($section->structureId, $child, $entry, 'update', true);
-					}
-				}
+						// First let's move the entry's children up a level, so this doesn't mess up the structure
+						$children = $entry->getChildren()->status(null)->localeEnabled(false)->limit(null)->find();
 
-				$entryIds[] = $entry->id;
+						foreach ($children as $child)
+						{
+							craft()->structures->moveBefore($section->structureId, $child, $entry, 'update', true);
+						}
+					}
+
+					$entryIds[] = $entry->id;
+				}
 			}
 
-			// Delete 'em
-			$success = craft()->elements->deleteElementById($entryIds);
+			if ($entryIds)
+			{
+				// Delete 'em
+				$success = craft()->elements->deleteElementById($entryIds);
+			}
+			else
+			{
+				$success = false;
+			}
 
 			if ($transaction !== null)
 			{

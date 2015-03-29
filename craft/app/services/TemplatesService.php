@@ -290,7 +290,7 @@ class TemplatesService extends BaseApplicationComponent
 		{
 			// Replace shortcut "{var}"s with "{{object.var}}"s, without affecting normal Twig tags
 			$formattedTemplate = preg_replace('/(?<![\{\%])\{(?![\{\%])/', '{{object.', $template);
-			$formattedTemplate = preg_replace('/(?<![\}\%])\}(?![\}\%])/', '}}', $formattedTemplate);
+			$formattedTemplate = preg_replace('/(?<![\}\%])\}(?![\}\%])/', '|raw}}', $formattedTemplate);
 			$this->_objectTemplates[$template] = $twig->loadTemplate($formattedTemplate);
 		}
 
@@ -481,8 +481,11 @@ class TemplatesService extends BaseApplicationComponent
 	 */
 	public function includeJs($js, $first = false)
 	{
+		// Trim any whitespace and ensure it ends with a semicolon.
+		$js = trim($js, " \t\n\r\0\x0B;").';';
+
 		$latestBuffer =& $this->_jsBuffers[count($this->_jsBuffers)-1];
-		ArrayHelper::prependOrAppend($latestBuffer, trim($js), $first);
+		ArrayHelper::prependOrAppend($latestBuffer, $js, $first);
 	}
 
 	/**
@@ -568,7 +571,7 @@ class TemplatesService extends BaseApplicationComponent
 		{
 			foreach ($this->_cssFiles as $url)
 			{
-				$node = '<link rel="stylesheet" type="text/css" href="'.$url.'"/>';
+				$node = HtmlHelper::encodeParams('<link rel="stylesheet" type="text/css" href="{url}"/>', array('url' => $url));
 				$this->includeHeadHtml($node);
 			}
 
@@ -1398,7 +1401,7 @@ class TemplatesService extends BaseApplicationComponent
 			$html .= ' hasicon';
 		}
 
-		$label = HtmlHelper::encode($context['element']);
+		$label = $context['element'];
 
 		$html .= '" data-id="'.$context['element']->id.'" data-locale="'.$context['element']->locale.'" data-status="'.$context['element']->getStatus().'" data-label="'.$label.'" data-url="'.$context['element']->getUrl().'"';
 
@@ -1451,11 +1454,11 @@ class TemplatesService extends BaseApplicationComponent
 
 		if ($context['context'] == 'index' && ($cpEditUrl = $context['element']->getCpEditUrl()))
 		{
-			$html .= '<a href="'.$cpEditUrl.'">'.$label.'</a>';
+			$html .= HtmlHelper::encodeParams('<a href="{cpEditUrl}">{label}</a>', array('cpEditUrl' => $cpEditUrl, 'label' => $label));
 		}
 		else
 		{
-			$html .= $label;
+			$html .= HtmlHelper::encode($label);
 		}
 
 		$html .= '</span></div></div>';

@@ -135,6 +135,9 @@ class WebApp extends \CWebApplication
 			$this->setId($appId);
 		}
 
+		// Set the edition components
+		$this->_setEditionComponents();
+
 		parent::init();
 	}
 
@@ -167,6 +170,8 @@ class WebApp extends \CWebApplication
 		if ($this->request->isCpRequest())
 		{
 			HeaderHelper::setHeader(array('X-Robots-Tag' => 'none'));
+			HeaderHelper::setHeader(array('X-Frame-Options' => 'SAMEORIGIN'));
+			HeaderHelper::setHeader(array('X-Content-Type-Options' => 'nosniff'));
 		}
 
 		// Validate some basics on the database configuration file.
@@ -202,9 +207,6 @@ class WebApp extends \CWebApplication
 				throw new HttpException(503);
 			}
 		}
-
-		// Set the edition components
-		$this->_setEditionComponents();
 
 		// isCraftDbMigrationNeeded will return true if we're in the middle of a manual or auto-update for Craft itself.
 		// If we're in maintenance mode and it's not a site request, show the manual update template.
@@ -900,7 +902,7 @@ class WebApp extends \CWebApplication
 					$error = Craft::t('Your account doesn’t have permission to access the site when the system is offline.');
 				}
 
-				$error .= ' <a href="'.UrlHelper::getUrl(craft()->config->getLogoutPath()).'">'.Craft::t('Log out?').'</a>';
+				$error .= ' ['.Craft::t('Log out?').']('.UrlHelper::getUrl(craft()->config->getLogoutPath()).')';
 			}
 			else
 			{

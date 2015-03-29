@@ -389,7 +389,7 @@ class GoogleCloudAssetSourceType extends BaseAssetSourceType
 		$fileName = AssetsHelper::cleanAssetName($fileName);
 		$extension = IOHelper::getExtension($fileName);
 
-		if (! IOHelper::isExtensionAllowed($extension))
+		if (!IOHelper::isExtensionAllowed($extension))
 		{
 			throw new Exception(Craft::t('This file type is not allowed'));
 		}
@@ -735,7 +735,7 @@ class GoogleCloudAssetSourceType extends BaseAssetSourceType
 	 * Get a file's S3 path.
 	 *
 	 * @param AssetFileModel $file
-	 * @param                $settings Source settings to use
+	 * @param                $settings The source settings to use.
 	 *
 	 * @return string
 	 */
