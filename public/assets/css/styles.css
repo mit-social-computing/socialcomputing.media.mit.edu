@@ -1799,7 +1799,7 @@ h1.nav-logo > a:hover {
 }
 /* line 20, ../../../source/sass/_buttons.scss */
 .btn-submit:hover {
-  background-color: #darkgray;
+  background-color: #333;
 }
 
 /* line 25, ../../../source/sass/_buttons.scss */
