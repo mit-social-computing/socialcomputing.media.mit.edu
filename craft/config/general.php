@@ -34,9 +34,18 @@ return array(
     ),
 
     'socialstaging.media.mit.edu'   => array(
+        'testToEmailAddress'    => NULL,
         'environmentVariables'  => array(
             'basePath'  => '/var/www/social-computing-staging/public/',
             'baseUrl'   => 'http://socialstaging.media.mit.edu/'
+        )
+    ),
+
+    'social.media.mit.edu'          => array(
+        'testToEmailAddress'    => NULL,
+        'environmentVariables'  => array(
+            'basePath'  => '/var/www/social-computing-production/public/',
+            'baseUrl'   => 'http://social.media.mit.edu/'
         )
     )
 
