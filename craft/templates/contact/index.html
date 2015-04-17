@@ -21,6 +21,7 @@
     {{ getCsrfInput() }}
 
     <input type="hidden" name="age">
+    <input type="hidden" name="action" value="contactForm/sendMessage">
 
     <h3><label for="fromName">Your Name</label></h3>
     <input id="fromName" type="text" name="fromName">
@@ -47,10 +48,11 @@ document.addEventListener('DOMContentLoaded', function(e) {
         var data = $(this).serialize();
 
         // Send it to the server
-        $.post('/', data, function(response) {
+        $.post('/contact', data, function(response) {
             if (response.success) {
                 $('#name').html(data.fromName)
                 $('#thanks').fadeIn();
+                $('#contact').fadeOut()
             } else {
                 // response.error will be an object containing any validation errors that occurred, indexed by field name
                 // e.g. response.error.fromName => ['From Name is required']
