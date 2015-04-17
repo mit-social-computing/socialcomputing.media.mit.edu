@@ -3,7 +3,11 @@
 <div class="l-full scrollbar">
     <div class="l-max">
         <main class="l-content-withsidebar" id="content">
+        {% if content is defined %}
             {% include 'partials/_content' %}
+        {% else %}
+            {% block content %}{% endblock %}
+        {% endif %}
         </main>
         <!-- #content -->
     </div>
