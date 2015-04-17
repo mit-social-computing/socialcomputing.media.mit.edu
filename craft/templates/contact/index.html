@@ -25,18 +25,17 @@
     <input type="hidden" name="action" value="contactForm/sendMessage">
 
     <h3><label for="fromName">Your Name</label></h3>
-    <input id="fromName" type="text" name="fromName">
+    <input class="input-gray input--full" id="fromName" type="text" name="fromName" placeholder="e.g. Jane Doe">
 
     <h3><label for="fromEmail">Your Email</label></h3>
-    <input id="fromEmail" type="text" name="fromEmail">
-
-    <h3><label for="subject">Subject</label></h3>
-    <input id="subject" type="text" name="subject">
+    <input class="input-gray input--full" id="fromEmail" type="text" name="fromEmail" placeholder="jane@mail.com">
 
     <h3><label for="message">Message</label></h3>
-    <textarea rows="10" cols="40" id="message" name="message"></textarea>
+    <textarea class="textarea-gray" rows="10" cols="40" id="message" name="message"></textarea>
 
-    <input type="submit" value="Send">
+    <div class="box">
+        <input type="submit" value="Send">
+    </div>
 </form>
 
 <script>
@@ -46,12 +45,13 @@ document.addEventListener('DOMContentLoaded', function(e) {
         ev.preventDefault();
 
         // Get the post data
-        var data = $(this).serialize();
+        var data = $(this).serialize() + '&subject=Sent+via+social.media.mit.edu',
+            name = $('#fromName').val()
 
         // Send it to the server
         $.post('/contact', data, function(response) {
             if (response.success) {
-                $('#name').html(data.fromName)
+                $('#name').html(name)
                 $('#thanks').fadeIn();
                 $('#contact').fadeOut()
             } else {

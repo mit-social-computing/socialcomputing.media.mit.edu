@@ -98,7 +98,9 @@ module.exports = function(grunt) {
                 advanced : false
             },
             dev : {
-                'public/assets/css/styles.min.css' : [ 'public/assets/css/styles.css' ]
+                files: {
+                    'public/assets/css/styles.min.css' : [ 'public/assets/css/styles.css' ]
+                }
             }
         },
         modernizr : {
