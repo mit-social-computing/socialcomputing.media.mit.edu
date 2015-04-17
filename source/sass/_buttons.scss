@@ -6,6 +6,22 @@
     }
 }
 
+.btn-subimt {
+    color: white;
+    background-color: $pink;
+    border: 1px solid $gray;
+    padding: 5px 13px;
+    @include transition(background-color 150ms ease);
+
+    &:focus {
+        outline: 1px dotted #333;
+    }
+
+    &:hover {
+        background-color: #darkgray;
+    }
+}
+
 .btn-menu {
     display: inline-block;
 

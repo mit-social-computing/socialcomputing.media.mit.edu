@@ -90,3 +90,7 @@ table {
 address {
     font-style: normal;
 }
+
+textarea {
+    @include vertical-rhythm($font-medium);
+}

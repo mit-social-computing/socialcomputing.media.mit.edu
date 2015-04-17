@@ -131,4 +131,6 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-modernizr')
 
     grunt.registerTask('default', ['concurrent:target'])
+    grunt.registerTask('css', ['compass:compile', 'concat:css', 'cssmin:dev'])
+
 }
