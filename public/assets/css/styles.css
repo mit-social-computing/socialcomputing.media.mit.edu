@@ -1783,7 +1783,7 @@ h1.nav-logo > a:hover {
 }
 
 /* line 9, ../../../source/sass/_buttons.scss */
-.btn-subimt {
+.btn-submit {
   color: white;
   background-color: #d175a1;
   border: 1px solid #666;
@@ -1794,11 +1794,11 @@ h1.nav-logo > a:hover {
   transition: background-color 150ms ease;
 }
 /* line 16, ../../../source/sass/_buttons.scss */
-.btn-subimt:focus {
+.btn-submit:focus {
   outline: 1px dotted #333;
 }
 /* line 20, ../../../source/sass/_buttons.scss */
-.btn-subimt:hover {
+.btn-submit:hover {
   background-color: #darkgray;
 }
 
