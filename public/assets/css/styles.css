@@ -938,12 +938,16 @@ textarea {
   margin-left: auto;
   margin-right: auto;
   padding: 2.375rem 1.1875rem 0;
+  -moz-transition: padding 250ms ease;
+  -o-transition: padding 250ms ease;
+  -webkit-transition: padding 250ms ease;
+  transition: padding 250ms ease;
 }
 @media only screen and (min-width: 33.625rem) {
   /* line 105, ../../../source/sass/_layout.scss */
   .l-content-withsidebar {
-    padding-left: 2.96875rem;
-    padding-right: 2.96875rem;
+    padding-left: 4.15625rem;
+    padding-right: 4.15625rem;
   }
 }
 @media only screen and (min-width: 884px) {
@@ -954,81 +958,81 @@ textarea {
   }
 }
 
-/* line 125, ../../../source/sass/_layout.scss */
+/* line 126, ../../../source/sass/_layout.scss */
 .l-content {
   width: 100%;
   padding: 0 1.1875rem;
 }
 
-/* line 130, ../../../source/sass/_layout.scss */
+/* line 131, ../../../source/sass/_layout.scss */
 .l-sidebar {
   display: none;
 }
 @media only screen and (min-width: 33.625rem) {
-  /* line 130, ../../../source/sass/_layout.scss */
+  /* line 131, ../../../source/sass/_layout.scss */
   .l-sidebar {
     display: block;
   }
 }
 
-/* line 138, ../../../source/sass/_layout.scss */
+/* line 139, ../../../source/sass/_layout.scss */
 .l-vpadding {
   padding: 19px 0.59375rem;
 }
 @media only screen and (min-width: 33.625rem) {
-  /* line 138, ../../../source/sass/_layout.scss */
+  /* line 139, ../../../source/sass/_layout.scss */
   .l-vpadding {
     padding-left: 1.1875rem;
     padding-right: 1.1875rem;
   }
 }
 @media only screen and (min-width: 75rem) {
-  /* line 138, ../../../source/sass/_layout.scss */
+  /* line 139, ../../../source/sass/_layout.scss */
   .l-vpadding {
     padding-left: 0;
     padding-right: 0;
   }
 }
 
-/* line 156, ../../../source/sass/_layout.scss */
+/* line 157, ../../../source/sass/_layout.scss */
 .l-left {
   float: left;
 }
 
-/* line 160, ../../../source/sass/_layout.scss */
+/* line 161, ../../../source/sass/_layout.scss */
 .l-right {
   float: right;
 }
 
-/* line 164, ../../../source/sass/_layout.scss */
+/* line 165, ../../../source/sass/_layout.scss */
 .l-clear {
   clear: both;
 }
 
-/* line 168, ../../../source/sass/_layout.scss */
+/* line 169, ../../../source/sass/_layout.scss */
 .l-left-block {
   float: left;
 }
 
-/* line 172, ../../../source/sass/_layout.scss */
+/* line 173, ../../../source/sass/_layout.scss */
 .l-right-block {
   float: right;
 }
 
-/* line 176, ../../../source/sass/_layout.scss */
+/* line 177, ../../../source/sass/_layout.scss */
 .l-right-block,
 .l-left-block {
   max-width: 724px;
   width: 100%;
 }
-/* line 181, ../../../source/sass/_layout.scss */
+/* line 182, ../../../source/sass/_layout.scss */
 .l-right-block.solo,
 .l-left-block.solo {
   margin: 0 auto;
   float: none;
 }
 
-/* line 187, ../../../source/sass/_layout.scss */
+/* line 188, ../../../source/sass/_layout.scss */
 .l-upperright {
   position: absolute;
   z-index: 1;
@@ -1036,13 +1040,13 @@ textarea {
   right: 1.1875rem;
 }
 
-/* line 194, ../../../source/sass/_layout.scss */
+/* line 195, ../../../source/sass/_layout.scss */
 .l-twocolumn {
   height: 264px;
   overflow: hidden;
 }
 @media only screen and (min-width: 33.625rem) {
-  /* line 194, ../../../source/sass/_layout.scss */
+  /* line 195, ../../../source/sass/_layout.scss */
   .l-twocolumn {
     display: -webkit-box;
     display: -webkit-flex;
@@ -1050,19 +1054,19 @@ textarea {
     display: -ms-flexbox;
     display: flex;
   }
-  /* line 204, ../../../source/sass/_layout.scss */
+  /* line 205, ../../../source/sass/_layout.scss */
   .no-flexbox .l-twocolumn > * {
     float: left;
   }
 }
 
-/* line 211, ../../../source/sass/_layout.scss */
+/* line 212, ../../../source/sass/_layout.scss */
 .l-2of3 {
   width: 100%;
   padding: 0 0.59375rem;
 }
 @media only screen and (min-width: 33.625rem) {
-  /* line 211, ../../../source/sass/_layout.scss */
+  /* line 212, ../../../source/sass/_layout.scss */
   .l-2of3 {
     -webkit-box-flex: 1;
     -webkit-flex: 1;
@@ -1071,18 +1075,18 @@ textarea {
     -ms-flex: 1;
     flex: 1;
   }
-  /* line 218, ../../../source/sass/_layout.scss */
+  /* line 219, ../../../source/sass/_layout.scss */
   .no-flexbox .l-2of3 {
     width: 66.66667%;
   }
 }
 
-/* line 224, ../../../source/sass/_layout.scss */
+/* line 225, ../../../source/sass/_layout.scss */
 .l-1of3 {
   width: 100%;
 }
 @media only screen and (min-width: 33.625rem) {
-  /* line 224, ../../../source/sass/_layout.scss */
+  /* line 225, ../../../source/sass/_layout.scss */
   .l-1of3 {
     padding-right: 0.59375rem;
     -webkit-box-flex: 0;
@@ -1092,13 +1096,13 @@ textarea {
     -ms-flex: 0 0 332px;
     flex: 0 0 332px;
   }
-  /* line 232, ../../../source/sass/_layout.scss */
+  /* line 233, ../../../source/sass/_layout.scss */
   .no-flexbox .l-1of3 {
     width: 33.33333%;
   }
 }
 
-/* line 238, ../../../source/sass/_layout.scss */
+/* line 239, ../../../source/sass/_layout.scss */
 .l-flexpage {
   display: -webkit-box;
   display: -webkit-flex;
@@ -1113,7 +1117,7 @@ textarea {
   flex-direction: column;
   height: 100%;
 }
-/* line 243, ../../../source/sass/_layout.scss */
+/* line 244, ../../../source/sass/_layout.scss */
 .l-flexpage > :first-child {
   -webkit-box-flex: 1;
   -webkit-flex: 1;
@@ -1122,17 +1126,17 @@ textarea {
   -ms-flex: 1;
   flex: 1;
 }
-/* line 246, ../../../source/sass/_layout.scss */
+/* line 247, ../../../source/sass/_layout.scss */
 .no-flexbox .l-flexpage > :first-child {
   min-height: 65%;
 }
 
-/* line 252, ../../../source/sass/_layout.scss */
+/* line 253, ../../../source/sass/_layout.scss */
 .l-slideshow {
   position: relative;
 }
 
-/* line 256, ../../../source/sass/_layout.scss */
+/* line 257, ../../../source/sass/_layout.scss */
 .l-fixbody {
   position: fixed;
 }
@@ -1373,6 +1377,11 @@ textarea {
   -moz-transform: translate3d(0, 100%, 0);
   -webkit-transform: translate3d(0, 100%, 0);
   transform: translate3d(0, 100%, 0);
+}
+/* line 128, ../../../source/sass/_state.scss */
+[data-sidebar="is-open"] + .l-content-withsidebar {
+  padding-left: 70px;
+  padding-right: 70px;
 }
 
 /* line 1, ../../../source/sass/_nav.scss */

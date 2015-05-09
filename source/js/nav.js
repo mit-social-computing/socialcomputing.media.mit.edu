@@ -83,21 +83,12 @@ $(function() {
     }
 
     function placeSiblingNav() {
-        if ( window.innerWidth > 884 ) {
-            $('#prev').css({
-                left: $a.offset().left - 85
-            })
-            $('#next').css({
-                left: $a.offset().left + $a.width() + 85
-            })
-        } else {
-            $('#prev').css({
-                left: $a.offset().left - 60
-            })
-            $('#next').css({
-                left: $a.offset().left + $a.width() + 60
-            })
-        }
+        $('#prev').css({
+            left: $a.offset().left - 70
+        })
+        $('#next').css({
+            left: $a.offset().left + $a.width() + 70
+        })
     }
 
     if ( !!$('#article').length ) {

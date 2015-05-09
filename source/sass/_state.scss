@@ -124,4 +124,9 @@
         opacity: 0;
         @include translate3d(0, 100%, 0);
     }
+
+    + .l-content-withsidebar {
+        padding-left: 70px;
+        padding-right: 70px;
+    }
 }
