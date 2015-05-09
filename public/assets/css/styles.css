@@ -3201,9 +3201,15 @@ input.input-gray:focus {
 .splash-button {
   position: absolute;
   bottom: 25px;
-  right: 25px;
+  right: 5px;
 }
-/* line 51, ../../../source/sass/_splash.scss */
+@media only screen and (min-width: 33.625rem) {
+  /* line 46, ../../../source/sass/_splash.scss */
+  .splash-button {
+    right: 25px;
+  }
+}
+/* line 55, ../../../source/sass/_splash.scss */
 .splash-button:after {
   content: '';
   display: block;
@@ -3214,7 +3220,7 @@ input.input-gray:focus {
   border-left-width: 20px;
 }
 
-/* line 62, ../../../source/sass/_splash.scss */
+/* line 66, ../../../source/sass/_splash.scss */
 .splash-quote {
   font-weight: 100;
   font-size: 24px;
@@ -3224,14 +3230,14 @@ input.input-gray:focus {
   max-width: 660px;
 }
 @media only screen and (min-width: 33.625rem) {
-  /* line 62, ../../../source/sass/_splash.scss */
+  /* line 66, ../../../source/sass/_splash.scss */
   .splash-quote {
     font-size: 34px;
     font-size: 2.125rem;
   }
 }
 
-/* line 76, ../../../source/sass/_splash.scss */
+/* line 80, ../../../source/sass/_splash.scss */
 .splash-cite {
   display: block;
   text-align: right;
@@ -3239,12 +3245,12 @@ input.input-gray:focus {
   font-style: normal;
 }
 @media only screen and (min-width: 33.625rem) {
-  /* line 76, ../../../source/sass/_splash.scss */
+  /* line 80, ../../../source/sass/_splash.scss */
   .splash-cite {
     margin-right: -3.5625rem;
   }
 }
-/* line 86, ../../../source/sass/_splash.scss */
+/* line 90, ../../../source/sass/_splash.scss */
 .splash-cite:before {
   content: '\2014';
 }

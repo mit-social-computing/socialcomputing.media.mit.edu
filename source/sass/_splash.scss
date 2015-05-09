@@ -46,7 +46,11 @@
 .splash-button {
     position: absolute;
     bottom: 25px;
-    right: 25px;
+    right: 5px;
+
+    @include mq($screen-min) {
+        right: 25px;
+    }
 
     &:after {
         content: '';
