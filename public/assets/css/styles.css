@@ -3217,22 +3217,34 @@ input.input-gray:focus {
 /* line 62, ../../../source/sass/_splash.scss */
 .splash-quote {
   font-weight: 100;
-  font-size: 34px;
-  font-size: 2.125rem;
+  font-size: 24px;
+  font-size: 1.5rem;
   color: white;
   text-align: center;
   max-width: 660px;
 }
+@media only screen and (min-width: 33.625rem) {
+  /* line 62, ../../../source/sass/_splash.scss */
+  .splash-quote {
+    font-size: 34px;
+    font-size: 2.125rem;
+  }
+}
 
-/* line 71, ../../../source/sass/_splash.scss */
+/* line 76, ../../../source/sass/_splash.scss */
 .splash-cite {
   display: block;
   text-align: right;
   margin-top: 2.375rem;
-  margin-right: -3.5625rem;
   font-style: normal;
 }
-/* line 78, ../../../source/sass/_splash.scss */
+@media only screen and (min-width: 33.625rem) {
+  /* line 76, ../../../source/sass/_splash.scss */
+  .splash-cite {
+    margin-right: -3.5625rem;
+  }
+}
+/* line 86, ../../../source/sass/_splash.scss */
 .splash-cite:before {
   content: '\2014';
 }
