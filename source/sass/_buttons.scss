@@ -37,6 +37,16 @@
             display: block;
             margin: 0 auto;
         }
+
+        &.btn-lbmenu {
+            display: block;
+
+            > span,
+            > span:before,
+            > span:after {
+                background-color: $darkgray;
+            }
+        }
     }
 
     > span {

@@ -41,7 +41,7 @@
 
 .lightbox-body {
     height: 100%;
-    padding: 35px 0;
+    padding: 55px 0;
     opacity: 0;
     @include transition(opacity 150ms ease-out);
 
@@ -197,5 +197,12 @@
 
     li {
         margin: 0 2px;
+        height: 25px;
+    }
+}
+#lightboxBtns {
+    .btn--left,
+    .btn--right {
+        vertical-align: middle;
     }
 }

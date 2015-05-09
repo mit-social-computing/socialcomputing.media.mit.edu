@@ -91,7 +91,7 @@
     }
 
     options = {
-        tpl : '<div class="lightbox-bg"><div class="lightbox-body"><div class="lightbox-imgs" id="slideshow"/><div class="lb-caption" id="lbCaptionWide"/><div class="l-fixed l-fixed--upperleft" id="lbLogo"><img src="/assets/img/sc-logo.svg" class="logo"></div><div class="l-fixed l-fixed--upperright"><button class="btn btn--close" id="close"><img src="/assets/img/lightbox-close.png"></button></div><div class="l-fixed l-fixed--lowerright" id="lightboxBtns"/>',
+        tpl : '<div class="lightbox-bg"><div class="lightbox-body"><div class="lightbox-imgs" id="slideshow"/><div class="lb-caption" id="lbCaptionWide"/><div class="l-fixed l-fixed--upperleft" id="lbLogo"><img src="/assets/img/sc-logo.svg" class="logo"></div><div class="l-fixed l-fixed--upperright"><button class="btn btn-menu btn-lbmenu close" id="close"><span/></button></div><div class="l-fixed l-fixed--lowerright" id="lightboxBtns"/>',
         bodyClass : 'l-fixbody',
         useKeys : true,
         thumbs : false,

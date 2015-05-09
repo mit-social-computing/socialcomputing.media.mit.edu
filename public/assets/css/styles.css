@@ -1819,8 +1819,18 @@ h1.nav-logo > a:hover {
     display: block;
     margin: 0 auto;
   }
+  /* line 41, ../../../source/sass/_buttons.scss */
+  .btn-menu.btn-lbmenu {
+    display: block;
+  }
+  /* line 44, ../../../source/sass/_buttons.scss */
+  .btn-menu.btn-lbmenu > span,
+  .btn-menu.btn-lbmenu > span:before,
+  .btn-menu.btn-lbmenu > span:after {
+    background-color: #333;
+  }
 }
-/* line 42, ../../../source/sass/_buttons.scss */
+/* line 52, ../../../source/sass/_buttons.scss */
 .btn-menu > span {
   position: relative;
   vertical-align: middle;
@@ -1830,7 +1840,7 @@ h1.nav-logo > a:hover {
   height: 2px;
   transition: 0.3s all linear;
 }
-/* line 48, ../../../source/sass/_buttons.scss */
+/* line 58, ../../../source/sass/_buttons.scss */
 .btn-menu > span:before, .btn-menu > span:after {
   background-color: white;
   content: '';
@@ -1841,31 +1851,31 @@ h1.nav-logo > a:hover {
   height: 2px;
   transition: 0.3s all linear;
 }
-/* line 57, ../../../source/sass/_buttons.scss */
+/* line 67, ../../../source/sass/_buttons.scss */
 .btn-menu > span:before {
   -moz-transform: translateY(0.275rem);
   -ms-transform: translateY(0.275rem);
   -webkit-transform: translateY(0.275rem);
   transform: translateY(0.275rem);
 }
-/* line 61, ../../../source/sass/_buttons.scss */
+/* line 71, ../../../source/sass/_buttons.scss */
 .btn-menu > span:after {
   -moz-transform: translateY(-0.275rem);
   -ms-transform: translateY(-0.275rem);
   -webkit-transform: translateY(-0.275rem);
   transform: translateY(-0.275rem);
 }
-/* line 67, ../../../source/sass/_buttons.scss */
+/* line 77, ../../../source/sass/_buttons.scss */
 .btn-menu.btn--sidemenu > span,
 .btn-menu.btn--sidemenu > span:before,
 .btn-menu.btn--sidemenu > span:after {
   background-color: #333;
 }
-/* line 75, ../../../source/sass/_buttons.scss */
+/* line 85, ../../../source/sass/_buttons.scss */
 .btn-menu.close > span {
   background: transparent;
 }
-/* line 78, ../../../source/sass/_buttons.scss */
+/* line 88, ../../../source/sass/_buttons.scss */
 .btn-menu.close > span:before, .btn-menu.close > span:after {
   transform-origin: 50% 50%;
   -moz-transform: translateY(0);
@@ -1874,25 +1884,25 @@ h1.nav-logo > a:hover {
   transform: translateY(0);
   width: 22;
 }
-/* line 85, ../../../source/sass/_buttons.scss */
+/* line 95, ../../../source/sass/_buttons.scss */
 .btn-menu.close > span:before {
   -moz-transform: rotate3d(0, 0, 1, 45deg);
   -webkit-transform: rotate3d(0, 0, 1, 45deg);
   transform: rotate3d(0, 0, 1, 45deg);
 }
-/* line 89, ../../../source/sass/_buttons.scss */
+/* line 99, ../../../source/sass/_buttons.scss */
 .btn-menu.close > span:after {
   -moz-transform: rotate3d(0, 0, 1, -45deg);
   -webkit-transform: rotate3d(0, 0, 1, -45deg);
   transform: rotate3d(0, 0, 1, -45deg);
 }
 
-/* line 96, ../../../source/sass/_buttons.scss */
+/* line 106, ../../../source/sass/_buttons.scss */
 .btn--left,
 .btn--right {
   font-size: 0;
 }
-/* line 100, ../../../source/sass/_buttons.scss */
+/* line 110, ../../../source/sass/_buttons.scss */
 .btn--left:after,
 .btn--right:after {
   content: '';
@@ -1909,22 +1919,22 @@ h1.nav-logo > a:hover {
   transition: border-color 150ms;
 }
 
-/* line 116, ../../../source/sass/_buttons.scss */
+/* line 126, ../../../source/sass/_buttons.scss */
 .btn--right:hover:after {
   border-left-color: #d175a1;
 }
-/* line 120, ../../../source/sass/_buttons.scss */
+/* line 130, ../../../source/sass/_buttons.scss */
 .btn--right:after {
   border-left-color: #d2d1d1;
   border-left-width: 11px;
   border-right-width: 0;
 }
 
-/* line 128, ../../../source/sass/_buttons.scss */
+/* line 138, ../../../source/sass/_buttons.scss */
 .btn--left:hover:after {
   border-right-color: #d175a1;
 }
-/* line 132, ../../../source/sass/_buttons.scss */
+/* line 142, ../../../source/sass/_buttons.scss */
 .btn--left:after {
   border-right-color: #d2d1d1;
   border-right-width: 11px;
@@ -2677,7 +2687,7 @@ h1.nav-logo > a:hover {
 /* line 42, ../../../source/sass/_lightbox.scss */
 .lightbox-body {
   height: 100%;
-  padding: 35px 0;
+  padding: 55px 0;
   opacity: 0;
   -moz-transition: opacity 150ms ease-out;
   -o-transition: opacity 150ms ease-out;
@@ -2832,6 +2842,13 @@ h1.nav-logo > a:hover {
 /* line 198, ../../../source/sass/_lightbox.scss */
 #lightboxBtns .slick-dots li {
   margin: 0 2px;
+  height: 25px;
+}
+
+/* line 204, ../../../source/sass/_lightbox.scss */
+#lightboxBtns .btn--left,
+#lightboxBtns .btn--right {
+  vertical-align: middle;
 }
 
 /* line 1, ../../../source/sass/_projects.scss */
