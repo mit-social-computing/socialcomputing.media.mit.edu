@@ -16,11 +16,8 @@ $transition: .3s all linear;
 @mixin line {
     display: inline-block;
     width: rems($button-size);
-    height: 4px;
+    height: 2px;
     transition: $transition;
-
-    background-repeat: no-repeat;
-    background-size: 100%;
 }
 
 @mixin fontsize($size-map) {

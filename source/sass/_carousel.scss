@@ -78,8 +78,7 @@
 
 .ss-caption {
     text-align: center;
-    padding: 0 15px;
-    @include flex(1);
+    padding: 25px 15px;
 
     @include mq($screen-min) {
         display: none;

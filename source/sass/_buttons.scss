@@ -29,7 +29,6 @@
     margin-right: -7px;
 
     transition: $transition;
-    @include handwriting;
 
     @include mq($screen-min) {
         display: none;
@@ -43,11 +42,12 @@
     > span {
         position: relative;
         vertical-align: middle;
-        background-image: url(/assets/img/masks/hamburger-middle.png);
+        background-color: white;
         @include line;
 
         &:before,
         &:after {
+            background-color: white;
             content: '';
             position: absolute;
             left: 0;
@@ -56,12 +56,18 @@
 
         &:before {
             @include translateY( rems($button-size/5) );
-            background-image: url(/assets/img/masks/hamburger-top.png);
         }
 
         &:after {
             @include translateY( -(rems($button-size/5)) );
-            background-image: url(/assets/img/masks/hamburger-bottom.png);
+        }
+    }
+
+    &.btn--sidemenu {
+        > span,
+        > span:before,
+        > span:after {
+            background-color: $darkgray;
         }
     }
 
