@@ -50,7 +50,11 @@
     }
 
     &:after {
-        content: url(/assets/img/short-line-divider.png);
+        content: '';
+        background-image: url(/assets/img/short-line-divider.png);
+        background-size: 100%;
+        background-repeat: no-repeat;
+        background-position: center;
         display: block;
         margin: rems($base * 4) auto;
         max-width: 376px;

@@ -2081,59 +2081,63 @@ h1.nav-logo > a:hover {
 }
 /* line 52, ../../../source/sass/_text.scss */
 .text-summary:after {
-  content: url(/assets/img/short-line-divider.png);
+  content: '';
+  background-image: url(/assets/img/short-line-divider.png);
+  background-size: 100%;
+  background-repeat: no-repeat;
+  background-position: center;
   display: block;
   margin: 4.75rem auto;
   max-width: 376px;
   opacity: 0.4;
 }
-/* line 60, ../../../source/sass/_text.scss */
+/* line 64, ../../../source/sass/_text.scss */
 .text-summary:last-of-type {
   margin-bottom: 4.75rem;
 }
-/* line 63, ../../../source/sass/_text.scss */
+/* line 67, ../../../source/sass/_text.scss */
 .text-summary:last-of-type:after {
   content: '';
 }
 
-/* line 69, ../../../source/sass/_text.scss */
+/* line 73, ../../../source/sass/_text.scss */
 .text-body {
   overflow: hidden;
 }
-/* line 72, ../../../source/sass/_text.scss */
+/* line 76, ../../../source/sass/_text.scss */
 .text-media .text-body {
   display: inline-block;
   vertical-align: bottom;
 }
-/* line 76, ../../../source/sass/_text.scss */
+/* line 80, ../../../source/sass/_text.scss */
 .text-media .text-body > * {
   margin: 0;
 }
-/* line 81, ../../../source/sass/_text.scss */
+/* line 85, ../../../source/sass/_text.scss */
 .text-body.medium {
   font-size: 17.5px;
   font-size: 1.09375rem;
 }
 @media only screen and (min-width: 33.625rem) {
-  /* line 81, ../../../source/sass/_text.scss */
+  /* line 85, ../../../source/sass/_text.scss */
   .text-body.medium {
     font-size: 16px;
     font-size: 1rem;
   }
 }
-/* line 85, ../../../source/sass/_text.scss */
+/* line 89, ../../../source/sass/_text.scss */
 .text-body.large {
   font-size: 20px;
   font-size: 1.25rem;
 }
 @media only screen and (min-width: 33.625rem) {
-  /* line 85, ../../../source/sass/_text.scss */
+  /* line 89, ../../../source/sass/_text.scss */
   .text-body.large {
     font-size: 22px;
     font-size: 1.375rem;
   }
 }
-/* line 89, ../../../source/sass/_text.scss */
+/* line 93, ../../../source/sass/_text.scss */
 .text-body.text-footer {
   text-transform: lowercase;
   color: #999;
@@ -2141,78 +2145,78 @@ h1.nav-logo > a:hover {
   font-size: 1.09375rem;
 }
 @media only screen and (min-width: 33.625rem) {
-  /* line 89, ../../../source/sass/_text.scss */
+  /* line 93, ../../../source/sass/_text.scss */
   .text-body.text-footer {
     font-size: 16px;
     font-size: 1rem;
   }
 }
-/* line 94, ../../../source/sass/_text.scss */
+/* line 98, ../../../source/sass/_text.scss */
 .text-body.text-footer > a {
   color: #999;
 }
-/* line 96, ../../../source/sass/_text.scss */
+/* line 100, ../../../source/sass/_text.scss */
 .text-body.text-footer > a:hover {
   color: #d175a1;
 }
-/* line 102, ../../../source/sass/_text.scss */
+/* line 106, ../../../source/sass/_text.scss */
 .text-body.padded {
   padding: 1.1875rem 1.1875rem 0;
 }
-/* line 106, ../../../source/sass/_text.scss */
+/* line 110, ../../../source/sass/_text.scss */
 .text-body p {
   font-size: inherit;
   line-height: inherit;
 }
-/* line 110, ../../../source/sass/_text.scss */
+/* line 114, ../../../source/sass/_text.scss */
 .text-body p:first-child {
   margin-top: 0;
 }
-/* line 115, ../../../source/sass/_text.scss */
+/* line 119, ../../../source/sass/_text.scss */
 .text-body > ul,
 .text-body > ol {
   list-style-position: inside;
 }
-/* line 120, ../../../source/sass/_text.scss */
+/* line 124, ../../../source/sass/_text.scss */
 .text-body ol {
   counter-reset: counter;
 }
-/* line 123, ../../../source/sass/_text.scss */
+/* line 127, ../../../source/sass/_text.scss */
 .text-body ol li:before {
   counter-increment: counter;
   content: counter(counter) " ";
   font-weight: 500;
 }
-/* line 131, ../../../source/sass/_text.scss */
+/* line 135, ../../../source/sass/_text.scss */
 .text-body.text-body--collapse > * {
   margin-top: 0;
   margin-bottom: 0;
 }
 
-/* line 138, ../../../source/sass/_text.scss */
+/* line 142, ../../../source/sass/_text.scss */
 .text-title.text-title--plain {
   font-family: inherit;
   font-size: 20px;
   font-size: 1.25rem;
 }
 @media only screen and (min-width: 33.625rem) {
-  /* line 138, ../../../source/sass/_text.scss */
+  /* line 142, ../../../source/sass/_text.scss */
   .text-title.text-title--plain {
     font-size: 20px;
     font-size: 1.25rem;
   }
 }
 
-/* line 143, ../../../source/sass/_text.scss */
+/* line 147, ../../../source/sass/_text.scss */
 .text-scroll {
   overflow-y: scroll;
   max-height: 258px;
 }
-/* line 147, ../../../source/sass/_text.scss */
+/* line 151, ../../../source/sass/_text.scss */
 .text-scroll::-webkit-scrollbar {
   width: 25px;
 }
-/* line 151, ../../../source/sass/_text.scss */
+/* line 155, ../../../source/sass/_text.scss */
 .text-scroll::-webkit-scrollbar-track {
   background-color: #d2d1d1;
   border-left: 5px solid transparent;
@@ -2220,19 +2224,19 @@ h1.nav-logo > a:hover {
   background-clip: padding-box;
   margin: 1.1875rem 0 1.1875rem;
 }
-/* line 159, ../../../source/sass/_text.scss */
+/* line 163, ../../../source/sass/_text.scss */
 .text-scroll::-webkit-scrollbar-thumb {
   background-color: #d175a1;
   border-left: 5px solid transparent;
   border-right: 5px solid transparent;
   background-clip: padding-box;
 }
-/* line 165, ../../../source/sass/_text.scss */
+/* line 169, ../../../source/sass/_text.scss */
 .text-scroll::-webkit-scrollbar-thumb:hover {
   background-color: rgba(209, 117, 161, 0.75);
 }
 
-/* line 172, ../../../source/sass/_text.scss */
+/* line 176, ../../../source/sass/_text.scss */
 .text-title {
   font-weight: 200;
   font-size: 25px;
@@ -2242,26 +2246,26 @@ h1.nav-logo > a:hover {
   color: #333;
 }
 @media only screen and (min-width: 33.625rem) {
-  /* line 172, ../../../source/sass/_text.scss */
+  /* line 176, ../../../source/sass/_text.scss */
   .text-title {
     font-size: 30px;
     font-size: 1.875rem;
   }
 }
-/* line 179, ../../../source/sass/_text.scss */
+/* line 183, ../../../source/sass/_text.scss */
 .text-title + p {
   margin-top: 0;
 }
-/* line 183, ../../../source/sass/_text.scss */
+/* line 187, ../../../source/sass/_text.scss */
 .text-title > a {
   text-decoration: none;
   color: #333;
 }
-/* line 187, ../../../source/sass/_text.scss */
+/* line 191, ../../../source/sass/_text.scss */
 .text-title > a:hover {
   color: #d175a1;
 }
-/* line 192, ../../../source/sass/_text.scss */
+/* line 196, ../../../source/sass/_text.scss */
 .text-title.text-title--lowkey {
   font-size: 17.5px;
   font-size: 1.09375rem;
@@ -2270,19 +2274,19 @@ h1.nav-logo > a:hover {
   -webkit-font-smoothing: antialiased;
 }
 @media only screen and (min-width: 33.625rem) {
-  /* line 192, ../../../source/sass/_text.scss */
+  /* line 196, ../../../source/sass/_text.scss */
   .text-title.text-title--lowkey {
     font-size: 16px;
     font-size: 1rem;
   }
 }
 
-/* line 201, ../../../source/sass/_text.scss */
+/* line 205, ../../../source/sass/_text.scss */
 .text-header > .text-title {
   margin-bottom: 0;
   padding-right: 105px;
 }
-/* line 206, ../../../source/sass/_text.scss */
+/* line 210, ../../../source/sass/_text.scss */
 .text-header:after {
   content: url(/assets/img/long-line-divider.png);
   display: block;
