@@ -1,0 +1,5 @@
+{
+    "require" : {
+      "icanboogie/inflector": "1.3.2"
+    }
+}
