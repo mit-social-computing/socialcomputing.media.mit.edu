@@ -1,0 +1,39 @@
+{% extends 'layouts/_text' %}
+
+{% set fullName = slug|titleize %}
+{% set user = craft.users.search('fullName:' ~ fullName).first() %}
+
+{% block content %}
+<div class="box box--white" id="bioImage">
+    {% if user.photoUrl %}
+        <img class="box-image" src="{{ user.getPhotoUrl('500') }}">
+        {% else %}
+        <img class="box-image" src="/assets/img/temp/people.jpg">
+    {% endif %}
+
+    <img class="box-mask box-mask--500" src="/assets/img/masks/white_full.png" alt="" />
+</div>
+
+<hr>
+
+<div class="text text--margin">
+    <div class="text-body text-body--collapse medium">
+        <h3 class="text-title text-title--plain">{{ user.fullName|lower }}</h3>
+        <p>{{ user.position|lower }}</p>
+        {% for contact in user.contactLink %}
+            {% if contact.type == 'linkBlock' %}
+            <a href="{{ contact.linkUrl }}">{{ contact.linkText }}</a>
+            {% elseif contact.type == 'twitterBlock' %}
+            <a href="http://twitter.com/{{ contact.twitterHandle }}">twitter</a>
+            {% endif %}
+        {% endfor %}
+    </div>
+</div>
+
+<div class="text">
+    <div class="text-body medium">
+        {{user.bio}}
+    </div>
+</div>
+
+{% endblock %}
