@@ -4,22 +4,23 @@
     <div class="l-content" id="content">
         <div class="grid grid--image">
             {% for user in users %}
+            {% set slug = user.fullName | slugify %}
             <div class="grid-item">
-                <div class="box--white">
+                <a href="{{siteUrl}}people/{{slug}}" class="box box--white">
 
-                {% if user.photoUrl %}
-                    <img class="box-image" src="{{ user.getPhotoUrl('537') }}">
-                    {% else %}
-                    <img class="box-image" src="/assets/img/temp/people.jpg">
-                {% endif %}
+                    {% if user.photoUrl %}
+                        <img class="box-image" src="{{ user.getPhotoUrl('537') }}">
+                        {% else %}
+                        <img class="box-image" src="/assets/img/temp/people.jpg">
+                    {% endif %}
 
                     <img class="box-mask" src="/assets/img/masks/white_full.png" alt="" />
 
-                </div>
+                </a>
                 <div class="text">
                     <div class="text-body text-body--collapse medium">
-                        <h3 class="text-title text-title--plain">{{ user.fullName|lower }}</h3>
-                        <p>{{ user.position }}</p>
+                        <h3 class="text-title text-title--plain"><a href="{{siteUrl}}people/{{slug}}">{{ user.fullName|lower }}</a></h3>
+                        <p>{{ user.position|lower }}</p>
                         {% for contact in user.contactLink %}
                             {% if contact.type == 'linkBlock' %}
                             <a href="{{ contact.linkUrl }}">{{ contact.linkText }}</a>
