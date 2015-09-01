@@ -12431,7 +12431,7 @@ function makeArray( obj ) {
 $(function() {
     var $gallery = $('.gallery'),
         $grid = $('.grid'),
-        $others = $('.chapter-image, .text-media')
+        $others = $('.chapter-image, .text-media, #bioImage')
 
     $gallery.imagesLoaded()
         .always(function() {
