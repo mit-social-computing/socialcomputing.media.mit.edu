@@ -93,7 +93,8 @@ class DbBackup
 		}
 
 		$this->_currentVersion = 'v'.craft()->getVersion().'.'.craft()->getBuild();
-		$fileName = IOHelper::cleanFilename(craft()->getSiteName()).'_'.gmdate('ymd_His').'_'.$this->_currentVersion.'.sql';
+		$siteName = IOHelper::cleanFilename(StringHelper::asciiString(craft()->getSiteName()));
+		$fileName = ($siteName ? $siteName.'_' : '').gmdate('ymd_His').'_'.$this->_currentVersion.'.sql';
 		$this->_filePath = craft()->path->getDbBackupPath().StringHelper::toLowerCase($fileName);
 
 		$this->_processHeader();
@@ -395,7 +396,7 @@ class DbBackup
 
 				for ($counter = 0; $counter < $totalBatches; $counter++)
 				{
-					@set_time_limit(120);
+					@set_time_limit(240);
 
 					$offset = $batchSize * $counter;
 					$rows = craft()->db->createCommand('SELECT * FROM ' . craft()->db->quoteTableName($tableName) . ' LIMIT ' . $offset . ',' . $batchSize . ';')->queryAll();

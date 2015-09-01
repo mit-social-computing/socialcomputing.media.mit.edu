@@ -225,7 +225,11 @@ class StringHelper
 				311 => 'kj', 316 => 'lj', 326 => 'nj', 353 => 'sh', 363 => 'uu',
 				382 => 'zh', 256 => 'aa', 268 => 'ch', 274 => 'ee', 290 => 'gj',
 				298 => 'ii', 310 => 'kj', 315 => 'lj', 325 => 'nj', 337 => 'o',
-				352 => 'sh', 362 => 'uu', 369 => 'u',  381 => 'zh'
+				352 => 'sh', 362 => 'uu', 369 => 'u',  381 => 'zh', 260 => 'A',
+				261 => 'a',  262 => 'C',  263 => 'c',  280 => 'E',  281 => 'e',
+				321 => 'L',  322 => 'l',  323 => 'N',  324 => 'n',  211 => 'O',
+				346 => 'S',  347 => 's',  379 => 'Z',  380 => 'z',  377 => 'Z',
+				388 => 'z',
 			);
 
 			foreach (craft()->config->get('customAsciiCharMappings') as $ascii => $char)
@@ -535,6 +539,65 @@ class StringHelper
 		$firstChar = mb_substr($string, 0, 1, static::UTF8);
 		$remainder = mb_substr($string, 1, $strlen - 1, static::UTF8);
 		return static::toLowerCase($firstChar).$remainder;
+	}
+
+	/**
+	 * Kebab-cases a string.
+	 *
+	 * @param string $string The string
+	 * @param string $glue The string used to glue the words together (default is a hyphen)
+	 * @param boolean $lower Whether the string should be lowercased (default is true)
+	 * @param boolean $removePunctuation Whether punctuation marks should be removed (default is true)
+	 *
+	 * @return string
+	 */
+	public static function toKebabCase($string, $glue = '-', $lower = true, $removePunctuation = true)
+	{
+		if ($removePunctuation)
+		{
+			$string = str_replace(array('.', '_', '-'), ' ', $string);
+		}
+
+		// Remove inner-word punctuation.
+		$string = preg_replace('/[\'"‘’“”\[\]\(\)\{\}:]/u', '', $string);
+
+		// Split on the words and then glue it back together
+		$words = self::splitOnWords($string);
+		$string = implode($glue, $words);
+
+		if ($lower)
+		{
+			// Make it lowercase
+			$string = self::toLowerCase($string);
+		}
+
+		return $string;
+	}
+
+	/**
+	 * Splits a string into an array of the words in the string.
+	 *
+	 * @param string $string The string
+	 *
+	 * @return string[]
+	 */
+	public static function splitOnWords($string)
+	{
+		// Split on anything that is not alphanumeric, or a period, underscore, or hyphen.
+		preg_match_all('/[\p{L}\p{N}\._-]+/u', $string, $matches);
+		return ArrayHelper::filterEmptyStringsFromArray($matches[0]);
+	}
+
+	/**
+	 * Strips HTML tags out of a given string.
+	 *
+	 * @param $str The string.
+	 *
+	 * @return string
+	 */
+	public static function stripHtml($str)
+	{
+		return preg_replace('/<(.*?)>/u', '', $str);
 	}
 
 	/**

@@ -249,7 +249,15 @@ class AppBehavior extends BaseBehavior
 	{
 		$info = $this->getInfo();
 		$info->edition = $edition;
-		return $this->saveInfo($info);
+
+		$result = $this->saveInfo($info);
+
+		// Fire an 'onEditionChange' event
+		$this->getOwner()->onEditionChange(new Event($this, array(
+			'edition' => $edition
+		)));
+
+		return $result;
 	}
 
 	/**
@@ -489,6 +497,9 @@ class AppBehavior extends BaseBehavior
 					throw new Exception(Craft::t('Craft appears to be installed but the info table is empty.'));
 				}
 
+				// Prevent an infinite loop in createFromString.
+				$row['releaseDate'] = DateTime::createFromString($row['releaseDate'], null, false);
+
 				$this->_info = new InfoModel($row);
 			}
 			else
@@ -562,7 +573,7 @@ class AppBehavior extends BaseBehavior
 			}
 			else
 			{
-				if (craft()->getComponent('request', false))
+				if (craft()->getComponent('request', false) && !craft()->isConsole())
 				{
 					// We tried to get the language, but something went wrong. Use fallback to prevent infinite loop.
 					$fallbackLanguage = $this->_getFallbackLanguage();
@@ -729,20 +740,29 @@ class AppBehavior extends BaseBehavior
 				// Is it set to "auto"?
 				if ($locale == 'auto')
 				{
-					// Place this within a try/catch in case userSession is being fussy.
-					try
+					// Prevents a PHP notice in case the session failed to start, for whatever reason.
+					if (craft()->getComponent('userSession', false))
 					{
-						// If the user is logged in *and* has a primary language set, use that
-						$user = craft()->userSession->getUser();
-
-						if ($user && $user->preferredLocale)
+						// Place this within a try/catch in case userSession is being fussy.
+						try
 						{
-							return $user->preferredLocale;
+							// If the user is logged in *and* has a primary language set, use that
+							$user = craft()->userSession->getUser();
+
+							if ($user && $user->preferredLocale)
+							{
+								return $user->preferredLocale;
+							}
+						} catch (\Exception $e)
+						{
+							Craft::log("Tried to determine the user's preferred locale, but got this exception: ".$e->getMessage(), LogLevel::Error);
 						}
 					}
-					catch (\Exception $e)
+
+					// If they've set a default CP language, use it here.
+					if ($defaultCpLanguage = craft()->config->get('defaultCpLanguage'))
 					{
-						Craft::log("Tried to determine the user's preferred locale, but got this exception: ".$e->getMessage(), LogLevel::Error);
+						return $defaultCpLanguage;
 					}
 
 					// Otherwise check if the browser's preferred language matches any of the site locales
