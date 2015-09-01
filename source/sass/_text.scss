@@ -1,8 +1,7 @@
-.text {
+.text {}
 
-    // @include mq($screen-min) {
-    //     padding: 0;
-    // }
+.text--margin {
+    margin-bottom: rems($base);
 }
 
 .text--separator {
