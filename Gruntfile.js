@@ -99,7 +99,7 @@ module.exports = function(grunt) {
             },
             dev : {
                 files: {
-                    'public/assets/css/styles.min.css' : [ 'public/assets/css/styles.css' ]
+                    'public/assets/css/styles.min.css' : [ 'public/assets/css/styles.concat.css' ]
                 }
             }
         },
@@ -132,5 +132,7 @@ module.exports = function(grunt) {
 
     grunt.registerTask('default', ['concurrent:target'])
     grunt.registerTask('css', ['compass:compile', 'concat:css', 'cssmin:dev'])
+    grunt.registerTask('js', ['modernizr:dist', 'concat:js', 'uglify:build'])
+    grunt.registerTask('build', ['js:build', 'css:build'])
 
 }
